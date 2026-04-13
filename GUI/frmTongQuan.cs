@@ -2,6 +2,7 @@
 using DTO;
 using System;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace GUI
@@ -14,6 +15,9 @@ namespace GUI
         public frmTongQuan()
         {
             InitializeComponent();
+            // Gọi trực tiếp nếu bạn không muốn/không thể sửa Designer
+            HienThiThongKe();
+            HienThiDanhSachChiTiet();
         }
 
         private void frmTongQuan_Load(object sender, EventArgs e)
@@ -36,20 +40,24 @@ namespace GUI
         }
 
         private void HienThiDanhSachChiTiet()
-        {
-            // Lấy dữ liệu JOIN từ 4 bảng
+            {
             DataTable dt = busPhong.LayDanhSachPhongTongQuan();
+            if (dt == null) { MessageBox.Show("DataTable = null"); return; }
+            // Hiển thị tên các cột trả về
+            var cols = string.Join(", ", dt.Columns.Cast<System.Data.DataColumn>().Select(c => c.ColumnName));
+            MessageBox.Show("Cols: " + cols);
+            if (dt.Rows.Count > 0)
+            {
+                var row0 = string.Join(" | ", dt.Columns.Cast<System.Data.DataColumn>().Select(c =>
+                    dt.Rows[0][c] == DBNull.Value ? "<null>" : dt.Rows[0][c].ToString()));
+                MessageBox.Show("Row0: " + row0);
+            }
 
-            // Xóa sạch các cột cũ tự tạo trong Design để tránh xung đột tên
             dgvDanhSach.Columns.Clear();
-
-            // Gán dữ liệu
             dgvDanhSach.DataSource = dt;
-
-            // Định dạng lại lưới cho đẹp
             dgvDanhSach.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvDanhSach.AllowUserToAddRows = false; // Mất dòng trống cuối cùng
-            dgvDanhSach.ReadOnly = true; // Không cho sửa trực tiếp trên lưới
+            dgvDanhSach.AllowUserToAddRows = false;
+            dgvDanhSach.ReadOnly = true;
         }
     }
 }

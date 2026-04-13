@@ -1,11 +1,10 @@
-﻿using DAO;
-using DTO;
+﻿using DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace BUS
+namespace DAO
 {
     public class Phong_DAO
     {
@@ -110,21 +109,19 @@ namespace BUS
         //From tổng quan
         public static DataTable LayDanhSachPhongTongQuan()
         {
-            // Câu truy vấn Join 4 bảng để lấy dữ liệu chi tiết cho màn hình Tổng Quan
             string sTruyVan = @"
-                                SELECT 
-                                    p.MaPhong AS [Mã Phòng], 
-                                    p.TenPhong AS [Tên phòng], 
-                                    lp.TenLoai AS [Tên loại], 
-                                    kh.HoTen AS [Khách hàng], 
-                                    pt.NgayCheckOut AS [Ngày trả], 
-                                    p.TrangThai AS [Trạng thái]
-                                FROM Phong p
-                                LEFT JOIN LoaiPhong lp ON p.MaLoai = lp.MaLoai
-                                LEFT JOIN PhieuThue pt ON p.MaPhong = pt.MaPhong AND pt.TrangThai = N'Chưa thanh toán'
-                                LEFT JOIN KhachHang kh ON pt.MaKH = kh.MaKH
-                                ORDER BY p.MaPhong ASC";
-
+        SELECT 
+            p.MaPhong AS MaPhong, 
+            p.TenPhong AS TenPhong, 
+            lp.TenLoai AS TenLoai, 
+            kh.HoTen AS HoTen, 
+            pt.NgayCheckOutDuKien AS NgayCheckOutDuKien, 
+            p.TrangThai AS TrangThai
+            FROM Phong p
+            LEFT JOIN LoaiPhong lp ON p.MaLoai = lp.MaLoai
+            LEFT JOIN PhieuThue pt ON p.MaPhong = pt.MaPhong AND pt.TrangThai = N'Chưa thanh toán'
+            LEFT JOIN KhachHang kh ON pt.MaKH = kh.MaKH
+            ORDER BY p.MaPhong ASC";
             SqlConnection con = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, con);
             DataProvider.DongKetNoi(con);
