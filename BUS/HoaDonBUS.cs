@@ -7,14 +7,16 @@ namespace BUS
 {
     public class HoaDon_BUS
     {
-        private HoaDon_DAO daoHD = new HoaDon_DAO();
+        // Vì trong DAO các hàm là 'public static', bạn không cần dòng:
+        // private HoaDon_DAO daoHD = new HoaDon_DAO();
+        // Hãy gọi trực tiếp qua tên lớp HoaDon_DAO.
 
         public List<HoaDon_DTO> LayDanhSachHoaDon()
         {
-            return daoHD.GetListHoaDon();
+            // Gọi đúng hàm static từ DAO
+            return HoaDon_DAO.LayHoaDon();
         }
 
-        // Logic quan trọng: Tính toán tổng tiền thanh toán cuối cùng
         public decimal TinhTongThanhToan(decimal tienPhong, decimal tienDV)
         {
             return tienPhong + tienDV;
@@ -22,23 +24,29 @@ namespace BUS
 
         public bool LuuHoaDon(HoaDon_DTO hd)
         {
-            // Logic: Gán ngày thanh toán là ngày hiện tại trước khi lưu
+            // Gán ngày thanh toán là hiện tại trước khi lưu
             hd.DtNgayThanhToan = DateTime.Now;
 
-            if (hd.DTongTienThanhToan <= 0) return false; // Không cho lưu hóa đơn 0 đồng
+            if (hd.DTongTienThanhToan <= 0) return false;
 
-            return daoHD.InsertHoaDon(hd);
+            // Gọi đúng hàm static LuuHoaDon từ DAO
+            return HoaDon_DAO.LuuHoaDon(hd);
         }
 
         public decimal LayDoanhThuTheoThang(int thang, int nam)
         {
             decimal tong = 0;
-            List<HoaDon_DTO> ds = daoHD.GetListHoaDon();
-            foreach (var hd in ds)
+            List<HoaDon_DTO> ds = HoaDon_DAO.LayHoaDon();
+
+            if (ds != null)
             {
-                if (hd.DtNgayThanhToan.Month == thang && hd.DtNgayThanhToan.Year == nam)
+                foreach (var hd in ds)
                 {
-                    tong += hd.DTongTienThanhToan;
+                    // Kiểm tra khớp tháng và năm
+                    if (hd.DtNgayThanhToan.Month == thang && hd.DtNgayThanhToan.Year == nam)
+                    {
+                        tong += hd.DTongTienThanhToan;
+                    }
                 }
             }
             return tong;

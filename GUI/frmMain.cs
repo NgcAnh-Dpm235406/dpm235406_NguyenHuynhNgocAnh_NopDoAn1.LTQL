@@ -14,7 +14,7 @@ namespace GUI
 {
     public partial class frmMain : Form
     {
-        public frmMain()
+        public frmMain(TaiKhoan_DTO user)
         {
             InitializeComponent();
         }

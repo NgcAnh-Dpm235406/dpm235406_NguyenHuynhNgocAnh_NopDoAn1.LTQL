@@ -20,8 +20,8 @@ namespace DTO
         private string sHoTen;
         public string SHoTen { get => sHoTen; set => sHoTen = value; }
 
-        private int iLoaiTaiKhoan;
-        public int ILoaiTaiKhoan { get => iLoaiTaiKhoan; set => iLoaiTaiKhoan = value; }
+        private string sLoaiTaiKhoan;
+        public string SLoaiTaiKhoan { get => sLoaiTaiKhoan; set => sLoaiTaiKhoan = value; }
 
         private bool bTrangThai;
         public bool BTrangThai { get => bTrangThai; set => bTrangThai = value; }

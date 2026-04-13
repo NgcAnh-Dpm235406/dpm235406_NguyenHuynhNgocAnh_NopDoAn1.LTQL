@@ -45,5 +45,17 @@ namespace DAO
             DataProvider.DongKetNoi(con);
             return kq;
         }
+
+        // Thêm hàm này vào trong lớp KhachHang_DAO
+        public static bool SuaKhachHang(KhachHang_DTO kh)
+        {
+            string sTruyVan = string.Format("UPDATE KhachHang SET HoTen = N'{0}', CCCD = '{1}', SDT = '{2}', DiaChi = N'{3}', QuocTich = N'{4}' WHERE MaKH = {5}",
+                kh.SHoTen, kh.SCCCD, kh.SSDT, kh.SDiaChi, kh.SQuocTich, kh.IMaKH);
+
+            SqlConnection con = DataProvider.MoKetNoi();
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, con);
+            DataProvider.DongKetNoi(con);
+            return kq;
+        }
     }
 }
