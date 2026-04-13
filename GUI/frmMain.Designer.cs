@@ -26,26 +26,26 @@
             this.pnlMainContent = new Guna.UI2.WinForms.Guna2Panel();
             this.btnTaiKhoan = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnDichVu = new Guna.UI2.WinForms.Guna2TileButton();
-            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.plnTieuDe = new Guna.UI2.WinForms.Guna2Panel();
-            this.lblHoTen = new System.Windows.Forms.Label();
-            this.lblTieuDe = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.pnlNoiDungChinh = new System.Windows.Forms.Panel();
-            this.btnDangXuat = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
             this.btnHoaDon = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnKhachHang = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnQuanlyp = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnTongQuan = new Guna.UI2.WinForms.Guna2TileButton();
+            this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.plnTieuDe = new Guna.UI2.WinForms.Guna2Panel();
+            this.btnDangXuat = new Guna.UI2.WinForms.Guna2Button();
+            this.lblHoTen = new System.Windows.Forms.Label();
+            this.guna2PictureBox1 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.lblTieuDe = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.pnlNoiDungChinh = new System.Windows.Forms.Panel();
             this.pnThanhBen.SuspendLayout();
             this.pnlMainContent.SuspendLayout();
             this.guna2Panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.plnTieuDe.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pnThanhBen
@@ -99,6 +99,7 @@
             this.btnTaiKhoan.TabIndex = 11;
             this.btnTaiKhoan.Text = "Tài khoản";
             this.btnTaiKhoan.TextOffset = new System.Drawing.Point(0, -15);
+            this.btnTaiKhoan.Click += new System.EventHandler(this.btnTaiKhoan_Click);
             // 
             // btnDichVu
             // 
@@ -123,6 +124,104 @@
             this.btnDichVu.Text = "Dịch vụ";
             this.btnDichVu.TextOffset = new System.Drawing.Point(0, -15);
             this.btnDichVu.Click += new System.EventHandler(this.btnDichVu_Click);
+            // 
+            // btnHoaDon
+            // 
+            this.btnHoaDon.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.btnHoaDon.CheckedState.FillColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnHoaDon.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnHoaDon.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnHoaDon.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnHoaDon.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnHoaDon.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnHoaDon.FillColor = System.Drawing.Color.Transparent;
+            this.btnHoaDon.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHoaDon.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
+            this.btnHoaDon.Image = global::GUI.Properties.Resources.hd_removebg_preview;
+            this.btnHoaDon.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnHoaDon.ImageOffset = new System.Drawing.Point(3, 21);
+            this.btnHoaDon.ImageSize = new System.Drawing.Size(40, 40);
+            this.btnHoaDon.Location = new System.Drawing.Point(0, 159);
+            this.btnHoaDon.Name = "btnHoaDon";
+            this.btnHoaDon.Size = new System.Drawing.Size(194, 52);
+            this.btnHoaDon.TabIndex = 8;
+            this.btnHoaDon.Text = "Hóa đơn";
+            this.btnHoaDon.TextOffset = new System.Drawing.Point(0, -17);
+            this.btnHoaDon.Click += new System.EventHandler(this.btnHoaDon_Click);
+            // 
+            // btnKhachHang
+            // 
+            this.btnKhachHang.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.btnKhachHang.CheckedState.FillColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnKhachHang.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnKhachHang.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnKhachHang.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnKhachHang.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnKhachHang.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnKhachHang.FillColor = System.Drawing.Color.Transparent;
+            this.btnKhachHang.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnKhachHang.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
+            this.btnKhachHang.Image = global::GUI.Properties.Resources.tk2_removebg_preview;
+            this.btnKhachHang.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnKhachHang.ImageOffset = new System.Drawing.Point(3, 19);
+            this.btnKhachHang.ImageSize = new System.Drawing.Size(30, 30);
+            this.btnKhachHang.Location = new System.Drawing.Point(0, 107);
+            this.btnKhachHang.Name = "btnKhachHang";
+            this.btnKhachHang.Size = new System.Drawing.Size(194, 52);
+            this.btnKhachHang.TabIndex = 7;
+            this.btnKhachHang.Text = "Khách hàng";
+            this.btnKhachHang.TextOffset = new System.Drawing.Point(0, -15);
+            this.btnKhachHang.Click += new System.EventHandler(this.btnKhachHang_Click);
+            // 
+            // btnQuanlyp
+            // 
+            this.btnQuanlyp.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.btnQuanlyp.CheckedState.FillColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnQuanlyp.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnQuanlyp.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnQuanlyp.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnQuanlyp.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnQuanlyp.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnQuanlyp.FillColor = System.Drawing.Color.Transparent;
+            this.btnQuanlyp.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuanlyp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
+            this.btnQuanlyp.Image = global::GUI.Properties.Resources.pg;
+            this.btnQuanlyp.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnQuanlyp.ImageOffset = new System.Drawing.Point(3, 15);
+            this.btnQuanlyp.ImageSize = new System.Drawing.Size(24, 24);
+            this.btnQuanlyp.Location = new System.Drawing.Point(0, 55);
+            this.btnQuanlyp.Name = "btnQuanlyp";
+            this.btnQuanlyp.Size = new System.Drawing.Size(194, 52);
+            this.btnQuanlyp.TabIndex = 6;
+            this.btnQuanlyp.Text = "Quản lý phòng";
+            this.btnQuanlyp.TextOffset = new System.Drawing.Point(0, -15);
+            this.btnQuanlyp.Click += new System.EventHandler(this.btnQuanLyPhong_Click);
+            // 
+            // btnTongQuan
+            // 
+            this.btnTongQuan.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.btnTongQuan.CheckedState.FillColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnTongQuan.CheckedState.Image = global::GUI.Properties.Resources.tongquan;
+            this.btnTongQuan.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnTongQuan.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnTongQuan.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnTongQuan.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnTongQuan.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnTongQuan.FillColor = System.Drawing.Color.Transparent;
+            this.btnTongQuan.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTongQuan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
+            this.btnTongQuan.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.btnTongQuan.Image = global::GUI.Properties.Resources.tq;
+            this.btnTongQuan.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnTongQuan.ImageOffset = new System.Drawing.Point(10, 15);
+            this.btnTongQuan.ImageSize = new System.Drawing.Size(24, 24);
+            this.btnTongQuan.Location = new System.Drawing.Point(0, 0);
+            this.btnTongQuan.Name = "btnTongQuan";
+            this.btnTongQuan.Size = new System.Drawing.Size(194, 55);
+            this.btnTongQuan.TabIndex = 2;
+            this.btnTongQuan.Text = "Tổng quan";
+            this.btnTongQuan.TextOffset = new System.Drawing.Point(0, -15);
+            this.btnTongQuan.Click += new System.EventHandler(this.btnTongQuan_Click);
             // 
             // guna2Panel1
             // 
@@ -158,6 +257,16 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "Phượng Hoàng";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::GUI.Properties.Resources.logoph_removebg_preview;
+            this.pictureBox1.Location = new System.Drawing.Point(-11, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(100, 90);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // plnTieuDe
             // 
             this.plnTieuDe.BackColor = System.Drawing.Color.LightCyan;
@@ -171,34 +280,6 @@
             this.plnTieuDe.Name = "plnTieuDe";
             this.plnTieuDe.Size = new System.Drawing.Size(875, 71);
             this.plnTieuDe.TabIndex = 1;
-            // 
-            // lblHoTen
-            // 
-            this.lblHoTen.AutoSize = true;
-            this.lblHoTen.Location = new System.Drawing.Point(505, 33);
-            this.lblHoTen.Name = "lblHoTen";
-            this.lblHoTen.Size = new System.Drawing.Size(123, 19);
-            this.lblHoTen.TabIndex = 2;
-            this.lblHoTen.Text = "Xin chào: Admin";
-            // 
-            // lblTieuDe
-            // 
-            this.lblTieuDe.BackColor = System.Drawing.Color.Transparent;
-            this.lblTieuDe.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTieuDe.Location = new System.Drawing.Point(22, 31);
-            this.lblTieuDe.Name = "lblTieuDe";
-            this.lblTieuDe.Size = new System.Drawing.Size(188, 21);
-            this.lblTieuDe.TabIndex = 0;
-            this.lblTieuDe.Text = "TỔNG QUAN HÔM NAY";
-            // 
-            // pnlNoiDungChinh
-            // 
-            this.pnlNoiDungChinh.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.pnlNoiDungChinh.Location = new System.Drawing.Point(194, 71);
-            this.pnlNoiDungChinh.Name = "pnlNoiDungChinh";
-            this.pnlNoiDungChinh.Padding = new System.Windows.Forms.Padding(10);
-            this.pnlNoiDungChinh.Size = new System.Drawing.Size(875, 538);
-            this.pnlNoiDungChinh.TabIndex = 2;
             // 
             // btnDangXuat
             // 
@@ -220,6 +301,16 @@
             this.btnDangXuat.Size = new System.Drawing.Size(98, 40);
             this.btnDangXuat.TabIndex = 3;
             this.btnDangXuat.Text = "Logout";
+            this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
+            // 
+            // lblHoTen
+            // 
+            this.lblHoTen.AutoSize = true;
+            this.lblHoTen.Location = new System.Drawing.Point(505, 33);
+            this.lblHoTen.Name = "lblHoTen";
+            this.lblHoTen.Size = new System.Drawing.Size(123, 19);
+            this.lblHoTen.TabIndex = 2;
+            this.lblHoTen.Text = "Xin chào: Admin";
             // 
             // guna2PictureBox1
             // 
@@ -232,109 +323,24 @@
             this.guna2PictureBox1.TabIndex = 1;
             this.guna2PictureBox1.TabStop = false;
             // 
-            // btnHoaDon
+            // lblTieuDe
             // 
-            this.btnHoaDon.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            this.btnHoaDon.CheckedState.FillColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnHoaDon.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnHoaDon.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnHoaDon.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnHoaDon.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnHoaDon.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnHoaDon.FillColor = System.Drawing.Color.Transparent;
-            this.btnHoaDon.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHoaDon.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
-            this.btnHoaDon.Image = global::GUI.Properties.Resources.hd_removebg_preview;
-            this.btnHoaDon.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnHoaDon.ImageOffset = new System.Drawing.Point(3, 21);
-            this.btnHoaDon.ImageSize = new System.Drawing.Size(40, 40);
-            this.btnHoaDon.Location = new System.Drawing.Point(0, 159);
-            this.btnHoaDon.Name = "btnHoaDon";
-            this.btnHoaDon.Size = new System.Drawing.Size(194, 52);
-            this.btnHoaDon.TabIndex = 8;
-            this.btnHoaDon.Text = "Hóa đơn";
-            this.btnHoaDon.TextOffset = new System.Drawing.Point(0, -17);
+            this.lblTieuDe.BackColor = System.Drawing.Color.Transparent;
+            this.lblTieuDe.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTieuDe.Location = new System.Drawing.Point(22, 31);
+            this.lblTieuDe.Name = "lblTieuDe";
+            this.lblTieuDe.Size = new System.Drawing.Size(188, 21);
+            this.lblTieuDe.TabIndex = 0;
+            this.lblTieuDe.Text = "TỔNG QUAN HÔM NAY";
             // 
-            // btnKhachHang
+            // pnlNoiDungChinh
             // 
-            this.btnKhachHang.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            this.btnKhachHang.CheckedState.FillColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnKhachHang.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnKhachHang.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnKhachHang.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnKhachHang.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnKhachHang.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnKhachHang.FillColor = System.Drawing.Color.Transparent;
-            this.btnKhachHang.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnKhachHang.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
-            this.btnKhachHang.Image = global::GUI.Properties.Resources.tk2_removebg_preview;
-            this.btnKhachHang.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnKhachHang.ImageOffset = new System.Drawing.Point(3, 19);
-            this.btnKhachHang.ImageSize = new System.Drawing.Size(30, 30);
-            this.btnKhachHang.Location = new System.Drawing.Point(0, 107);
-            this.btnKhachHang.Name = "btnKhachHang";
-            this.btnKhachHang.Size = new System.Drawing.Size(194, 52);
-            this.btnKhachHang.TabIndex = 7;
-            this.btnKhachHang.Text = "Khách hàng";
-            this.btnKhachHang.TextOffset = new System.Drawing.Point(0, -15);
-            // 
-            // btnQuanlyp
-            // 
-            this.btnQuanlyp.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            this.btnQuanlyp.CheckedState.FillColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnQuanlyp.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnQuanlyp.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnQuanlyp.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnQuanlyp.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnQuanlyp.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnQuanlyp.FillColor = System.Drawing.Color.Transparent;
-            this.btnQuanlyp.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuanlyp.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
-            this.btnQuanlyp.Image = global::GUI.Properties.Resources.pg;
-            this.btnQuanlyp.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnQuanlyp.ImageOffset = new System.Drawing.Point(3, 15);
-            this.btnQuanlyp.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnQuanlyp.Location = new System.Drawing.Point(0, 55);
-            this.btnQuanlyp.Name = "btnQuanlyp";
-            this.btnQuanlyp.Size = new System.Drawing.Size(194, 52);
-            this.btnQuanlyp.TabIndex = 6;
-            this.btnQuanlyp.Text = "Quản lý phòng";
-            this.btnQuanlyp.TextOffset = new System.Drawing.Point(0, -15);
-            // 
-            // btnTongQuan
-            // 
-            this.btnTongQuan.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            this.btnTongQuan.CheckedState.FillColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnTongQuan.CheckedState.Image = global::GUI.Properties.Resources.tongquan;
-            this.btnTongQuan.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnTongQuan.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnTongQuan.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnTongQuan.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnTongQuan.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnTongQuan.FillColor = System.Drawing.Color.Transparent;
-            this.btnTongQuan.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTongQuan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
-            this.btnTongQuan.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.btnTongQuan.Image = global::GUI.Properties.Resources.tq;
-            this.btnTongQuan.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnTongQuan.ImageOffset = new System.Drawing.Point(10, 15);
-            this.btnTongQuan.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnTongQuan.Location = new System.Drawing.Point(0, 0);
-            this.btnTongQuan.Name = "btnTongQuan";
-            this.btnTongQuan.Size = new System.Drawing.Size(194, 55);
-            this.btnTongQuan.TabIndex = 2;
-            this.btnTongQuan.Text = "Tổng quan";
-            this.btnTongQuan.TextOffset = new System.Drawing.Point(0, -15);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::GUI.Properties.Resources.logoph_removebg_preview;
-            this.pictureBox1.Location = new System.Drawing.Point(-11, 2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 90);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pnlNoiDungChinh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pnlNoiDungChinh.Location = new System.Drawing.Point(194, 71);
+            this.pnlNoiDungChinh.Name = "pnlNoiDungChinh";
+            this.pnlNoiDungChinh.Padding = new System.Windows.Forms.Padding(10);
+            this.pnlNoiDungChinh.Size = new System.Drawing.Size(875, 538);
+            this.pnlNoiDungChinh.TabIndex = 2;
             // 
             // frmMain
             // 
@@ -354,10 +360,10 @@
             this.pnlMainContent.ResumeLayout(false);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.plnTieuDe.ResumeLayout(false);
             this.plnTieuDe.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

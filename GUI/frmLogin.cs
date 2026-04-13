@@ -1,25 +1,23 @@
-﻿using BUS; // Đổi từ QLKS1.PUS sang BUS 
-using DTO; // Đổi từ QLKS1.DTO sang DTO cho khớp với các file trước
-using GUI;
+﻿using BUS;
+using DTO;
 using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace GUI
 {
     public partial class frmLogin : Form
     {
-        // Sử dụng tên lớp TaiKhoan_BUS mà mình đã thống nhất
+        // Khởi tạo BUS
         TaiKhoan_BUS accBus = new TaiKhoan_BUS();
 
         public frmLogin()
         {
             InitializeComponent();
-            // Đảm bảo mật khẩu luôn ẩn khi vừa mở form
+            // Thiết lập mặc định
             txtMatKhau.UseSystemPasswordChar = true;
+            this.AcceptButton = btnLogin; // Nhấn Enter trên bàn phím sẽ tự kích hoạt btnLogin
         }
 
-        // Sự kiện khi nhấn nút Login
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string user = txtTen.Text.Trim();
@@ -27,40 +25,50 @@ namespace GUI
 
             if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ tài khoản và mật khẩu!");
+                MessageBox.Show("Vui lòng nhập đầy đủ tài khoản và mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // Gọi hàm KiemTraDangNhap từ BUS (Trả về TaiKhoan_DTO)
+            // Gọi BUS kiểm tra
             TaiKhoan_DTO loginAcc = accBus.KiemTraDangNhap(user, pass);
 
-            if(loginAcc != null)
-{
-                // Chào bằng Họ tên sẽ chuyên nghiệp hơn
-                MessageBox.Show("Đăng nhập thành công! Chào " + loginAcc.SHoTen);
+            if (loginAcc != null)
+            {
+                MessageBox.Show("Đăng nhập thành công! Chào " + loginAcc.SHoTen, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+                // 1. Khởi tạo Form Main
                 frmMain f = new frmMain(loginAcc);
+
+                // 2. Ẩn form Login
                 this.Hide();
+
+                // 3. Hiển thị Main dưới dạng Dialog. 
+                // Khi người dùng nhấn Đăng xuất (this.Close() ở frmMain), code sẽ chạy tiếp dòng dưới.
                 f.ShowDialog();
+
+                // 4. Khi quay lại Login: Xóa trắng mật khẩu và hiện Form
+                txtMatKhau.Clear();
                 this.Show();
+                txtMatKhau.Focus(); // Để con trỏ vào ô mật khẩu cho lần đăng nhập sau
             }
             else
             {
-                MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                txtMatKhau.Clear();
+                txtMatKhau.Focus();
             }
         }
 
-        // Sự kiện nhấn vào nút PictureBox1 (Icon Shutdown)
         private void pictureBox1_Click(object sender, EventArgs e)
         {
             DialogResult dr = MessageBox.Show("Bạn có muốn thoát chương trình?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (dr == DialogResult.Yes)
             {
-                Application.Exit();
+                Application.Exit(); // Thoát hoàn toàn ứng dụng
             }
         }
 
-        // Hiện mật khẩu khi nhấn giữ chuột vào icon con mắt
+        // --- Hiển thị mật khẩu (Cải tiến) ---
         private void showPASS_MouseDown(object sender, MouseEventArgs e)
         {
             txtMatKhau.UseSystemPasswordChar = false;
@@ -71,9 +79,14 @@ namespace GUI
             txtMatKhau.UseSystemPasswordChar = true;
         }
 
-        private void frmLogin_Load(object sender, EventArgs e)
+        // --- Đảm bảo đóng Form Login là đóng sạch ứng dụng ---
+        private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Có thể thêm các thiết lập ban đầu ở đây
+            // Nếu form Login bị đóng thủ công (dấu X), thoát hẳn app để không chạy ngầm
+            if (this.Visible == true)
+            {
+                Application.Exit();
+            }
         }
     }
 }

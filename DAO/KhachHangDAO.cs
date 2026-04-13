@@ -57,5 +57,29 @@ namespace DAO
             DataProvider.DongKetNoi(con);
             return kq;
         }
+        public static bool XoaKhachHang(int maKH)
+        {
+            try
+            {
+                // Câu lệnh SQL xóa dựa trên mã khách hàng
+                string sTruyVan = string.Format("DELETE FROM KhachHang WHERE MaKH = {0}", maKH);
+
+                // Mở kết nối
+                SqlConnection con = DataProvider.MoKetNoi();
+
+                // Thực thi truy vấn không lấy dữ liệu (Trả về true nếu thành công)
+                bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, con);
+
+                // Đóng kết nối
+                DataProvider.DongKetNoi(con);
+
+                return kq;
+            }
+            catch (Exception)
+            {
+                // Nếu có lỗi (ví dụ: khách hàng đang có hóa đơn, không thể xóa vì ràng buộc khóa ngoại)
+                return false;
+            }
+        }
     }
 }

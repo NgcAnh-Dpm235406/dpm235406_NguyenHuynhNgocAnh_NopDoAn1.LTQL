@@ -139,6 +139,8 @@
             this.showPASS.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.showPASS.TabIndex = 4;
             this.showPASS.TabStop = false;
+            this.showPASS.MouseDown += new System.Windows.Forms.MouseEventHandler(this.showPASS_MouseDown);
+            this.showPASS.MouseUp += new System.Windows.Forms.MouseEventHandler(this.showPASS_MouseUp);
             // 
             // panel1
             // 

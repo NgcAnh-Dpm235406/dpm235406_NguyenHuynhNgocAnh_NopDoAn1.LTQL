@@ -51,5 +51,19 @@ namespace BUS
             }
             return tong;
         }
+
+        public decimal TinhTongDoanhThuTatCa()
+        {
+            decimal tong = 0;
+            List<HoaDon_DTO> ds = HoaDon_DAO.LayHoaDon();
+            if (ds != null)
+            {
+                foreach (var hd in ds)
+                {
+                    tong += hd.DTongTienThanhToan;
+                }
+            }
+            return tong;
+        }
     }
 }

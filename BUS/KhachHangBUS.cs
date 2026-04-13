@@ -1,40 +1,42 @@
-﻿using DTO;
-using DAO;
+﻿using DAO;
+using DTO;
 using System.Collections.Generic;
+using System.Data; // Thêm để dùng DataTable nếu cần
 
 namespace BUS
 {
     public class KhachHang_BUS
     {
-        // Vì trong DAO dùng hàm static, bạn nên gọi trực tiếp qua tên lớp KhachHang_DAO
-        // thay vì dùng biến daoKH.
-
+        // Hàm lấy danh sách trả về List DTO (Dùng cho logic)
         public List<KhachHang_DTO> LayTatCaKhachHang()
         {
-            // Đổi từ GetListKhachHang() thành LayKhachHang() cho khớp với DAO
             return KhachHang_DAO.LayKhachHang();
+        }
+
+        // Hàm kiểm tra trung CCCD
+        public bool KiemTraTrungCCCD(string cccd)
+        {
+            List<KhachHang_DTO> ds = KhachHang_DAO.LayKhachHang();
+            return ds != null && ds.Exists(x => x.SCCCD == cccd);
         }
 
         public bool ThemKhachHang(KhachHang_DTO kh)
         {
-            // Logic: Kiểm tra nếu khách hàng đã tồn tại qua số CCCD
-            List<KhachHang_DTO> ds = KhachHang_DAO.LayKhachHang();
-            if (ds != null)
-            {
-                foreach (var item in ds)
-                {
-                    if (item.SCCCD == kh.SCCCD) return false; // Trùng CCCD không cho thêm
-                }
-            }
+            // Tận dụng hàm kiểm tra trùng đã viết ở trên
+            if (KiemTraTrungCCCD(kh.SCCCD)) return false;
 
-            // Đổi từ InsertKhachHang(kh) thành ThemKhachHang(kh) cho khớp với DAO
             return KhachHang_DAO.ThemKhachHang(kh);
         }
 
         public bool SuaKhachHang(KhachHang_DTO kh)
         {
-            // Đảm bảo bạn đã viết hàm SuaKhachHang (hoặc UpdateKhachHang) bên DAO
             return KhachHang_DAO.SuaKhachHang(kh);
+        }
+
+        // QUAN TRỌNG: Bỏ 'static' để tránh lỗi gạch đỏ ở GUI
+        public bool XoaKhachHang(int maKH)
+        {
+            return KhachHang_DAO.XoaKhachHang(maKH);
         }
 
         public List<KhachHang_DTO> TimKiemKhachHang(string tuKhoa)
@@ -42,7 +44,8 @@ namespace BUS
             List<KhachHang_DTO> ds = KhachHang_DAO.LayKhachHang();
             if (ds == null) return new List<KhachHang_DTO>();
 
-            return ds.FindAll(kh => kh.SHoTen.ToLower().Contains(tuKhoa.ToLower()) || kh.SCCCD.Contains(tuKhoa));
+            return ds.FindAll(kh => kh.SHoTen.ToLower().Contains(tuKhoa.ToLower()) ||
+                                   kh.SCCCD.Contains(tuKhoa));
         }
     }
 }

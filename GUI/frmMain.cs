@@ -26,17 +26,19 @@ namespace GUI
         TaiKhoan_BUS busTK = new TaiKhoan_BUS();
         private void OpenChildForm(Form childForm)
         {
-            // Xóa các control cũ trong Main Panel (ví dụ đặt tên là pnlMainContent)
+            // 1. Xóa bỏ Form cũ trong Panel (ví dụ đặt tên là pnlNoiDungChinh)
             if (pnlNoiDungChinh.Controls.Count > 0)
             {
                 pnlNoiDungChinh.Controls.Clear();
             }
 
-            childForm.TopLevel = false; // Thiết lập Form con không phải là cửa sổ cấp cao nhất
-            childForm.FormBorderStyle = FormBorderStyle.None; // Bỏ viền Form con
-            childForm.Dock = DockStyle.Fill; // Để Form con lấp đầy Main Panel
+            // 2. Cấu hình quan trọng để lấp đầy chỗ trống
+            childForm.TopLevel = false;             // Bắt buộc để nhúng vào Panel
+            childForm.FormBorderStyle = FormBorderStyle.None; // Bỏ viền để trông liền mạch
+            childForm.Dock = DockStyle.Fill;        // CỰC KỲ QUAN TRỌNG: Form con sẽ tự giãn theo Panel chính
 
-            pnlNoiDungChinh.Controls.Add(childForm); // Thêm Form con vào Panel
+            // 3. Thêm vào Panel và hiển thị
+            pnlNoiDungChinh.Controls.Add(childForm);
             pnlNoiDungChinh.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
