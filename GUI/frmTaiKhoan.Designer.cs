@@ -180,6 +180,7 @@
             this.Controls.Add(this.txtTenTK);
             this.Name = "frmTaiKhoan";
             this.Text = "frmTaiKhoancs";
+            this.Load += new System.EventHandler(this.frmTaiKhoan_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTaiKhoan)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
