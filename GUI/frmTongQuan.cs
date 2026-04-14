@@ -40,24 +40,31 @@ namespace GUI
         }
 
         private void HienThiDanhSachChiTiet()
-            {
+        {
             DataTable dt = busPhong.LayDanhSachPhongTongQuan();
-            if (dt == null) { MessageBox.Show("DataTable = null"); return; }
-            // Hiển thị tên các cột trả về
-            var cols = string.Join(", ", dt.Columns.Cast<System.Data.DataColumn>().Select(c => c.ColumnName));
-            MessageBox.Show("Cols: " + cols);
-            if (dt.Rows.Count > 0)
-            {
-                var row0 = string.Join(" | ", dt.Columns.Cast<System.Data.DataColumn>().Select(c =>
-                    dt.Rows[0][c] == DBNull.Value ? "<null>" : dt.Rows[0][c].ToString()));
-                MessageBox.Show("Row0: " + row0);
-            }
 
-            dgvDanhSach.Columns.Clear();
-            dgvDanhSach.DataSource = dt;
-            dgvDanhSach.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvDanhSach.AllowUserToAddRows = false;
-            dgvDanhSach.ReadOnly = true;
+            if (dt != null)
+            {
+                // Tắt chế độ tự tạo cột để dùng cột đã tạo trong Design
+                dgvDanhSach.AutoGenerateColumns = false;
+
+                // Gán DataPropertyName dựa trên thứ tự cột trong Designer
+                // 0: MaPhong, 1: TenPhong, 2: TenLoai, 3: KhachHang, 4: NgayTra, 5: TrangThai
+                dgvDanhSach.Columns[0].DataPropertyName = "MaPhong";
+                dgvDanhSach.Columns[1].DataPropertyName = "TenPhong";
+                dgvDanhSach.Columns[2].DataPropertyName = "TenLoai";
+                dgvDanhSach.Columns[3].DataPropertyName = "HoTen";
+                dgvDanhSach.Columns[4].DataPropertyName = "NgayCheckOutDuKien";
+                dgvDanhSach.Columns[5].DataPropertyName = "TrangThai";
+
+                dgvDanhSach.DataSource = dt;
+                dgvDanhSach.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            }
+        }
+
+        private void prpDanhSach_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
