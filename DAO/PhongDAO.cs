@@ -107,22 +107,26 @@ namespace DAO
         }
 
         //From tổng quan
+        // Trong file PhongDAO.cs
+        // Sửa trong PhongDAO.cs
         public static DataTable LayDanhSachPhongTongQuan()
         {
             string sTruyVan = @"
         SELECT 
-            p.MaPhong AS MaPhong, 
-            p.TenPhong AS TenPhong, 
-            lp.TenLoai AS TenLoai, 
-            kh.HoTen AS HoTen, 
-            pt.NgayCheckOutDuKien AS NgayCheckOutDuKien, 
-            p.TrangThai AS TrangThai
-            FROM Phong p
-            LEFT JOIN LoaiPhong lp ON p.MaLoai = lp.MaLoai
-            LEFT JOIN PhieuThue pt ON p.MaPhong = pt.MaPhong AND pt.TrangThai = N'Chưa thanh toán'
-            LEFT JOIN KhachHang kh ON pt.MaKH = kh.MaKH
-            ORDER BY p.MaPhong ASC";
+            p.MaPhong, 
+            p.TenPhong, 
+            lp.TenLoai, 
+            kh.HoTen, 
+            pt.NgayCheckOutDuKien AS NgayTra, -- Đã khớp với bảng bạn vừa gửi
+            p.TrangThai
+        FROM Phong p
+        LEFT JOIN LoaiPhong lp ON p.MaLoai = lp.MaLoai
+        LEFT JOIN PhieuThue pt ON p.MaPhong = pt.MaPhong AND pt.TrangThai = N'Chưa thanh toán'
+        LEFT JOIN KhachHang kh ON pt.MaKH = kh.MaKH
+        ORDER BY p.MaPhong ASC";
+
             SqlConnection con = DataProvider.MoKetNoi();
+            // Đảm bảo dùng hàm TruyVanLayDuLieu
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, con);
             DataProvider.DongKetNoi(con);
             return dt;
