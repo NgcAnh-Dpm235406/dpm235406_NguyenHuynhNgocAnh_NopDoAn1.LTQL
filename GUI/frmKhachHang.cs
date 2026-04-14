@@ -35,6 +35,9 @@ namespace GUI
             dgvKhachHang.Columns["IMaKH"].HeaderText = "Mã KH";
             dgvKhachHang.Columns["SHoTen"].HeaderText = "Họ Tên";
             dgvKhachHang.Columns["SCCCD"].HeaderText = "Số CCCD";
+            dgvKhachHang.Columns["SSDT"].HeaderText = "Số ĐT";
+            dgvKhachHang.Columns["SDiaChi"].HeaderText = "Địa Chỉ";
+            dgvKhachHang.Columns["SQuocTich"].HeaderText = "Quốc Tịch";
         }
 
         // 2. Các hàm bổ trợ giao diện

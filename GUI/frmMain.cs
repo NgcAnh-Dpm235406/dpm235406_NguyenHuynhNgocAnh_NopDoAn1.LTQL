@@ -52,13 +52,6 @@ namespace GUI
             OpenChildForm(new frmQuanLyPhong());
         }
 
-        private void btnTongQuan_Click(object sender, EventArgs e)
-        {
-            // Mở Form Dashboard (Bạn cần tạo Form này trước)
-            lblTieuDe.Text = "TỔNG QUAN";
-            OpenChildForm(new frmTongQuan());
-        }
-
         private void btnKhachHang_Click(object sender, EventArgs e)
         {
             // Mở Form Dashboard(Bạn cần tạo Form này trước)
@@ -158,16 +151,7 @@ namespace GUI
 
 
 
-        private void btnTongQuan_Click_1(object sender, EventArgs e)
-        {
-            lblTieuDe.Text = "TỔNG QUAN";
-
-            // Khởi tạo Form con
-            frmTongQuan f = new frmTongQuan();
-
-            // Gọi hàm để nhúng vào Panel (nhớ kiểm tra tên Panel bên trong hàm này)
-            OpenChildForm(f);
-        }
+        
 
         private void btnKhachHang_Click_1(object sender, EventArgs e)
         {
@@ -186,6 +170,18 @@ namespace GUI
 
             // Khởi tạo Form con
             frmHoaDon f = new frmHoaDon();
+
+            // Gọi hàm để nhúng vào Panel (nhớ kiểm tra tên Panel bên trong hàm này)
+            OpenChildForm(f);
+        }
+
+        private void btnDatPhong_Click(object sender, EventArgs e)
+        {
+
+            lblTieuDe.Text = "ĐẶT PHÒNG";
+
+            // Khởi tạo Form con
+            frmDatPhong f = new frmDatPhong();
 
             // Gọi hàm để nhúng vào Panel (nhớ kiểm tra tên Panel bên trong hàm này)
             OpenChildForm(f);

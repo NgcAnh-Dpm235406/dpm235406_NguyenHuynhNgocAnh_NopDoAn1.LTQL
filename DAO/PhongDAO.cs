@@ -109,28 +109,43 @@ namespace DAO
         //From tổng quan
         // Trong file PhongDAO.cs
         // Sửa trong PhongDAO.cs
-        public static DataTable LayDanhSachPhongTongQuan()
+        // Thêm vào file Phong_DAO.cs
+        public static DataTable LayPhongTrongTheoLoai(int maLoai)
         {
-            // Câu truy vấn này sẽ lấy TẤT CẢ các phòng (Phong p)
-            // Nếu có phiếu thuê chưa thanh toán thì mới hiện HoTen và NgayCheckOutDuKien
-            string sTruyVan = @"
-        SELECT 
-            p.MaPhong, 
-            p.TenPhong, 
-            lp.TenLoai, 
-            kh.HoTen, 
-            pt.NgayCheckOutDuKien, 
-            p.TrangThai
-        FROM Phong p
-        LEFT JOIN LoaiPhong lp ON p.MaLoai = lp.MaLoai
-        LEFT JOIN PhieuThue pt ON p.MaPhong = pt.MaPhong AND pt.TrangThai = N'Chưa thanh toán'
-        LEFT JOIN KhachHang kh ON pt.MaKH = kh.MaKH
-        ORDER BY p.MaPhong ASC";
+            // Truy vấn lấy các phòng theo loại và phải đang TRỐNG
+            string sTruyVan = string.Format(@"SELECT MaPhong, TenPhong 
+                                     FROM Phong 
+                                     WHERE MaLoai = {0} AND TrangThai LIKE N'%Trống%'", maLoai);
 
             SqlConnection con = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, con);
             DataProvider.DongKetNoi(con);
+
             return dt;
+        }
+
+        public static DataTable LayTatCaTenPhongTrong()
+        {
+            // Truy vấn lấy tất cả tên phòng và mã phòng
+            string sTruyVan = "SELECT MaPhong, TenPhong FROM Phong WHERE TrangThai = N'Trống'";
+
+            SqlConnection con = DataProvider.MoKetNoi();
+            DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, con);
+            DataProvider.DongKetNoi(con);
+
+            return dt;
+        }
+
+        public static bool CapNhatTrangThaiPhong(int maPhong, string trangThaiMoi)
+        {
+            string sTruyVan = string.Format("UPDATE Phong SET TrangThai = N'{0}' WHERE MaPhong = {1}",
+                                            trangThaiMoi, maPhong);
+
+            SqlConnection con = DataProvider.MoKetNoi();
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, con);
+            DataProvider.DongKetNoi(con);
+
+            return kq;
         }
     }
 }

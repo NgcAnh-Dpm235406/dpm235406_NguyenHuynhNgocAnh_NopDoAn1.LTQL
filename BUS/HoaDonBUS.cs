@@ -1,7 +1,9 @@
-﻿using DTO;
-using DAO;
+﻿using DAO;
+using DTO;
 using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Drawing;
 
 namespace BUS
 {
@@ -65,5 +67,17 @@ namespace BUS
             }
             return tong;
         }
+
+        public DataTable LayDanhSachHoaDon(DateTime tu, DateTime den, string hoTen)
+        {
+            return HoaDon_DAO.LayDSHoaDon(tu, den, hoTen);
+        }
+
+        public bool XoaHoaDon(int maHD)
+        {
+            return HoaDon_DAO.XoaHoaDon(maHD);
+        }
+
+        
     }
 }
