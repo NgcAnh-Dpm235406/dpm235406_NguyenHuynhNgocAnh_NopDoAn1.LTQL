@@ -111,13 +111,15 @@ namespace DAO
         // Sửa trong PhongDAO.cs
         public static DataTable LayDanhSachPhongTongQuan()
         {
+            // Câu truy vấn này sẽ lấy TẤT CẢ các phòng (Phong p)
+            // Nếu có phiếu thuê chưa thanh toán thì mới hiện HoTen và NgayCheckOutDuKien
             string sTruyVan = @"
         SELECT 
             p.MaPhong, 
             p.TenPhong, 
             lp.TenLoai, 
             kh.HoTen, 
-            pt.NgayCheckOutDuKien AS NgayTra, -- Đã khớp với bảng bạn vừa gửi
+            pt.NgayCheckOutDuKien, 
             p.TrangThai
         FROM Phong p
         LEFT JOIN LoaiPhong lp ON p.MaLoai = lp.MaLoai
@@ -126,7 +128,6 @@ namespace DAO
         ORDER BY p.MaPhong ASC";
 
             SqlConnection con = DataProvider.MoKetNoi();
-            // Đảm bảo dùng hàm TruyVanLayDuLieu
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, con);
             DataProvider.DongKetNoi(con);
             return dt;
