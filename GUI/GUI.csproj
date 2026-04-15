@@ -55,6 +55,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="frmDatPhong.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDatPhong.Designer.cs">
+      <DependentUpon>frmDatPhong.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmDichVu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -97,14 +103,11 @@
     <Compile Include="frmTaiKhoan.Designer.cs">
       <DependentUpon>frmTaiKhoan.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTongQuan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmTongQuan.Designer.cs">
-      <DependentUpon>frmTongQuan.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="frmDatPhong.resx">
+      <DependentUpon>frmDatPhong.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmDichVu.resx">
       <DependentUpon>frmDichVu.cs</DependentUpon>
     </EmbeddedResource>
@@ -125,9 +128,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmTaiKhoan.resx">
       <DependentUpon>frmTaiKhoan.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmTongQuan.resx">
-      <DependentUpon>frmTongQuan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -164,6 +164,7 @@
     <Content Include="resources\ex.jpg" />
     <Content Include="resources\eye %281%29.png" />
     <Content Include="resources\giuong-removebg-preview.png" />
+    <None Include="resources\ha-removebg-preview.png" />
     <Content Include="resources\hd-removebg-preview.png" />
     <Content Include="resources\hd.png" />
     <Content Include="resources\hdd-removebg-preview.png" />
@@ -180,6 +181,7 @@
     <Content Include="resources\QTV-removebg-preview.png" />
     <Content Include="resources\TGKE-removebg-preview.png" />
     <Content Include="resources\THOAT-removebg-preview.png" />
+    <None Include="resources\tiemk-removebg-preview.png" />
     <Content Include="resources\TK-removebg-preview.png" />
     <Content Include="resources\tk.png" />
     <Content Include="resources\tk2-removebg-preview.png" />

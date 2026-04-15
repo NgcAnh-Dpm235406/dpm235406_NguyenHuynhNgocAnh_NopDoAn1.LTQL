@@ -164,6 +164,16 @@ namespace GUI.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ha_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("ha-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap hd {
             get {
                 object obj = ResourceManager.GetObject("hd", resourceCulture);
@@ -317,6 +327,16 @@ namespace GUI.Properties {
         internal static System.Drawing.Bitmap THOAT_removebg_preview {
             get {
                 object obj = ResourceManager.GetObject("THOAT-removebg-preview", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap tiemk_removebg_preview {
+            get {
+                object obj = ResourceManager.GetObject("tiemk-removebg-preview", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

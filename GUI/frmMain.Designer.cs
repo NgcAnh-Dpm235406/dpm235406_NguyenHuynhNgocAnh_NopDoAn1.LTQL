@@ -29,7 +29,7 @@
             this.btnHoaDon = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnKhachHang = new Guna.UI2.WinForms.Guna2TileButton();
             this.btnQuanlyp = new Guna.UI2.WinForms.Guna2TileButton();
-            this.btnTongQuan = new Guna.UI2.WinForms.Guna2TileButton();
+            this.btnDatPhong = new Guna.UI2.WinForms.Guna2TileButton();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -70,7 +70,7 @@
             this.pnlMainContent.Controls.Add(this.btnHoaDon);
             this.pnlMainContent.Controls.Add(this.btnKhachHang);
             this.pnlMainContent.Controls.Add(this.btnQuanlyp);
-            this.pnlMainContent.Controls.Add(this.btnTongQuan);
+            this.pnlMainContent.Controls.Add(this.btnDatPhong);
             this.pnlMainContent.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlMainContent.Location = new System.Drawing.Point(0, 93);
             this.pnlMainContent.Name = "pnlMainContent";
@@ -197,31 +197,31 @@
             this.btnQuanlyp.TextOffset = new System.Drawing.Point(0, -15);
             this.btnQuanlyp.Click += new System.EventHandler(this.btnQuanLyPhong_Click);
             // 
-            // btnTongQuan
+            // btnDatPhong
             // 
-            this.btnTongQuan.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
-            this.btnTongQuan.CheckedState.FillColor = System.Drawing.Color.DeepSkyBlue;
-            this.btnTongQuan.CheckedState.Image = global::GUI.Properties.Resources.tongquan;
-            this.btnTongQuan.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.btnTongQuan.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.btnTongQuan.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.btnTongQuan.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnTongQuan.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnTongQuan.FillColor = System.Drawing.Color.Transparent;
-            this.btnTongQuan.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTongQuan.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
-            this.btnTongQuan.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.btnTongQuan.Image = global::GUI.Properties.Resources.tq;
-            this.btnTongQuan.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
-            this.btnTongQuan.ImageOffset = new System.Drawing.Point(10, 15);
-            this.btnTongQuan.ImageSize = new System.Drawing.Size(24, 24);
-            this.btnTongQuan.Location = new System.Drawing.Point(0, 0);
-            this.btnTongQuan.Name = "btnTongQuan";
-            this.btnTongQuan.Size = new System.Drawing.Size(194, 55);
-            this.btnTongQuan.TabIndex = 2;
-            this.btnTongQuan.Text = "Tổng quan";
-            this.btnTongQuan.TextOffset = new System.Drawing.Point(0, -15);
-            this.btnTongQuan.Click += new System.EventHandler(this.btnTongQuan_Click);
+            this.btnDatPhong.ButtonMode = Guna.UI2.WinForms.Enums.ButtonMode.RadioButton;
+            this.btnDatPhong.CheckedState.FillColor = System.Drawing.Color.DeepSkyBlue;
+            this.btnDatPhong.CheckedState.Image = global::GUI.Properties.Resources.tongquan;
+            this.btnDatPhong.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnDatPhong.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnDatPhong.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnDatPhong.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnDatPhong.Dock = System.Windows.Forms.DockStyle.Top;
+            this.btnDatPhong.FillColor = System.Drawing.Color.Transparent;
+            this.btnDatPhong.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDatPhong.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(236)))), ((int)(((byte)(240)))), ((int)(((byte)(241)))));
+            this.btnDatPhong.HoverState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
+            this.btnDatPhong.Image = global::GUI.Properties.Resources.tq;
+            this.btnDatPhong.ImageAlign = System.Windows.Forms.HorizontalAlignment.Left;
+            this.btnDatPhong.ImageOffset = new System.Drawing.Point(10, 15);
+            this.btnDatPhong.ImageSize = new System.Drawing.Size(24, 24);
+            this.btnDatPhong.Location = new System.Drawing.Point(0, 0);
+            this.btnDatPhong.Name = "btnDatPhong";
+            this.btnDatPhong.Size = new System.Drawing.Size(194, 55);
+            this.btnDatPhong.TabIndex = 2;
+            this.btnDatPhong.Text = "Đặt phòng";
+            this.btnDatPhong.TextOffset = new System.Drawing.Point(0, -15);
+            this.btnDatPhong.Click += new System.EventHandler(this.btnDatPhong_Click);
             // 
             // guna2Panel1
             // 
@@ -378,7 +378,7 @@
         private Guna.UI2.WinForms.Guna2TileButton btnHoaDon;
         private Guna.UI2.WinForms.Guna2TileButton btnKhachHang;
         private Guna.UI2.WinForms.Guna2TileButton btnQuanlyp;
-        private Guna.UI2.WinForms.Guna2TileButton btnTongQuan;
+        private Guna.UI2.WinForms.Guna2TileButton btnDatPhong;
         private Guna.UI2.WinForms.Guna2Panel plnTieuDe;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTieuDe;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;

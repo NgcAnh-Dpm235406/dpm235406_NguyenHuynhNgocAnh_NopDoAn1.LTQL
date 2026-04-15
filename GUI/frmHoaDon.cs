@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BUS;
+using DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,92 +16,106 @@ namespace GUI
 {
     public partial class frmHoaDon : Form
     {
-        string strCon = @"Data Source=.\SQLEXPRESS;Initial Catalog=Quan_Ly_Khach_San;Integrated Security=True";
+        HoaDon_BUS busHD = new HoaDon_BUS();
         public frmHoaDon()
         {
             InitializeComponent();
+            LoadDSHoaDon();
         }
 
-        private void btnTinhTien_Click(object sender, EventArgs e)
+        private void LoadDSHoaDon()
         {
-            if (cboPhong.SelectedValue == null) return;
+            List<HoaDon_DTO> ds = busHD.LayDanhSachHoaDon();
+            dgvHoaDon.DataSource = ds;
 
-            using (SqlConnection con = new SqlConnection(strCon))
+            // Đổi tên Header khớp với tên trong DTO
+            dgvHoaDon.Columns["IMaHD"].HeaderText = "Mã HD";
+            dgvHoaDon.Columns["SHoTen"].HeaderText = "Tên Khách Hàng"; // Sẽ hiện chữ
+            dgvHoaDon.Columns["STenPhong"].HeaderText = "Tên Phòng";  // Sẽ hiện chữ (VD: P101)
+            dgvHoaDon.Columns["DtNgayThanhToan"].HeaderText = "Ngày TT";
+            dgvHoaDon.Columns["DTongTienPhong"].HeaderText = "Tiền Phòng";
+            dgvHoaDon.Columns["DTongTienDV"].HeaderText = "Tiền DV";
+            dgvHoaDon.Columns["DTongTienThanhToan"].HeaderText = "Tổng Cộng";
+
+            // ẨN CÁC CỘT ID KHÔNG CẦN THIẾT
+            dgvHoaDon.Columns["IMaPhieu"].Visible = false;
+            dgvHoaDon.Columns["IMaTK_NguoiLap"].Visible = false;
+
+            dgvHoaDon.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+        private void btnLoc_Click(object sender, EventArgs e)
+        {
+            try
             {
-                con.Open();
-                // Giả sử bạn có một stored procedure hoặc query kết hợp bảng SuDungDichVu và DichVu
-                string query = @"SELECT SUM(dv.DonGia * sd.SoLuong) 
-                         FROM SuDungDichVu sd JOIN DichVu dv ON sd.MaDV = dv.MaDV 
-                         WHERE sd.MaPhong = @maPhong AND sd.TrangThai = 'Chưa thanh toán'";
+                // 1. Lấy dữ liệu từ giao diện
+                DateTime tu = dtpTuNgay.Value;
+                DateTime den = dtpDenNgay.Value;
+                string tenKH = txtTimKiem.Text.Trim(); // Lấy từ khóa tìm kiếm
 
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@maPhong", cboPhong.SelectedValue);
+                // 2. Gọi tầng BUS để lấy dữ liệu (Truyền đủ 3 tham số để hết lỗi gạch đỏ)
+                // Lưu ý: Đảm bảo HoaDon_BUS.LayHoaDon đã được cập nhật nhận 3 tham số
+                DataTable dt = busHD.LayDanhSachHoaDon(tu, den, tenKH);
 
-                object ketQua = cmd.ExecuteScalar();
-                decimal tienDV = (ketQua != DBNull.Value) ? Convert.ToDecimal(ketQua) : 0;
-
-                // Giả sử tiền phòng cố định hoặc lấy từ bảng Phong
-                decimal tienPhong = 500000; // Ví dụ 500k
-
-                txtTongTien.Text = (tienDV + tienPhong).ToString();
-            }
-        }
-
-        private void btnLuu_Click(object sender, EventArgs e)
-        {
-            using (SqlConnection con = new SqlConnection(strCon))
-            {
-                con.Open();
-                string query = "INSERT INTO HoaDon (NgayLap, TongTien, MaPhong) VALUES (@ngay, @tong, @maPhong)";
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@ngay", dtpNgayLap.Value);
-                cmd.Parameters.AddWithValue("@tong", Convert.ToDecimal(txtTongTien.Text));
-                cmd.Parameters.AddWithValue("@maPhong", cboPhong.SelectedValue);
-
-                cmd.ExecuteNonQuery();
-
-                // Cập nhật trạng thái phòng thành 'Trống' sau khi thanh toán
-                string updatePhong = "UPDATE Phong SET TrangThai = N'Trống' WHERE MaPhong = @maPhong";
-                SqlCommand cmdUpdate = new SqlCommand(updatePhong, con);
-                cmdUpdate.Parameters.AddWithValue("@maPhong", cboPhong.SelectedValue);
-                cmdUpdate.ExecuteNonQuery();
-
-                MessageBox.Show("Thanh toán thành công!");
-                LoadAllHoaDon();
-                LoadComboBoxPhong(); // Refresh danh sách phòng trống
-            }
-        }
-
-        private void frmHoaDon_Load(object sender, EventArgs e)
-        {
-            LoadComboBoxPhong();
-            LoadAllHoaDon();
-        }
-
-        void LoadComboBoxPhong()
-        {
-            using (SqlConnection con = new SqlConnection(strCon))
-            {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT MaPhong, TenPhong FROM Phong WHERE TrangThai = N'Có khách'", con);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
-                cboPhong.DataSource = dt;
-                cboPhong.DisplayMember = "TenPhong";
-                cboPhong.ValueMember = "MaPhong";
-            }
-        }
-
-        void LoadAllHoaDon()
-        {
-            using (SqlConnection con = new SqlConnection(strCon))
-            {
-                SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM HoaDon", con);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
+                // 3. Hiển thị lên DataGridView
                 dgvHoaDon.DataSource = dt;
+
+                // 4. Định dạng lại bảng để không bị lỗi tên cột dính nhau như ảnh
+                if (dt != null && dt.Rows.Count > 0)
+                {
+                    FormatDataGridView();
+
+                    // Tính toán lại tổng tiền hiển thị lên các Label bên phải
+                    decimal tongTienDV = 0;
+                    decimal tongThanhToan = 0;
+
+                    foreach (DataRow row in dt.Rows)
+                    {
+                        tongTienDV += Convert.ToDecimal(row["TongTienDV"]);
+                        tongThanhToan += Convert.ToDecimal(row["TongTienThanhToan"]);
+                    }
+
+                    // Gán giá trị lên Label (ví dụ lblTongTienDV, lblTongThanhToan)
+                    lblTongDV.Text = tongTienDV.ToString("N0") + " VNĐ";
+                    lblTongCong.Text = tongThanhToan.ToString("N0") + " VNĐ";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi lọc dữ liệu: " + ex.Message);
             }
         }
+        private void FormatDataGridView()
+        {
+            if (dgvHoaDon.Columns.Contains("MaHD")) dgvHoaDon.Columns["MaHD"].HeaderText = "Mã HD";
+            if (dgvHoaDon.Columns.Contains("TenPhong")) dgvHoaDon.Columns["TenPhong"].HeaderText = "Tên Phòng";
+            if (dgvHoaDon.Columns.Contains("HoTen")) dgvHoaDon.Columns["HoTen"].HeaderText = "Họ Tên";
+            if (dgvHoaDon.Columns.Contains("NgayThanhToan")) dgvHoaDon.Columns["NgayThanhToan"].HeaderText = "Ngày Thanh Toán";
+            if (dgvHoaDon.Columns.Contains("TongTienPhong")) dgvHoaDon.Columns["TongTienPhong"].HeaderText = "Tiền Phòng";
+            if (dgvHoaDon.Columns.Contains("TongTienDV")) dgvHoaDon.Columns["TongTienDV"].HeaderText = "Tiền DV";
+            if (dgvHoaDon.Columns.Contains("TongTienThanhToan")) dgvHoaDon.Columns["TongTienThanhToan"].HeaderText = "Tổng Cộng";
 
-        
+            // Tự động giãn đều các cột để không bị mất chữ
+            dgvHoaDon.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+        }
+
+
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
+        {
+            string keyword = txtTimKiem.Text.Trim();
+            DateTime tu = dtpTuNgay.Value;
+            DateTime den = dtpDenNgay.Value;
+
+            DataTable dt = busHD.LayDanhSachHoaDon(tu, den, keyword);
+
+            dgvHoaDon.DataSource = null;
+            dgvHoaDon.Columns.Clear();
+
+            dgvHoaDon.AutoGenerateColumns = true;
+            dgvHoaDon.DataSource = dt;
+
+            // Đặt lại header luôn luôn
+            FormatDataGridView();
+        }
     }
 }

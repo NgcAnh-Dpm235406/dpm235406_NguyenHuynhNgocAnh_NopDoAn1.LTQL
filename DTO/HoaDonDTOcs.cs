@@ -14,6 +14,12 @@ namespace DTO
         private int iMaPhieu;
         public int IMaPhieu { get => iMaPhieu; set => iMaPhieu = value; }
 
+        private string sHoTen;
+        public string SHoTen { get => sHoTen; set => sHoTen = value; }
+
+        private string sTenPhong;
+        public string STenPhong { get => sTenPhong; set => sTenPhong = value; }
+
         private int iMaTK_NguoiLap;
         public int IMaTK_NguoiLap { get => iMaTK_NguoiLap; set => iMaTK_NguoiLap = value; }
 

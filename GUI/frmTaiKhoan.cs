@@ -113,5 +113,10 @@ namespace GUI
             
             txtTenTK.Focus();
         }
+
+        private void frmTaiKhoan_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
