@@ -30,6 +30,11 @@ namespace GUI
                 dgvTaiKhoan.DataSource = dt;
             }
         }
+        void HienThiDS()
+        {
+            dgvTaiKhoan.DataSource = TaiKhoan_BUS.LayDanhSachTaiKhoan();
+        }
+
         private void btnLuu_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txtTenTK.Text) || string.IsNullOrEmpty(txtMatKhau.Text))
@@ -56,7 +61,7 @@ namespace GUI
                 SqlCommand cmd = new SqlCommand(query, con);
                 cmd.Parameters.AddWithValue("@ten", txtTenTK.Text);
                 cmd.Parameters.AddWithValue("@mk", txtMatKhau.Text);  
-                cmd.Parameters.AddWithValue("@loai", cboLoaiTK.Text);
+                cmd.Parameters.AddWithValue("@loai", cboQuyen.Text);
 
                 cmd.ExecuteNonQuery();
                 MessageBox.Show("Đã cập nhật tài khoản!");
@@ -87,8 +92,8 @@ namespace GUI
             txtMatKhau.Clear();
 
             
-            if (cboLoaiTK.Items.Count > 0)
-                cboLoaiTK.SelectedIndex = 0; 
+            if (cboQuyen.Items.Count > 0)
+                cboQuyen.SelectedIndex = 0; 
 
             if (cboNhanVien.Items.Count > 0)
                 cboNhanVien.SelectedIndex = -1; 
@@ -104,19 +109,34 @@ namespace GUI
             txtMatKhau.Clear();
 
             
-            if (cboLoaiTK.Items.Count > 0)
-                cboLoaiTK.SelectedIndex = 0; 
+            if (cboQuyen.Items.Count > 0)
+                cboQuyen.SelectedIndex = 0; 
 
             if (cboNhanVien.Items.Count > 0)
                 cboNhanVien.SelectedIndex = -1; 
 
             
             txtTenTK.Focus();
+
+            HienThiDS();
+            btnThem_Click(sender, e);
         }
 
         private void frmTaiKhoan_Load(object sender, EventArgs e)
         {
-
+            HienThiDS();
         }
+
+        private void dgvTaiKhoan_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (dgvTaiKhoan.SelectedRows.Count > 0)
+            {
+                DataGridViewRow row = dgvTaiKhoan.SelectedRows[0];
+                txtTenTK.Text = row.Cells["STenDangNhap"].Value.ToString();
+                txtMatKhau.Text = row.Cells["SMatKhau"].Value.ToString();
+                cboQuyen.Text = row.Cells["SLoaiTaiKhoan"].Value.ToString();
+            }
+        }
+
     }
 }

@@ -32,7 +32,7 @@
             this.txtMatKhau = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.cboLoaiTK = new System.Windows.Forms.ComboBox();
+            this.cboQuyen = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.cboNhanVien = new System.Windows.Forms.ComboBox();
@@ -76,13 +76,13 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "Mật khẩu";
             // 
-            // cboLoaiTK
+            // cboQuyen
             // 
-            this.cboLoaiTK.FormattingEnabled = true;
-            this.cboLoaiTK.Location = new System.Drawing.Point(164, 102);
-            this.cboLoaiTK.Name = "cboLoaiTK";
-            this.cboLoaiTK.Size = new System.Drawing.Size(121, 24);
-            this.cboLoaiTK.TabIndex = 2;
+            this.cboQuyen.FormattingEnabled = true;
+            this.cboQuyen.Location = new System.Drawing.Point(164, 102);
+            this.cboQuyen.Name = "cboQuyen";
+            this.cboQuyen.Size = new System.Drawing.Size(121, 24);
+            this.cboQuyen.TabIndex = 2;
             // 
             // label3
             // 
@@ -120,6 +120,7 @@
             this.dgvTaiKhoan.RowTemplate.Height = 24;
             this.dgvTaiKhoan.Size = new System.Drawing.Size(800, 272);
             this.dgvTaiKhoan.TabIndex = 3;
+            this.dgvTaiKhoan.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvTaiKhoan_CellContentClick);
             // 
             // btnThem
             // 
@@ -172,7 +173,7 @@
             this.Controls.Add(this.btnThem);
             this.Controls.Add(this.dgvTaiKhoan);
             this.Controls.Add(this.cboNhanVien);
-            this.Controls.Add(this.cboLoaiTK);
+            this.Controls.Add(this.cboQuyen);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -194,7 +195,7 @@
         private System.Windows.Forms.TextBox txtMatKhau;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cboLoaiTK;
+        private System.Windows.Forms.ComboBox cboQuyen;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cboNhanVien;

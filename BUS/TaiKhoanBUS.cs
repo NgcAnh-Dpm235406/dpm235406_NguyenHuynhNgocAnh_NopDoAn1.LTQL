@@ -36,7 +36,9 @@ namespace BUS
         // Vì TaiKhoan_DAO dùng các hàm static, bạn có thể gọi trực tiếp qua tên lớp
         // Hoặc giữ nguyên khai báo này nếu muốn dùng theo thực thể:
         private TaiKhoan_DAO daoTK = new TaiKhoan_DAO();
+        public static bool Xoa(string tenTK) => TaiKhoan_DAO.XoaTaiKhoan(tenTK);
 
+        public static bool Sua(TaiKhoan_DTO tk) => TaiKhoan_DAO.SuaTaiKhoan(tk);
         // 1. Hàm kiểm tra đăng nhập (Kết nối GUI và DAO)
         public TaiKhoan_DTO KiemTraDangNhap(string tenTK, string matKhau)
         {

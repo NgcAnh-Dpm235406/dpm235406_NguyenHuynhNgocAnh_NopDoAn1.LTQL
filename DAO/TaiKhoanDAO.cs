@@ -41,6 +41,23 @@ namespace DAO
             DataProvider.DongKetNoi(con);
             return kq;
         }
+        public static bool XoaTaiKhoan(string tenTK)
+        {
+            string sTruyVan = string.Format("DELETE FROM TaiKhoan WHERE TenDangNhap = '{0}'", tenTK);
+            SqlConnection con = DataProvider.MoKetNoi();
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, con);
+            DataProvider.DongKetNoi(con);
+            return kq;
+        }
+        public static bool SuaTaiKhoan(TaiKhoan_DTO tk)
+        {
+            string sTruyVan = string.Format("UPDATE TaiKhoan SET MatKhau = '{0}', LoaiTaiKhoan = '{1}' WHERE TenDangNhap = '{2}'",
+                                            tk.SMatKhau, tk.SLoaiTaiKhoan, tk.STenDangNhap);
+            SqlConnection con = DataProvider.MoKetNoi();
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, con);
+            DataProvider.DongKetNoi(con);
+            return kq;
+        }
         public static TaiKhoan_DTO KiemTraDangNhap(string tenTK, string matKhau)
         {
             // Tên cột phải khớp: TenDangNhap, MatKhau
