@@ -33,6 +33,14 @@ namespace DAO
             DataProvider.DongKetNoi(con);
             return lstTK;
         }
+        public static bool ThemTaiKhoan(TaiKhoan_DTO tk)
+        {
+            string sTruyVan = string.Format("INSERT INTO TaiKhoan VALUES ('{0}', '{1}', '{2}')", tk.STenDangNhap, tk.SMatKhau, tk.SLoaiTaiKhoan);
+            SqlConnection con = DataProvider.MoKetNoi();
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, con);
+            DataProvider.DongKetNoi(con);
+            return kq;
+        }
         public static TaiKhoan_DTO KiemTraDangNhap(string tenTK, string matKhau)
         {
             // Tên cột phải khớp: TenDangNhap, MatKhau
