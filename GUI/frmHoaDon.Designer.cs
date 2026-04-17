@@ -28,37 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle13 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle14 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle15 = new System.Windows.Forms.DataGridViewCellStyle();
             this.guna2Panel1 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2HtmlLabel6 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.txtTimKiem = new Guna.UI2.WinForms.Guna2TextBox();
             this.dtpDenNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.dtpTuNgay = new Guna.UI2.WinForms.Guna2DateTimePicker();
             this.btnLoc = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Panel2 = new Guna.UI2.WinForms.Guna2Panel();
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
-            this.lblTongCong = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblTongAll = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnInHoaDon = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lblTongDV = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblTongTienPhong = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel13 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel14 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lblTongThanhToan = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lblGiamGia = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblTongT = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblTongTienDV = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lblTongTT = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.dgvHoaDon = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.btnThemHoaDon = new Guna.UI2.WinForms.Guna2Button();
+            this.cboPhieuThue = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2Panel1.SuspendLayout();
             this.guna2Panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvHoaDon)).BeginInit();
@@ -72,7 +67,6 @@
             this.guna2Panel1.Controls.Add(this.dtpDenNgay);
             this.guna2Panel1.Controls.Add(this.dtpTuNgay);
             this.guna2Panel1.Controls.Add(this.btnLoc);
-            this.guna2Panel1.Controls.Add(this.guna2HtmlLabel1);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel1.Name = "guna2Panel1";
@@ -153,43 +147,29 @@
             this.btnLoc.Size = new System.Drawing.Size(114, 44);
             this.btnLoc.TabIndex = 0;
             this.btnLoc.Text = "Lọc";
-            //this.btnLoc.Click += new System.EventHandler(this.btnLoc_Click);
-            // 
-            // guna2HtmlLabel1
-            // 
-            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel1.Location = new System.Drawing.Point(0, 0);
-            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
-            this.guna2HtmlLabel1.Size = new System.Drawing.Size(3, 2);
-            this.guna2HtmlLabel1.TabIndex = 1;
-            this.guna2HtmlLabel1.Text = null;
             // 
             // guna2Panel2
             // 
             this.guna2Panel2.BackColor = System.Drawing.SystemColors.Control;
+            this.guna2Panel2.Controls.Add(this.guna2HtmlLabel2);
+            this.guna2Panel2.Controls.Add(this.cboPhieuThue);
+            this.guna2Panel2.Controls.Add(this.btnThemHoaDon);
+            this.guna2Panel2.Controls.Add(this.guna2HtmlLabel1);
             this.guna2Panel2.Controls.Add(this.guna2Button2);
             this.guna2Panel2.Controls.Add(this.guna2Button1);
-            this.guna2Panel2.Controls.Add(this.lblTongCong);
+            this.guna2Panel2.Controls.Add(this.lblTongAll);
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel8);
             this.guna2Panel2.Controls.Add(this.btnInHoaDon);
-            this.guna2Panel2.Controls.Add(this.guna2HtmlLabel9);
-            this.guna2Panel2.Controls.Add(this.lblTongDV);
             this.guna2Panel2.Controls.Add(this.lblTongTienPhong);
-            this.guna2Panel2.Controls.Add(this.guna2HtmlLabel12);
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel13);
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel14);
-            this.guna2Panel2.Controls.Add(this.lblTongThanhToan);
-            this.guna2Panel2.Controls.Add(this.guna2HtmlLabel5);
-            this.guna2Panel2.Controls.Add(this.lblGiamGia);
+            this.guna2Panel2.Controls.Add(this.lblTongT);
             this.guna2Panel2.Controls.Add(this.lblTongTienDV);
-            this.guna2Panel2.Controls.Add(this.lblTongTT);
-            this.guna2Panel2.Controls.Add(this.guna2HtmlLabel4);
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel3);
-            this.guna2Panel2.Controls.Add(this.guna2HtmlLabel2);
             this.guna2Panel2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.guna2Panel2.Location = new System.Drawing.Point(659, 75);
+            this.guna2Panel2.Location = new System.Drawing.Point(625, 75);
             this.guna2Panel2.Name = "guna2Panel2";
-            this.guna2Panel2.Size = new System.Drawing.Size(274, 454);
+            this.guna2Panel2.Size = new System.Drawing.Size(308, 454);
             this.guna2Panel2.TabIndex = 1;
             // 
             // guna2Button2
@@ -205,7 +185,7 @@
             this.guna2Button2.ForeColor = System.Drawing.Color.White;
             this.guna2Button2.Image = global::GUI.Properties.Resources.xoa_removebg_preview;
             this.guna2Button2.ImageSize = new System.Drawing.Size(28, 28);
-            this.guna2Button2.Location = new System.Drawing.Point(52, 317);
+            this.guna2Button2.Location = new System.Drawing.Point(85, 397);
             this.guna2Button2.Name = "guna2Button2";
             this.guna2Button2.Size = new System.Drawing.Size(180, 45);
             this.guna2Button2.TabIndex = 0;
@@ -224,33 +204,33 @@
             this.guna2Button1.ForeColor = System.Drawing.Color.White;
             this.guna2Button1.Image = global::GUI.Properties.Resources.ex;
             this.guna2Button1.ImageSize = new System.Drawing.Size(30, 30);
-            this.guna2Button1.Location = new System.Drawing.Point(52, 248);
+            this.guna2Button1.Location = new System.Drawing.Point(85, 336);
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(180, 45);
             this.guna2Button1.TabIndex = 1;
             this.guna2Button1.Text = "Xuất Excel";
             // 
-            // lblTongCong
+            // lblTongAll
             // 
-            this.lblTongCong.BackColor = System.Drawing.Color.Transparent;
-            this.lblTongCong.Font = new System.Drawing.Font("Times New Roman", 10.8F);
-            this.lblTongCong.ForeColor = System.Drawing.Color.MediumBlue;
-            this.lblTongCong.Location = new System.Drawing.Point(159, 128);
-            this.lblTongCong.Name = "lblTongCong";
-            this.lblTongCong.Size = new System.Drawing.Size(53, 22);
-            this.lblTongCong.TabIndex = 22;
-            this.lblTongCong.Text = "50.000";
+            this.lblTongAll.BackColor = System.Drawing.Color.Transparent;
+            this.lblTongAll.Font = new System.Drawing.Font("Times New Roman", 10.8F);
+            this.lblTongAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.lblTongAll.Location = new System.Drawing.Point(207, 170);
+            this.lblTongAll.Name = "lblTongAll";
+            this.lblTongAll.Size = new System.Drawing.Size(12, 22);
+            this.lblTongAll.TabIndex = 22;
+            this.lblTongAll.Text = "0";
             // 
             // guna2HtmlLabel8
             // 
             this.guna2HtmlLabel8.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel8.Font = new System.Drawing.Font("Times New Roman", 10.8F);
             this.guna2HtmlLabel8.ForeColor = System.Drawing.Color.MediumBlue;
-            this.guna2HtmlLabel8.Location = new System.Drawing.Point(28, 128);
+            this.guna2HtmlLabel8.Location = new System.Drawing.Point(103, 142);
             this.guna2HtmlLabel8.Name = "guna2HtmlLabel8";
-            this.guna2HtmlLabel8.Size = new System.Drawing.Size(125, 22);
+            this.guna2HtmlLabel8.Size = new System.Drawing.Size(89, 22);
             this.guna2HtmlLabel8.TabIndex = 21;
-            this.guna2HtmlLabel8.Text = "Tổng tiền phòng:";
+            this.guna2HtmlLabel8.Text = "Tổng tất cả:";
             // 
             // btnInHoaDon
             // 
@@ -265,62 +245,29 @@
             this.btnInHoaDon.ForeColor = System.Drawing.Color.White;
             this.btnInHoaDon.Image = global::GUI.Properties.Resources.hdd_removebg_preview;
             this.btnInHoaDon.ImageSize = new System.Drawing.Size(40, 40);
-            this.btnInHoaDon.Location = new System.Drawing.Point(52, 177);
+            this.btnInHoaDon.Location = new System.Drawing.Point(85, 274);
             this.btnInHoaDon.Name = "btnInHoaDon";
             this.btnInHoaDon.Size = new System.Drawing.Size(180, 45);
             this.btnInHoaDon.TabIndex = 4;
             this.btnInHoaDon.Text = "In hóa đơn";
-            // 
-            // guna2HtmlLabel9
-            // 
-            this.guna2HtmlLabel9.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel9.Font = new System.Drawing.Font("Times New Roman", 10.8F);
-            this.guna2HtmlLabel9.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel9.Location = new System.Drawing.Point(161, 91);
-            this.guna2HtmlLabel9.Name = "guna2HtmlLabel9";
-            this.guna2HtmlLabel9.Size = new System.Drawing.Size(53, 22);
-            this.guna2HtmlLabel9.TabIndex = 20;
-            this.guna2HtmlLabel9.Text = "50.000";
-            // 
-            // lblTongDV
-            // 
-            this.lblTongDV.BackColor = System.Drawing.Color.Transparent;
-            this.lblTongDV.Font = new System.Drawing.Font("Times New Roman", 10.8F);
-            this.lblTongDV.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblTongDV.Location = new System.Drawing.Point(161, 63);
-            this.lblTongDV.Name = "lblTongDV";
-            this.lblTongDV.Size = new System.Drawing.Size(30, 22);
-            this.lblTongDV.TabIndex = 19;
-            this.lblTongDV.Text = "123";
             // 
             // lblTongTienPhong
             // 
             this.lblTongTienPhong.BackColor = System.Drawing.Color.Transparent;
             this.lblTongTienPhong.Font = new System.Drawing.Font("Times New Roman", 10.8F);
             this.lblTongTienPhong.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.lblTongTienPhong.Location = new System.Drawing.Point(161, 33);
+            this.lblTongTienPhong.Location = new System.Drawing.Point(200, 83);
             this.lblTongTienPhong.Name = "lblTongTienPhong";
             this.lblTongTienPhong.Size = new System.Drawing.Size(94, 22);
             this.lblTongTienPhong.TabIndex = 18;
             this.lblTongTienPhong.Text = "123.000.000";
-            // 
-            // guna2HtmlLabel12
-            // 
-            this.guna2HtmlLabel12.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel12.Font = new System.Drawing.Font("Times New Roman", 10.8F);
-            this.guna2HtmlLabel12.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.guna2HtmlLabel12.Location = new System.Drawing.Point(82, 91);
-            this.guna2HtmlLabel12.Name = "guna2HtmlLabel12";
-            this.guna2HtmlLabel12.Size = new System.Drawing.Size(71, 22);
-            this.guna2HtmlLabel12.TabIndex = 17;
-            this.guna2HtmlLabel12.Text = "Giảm giá:";
             // 
             // guna2HtmlLabel13
             // 
             this.guna2HtmlLabel13.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel13.Font = new System.Drawing.Font("Times New Roman", 10.8F);
             this.guna2HtmlLabel13.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.guna2HtmlLabel13.Location = new System.Drawing.Point(47, 63);
+            this.guna2HtmlLabel13.Location = new System.Drawing.Point(86, 113);
             this.guna2HtmlLabel13.Name = "guna2HtmlLabel13";
             this.guna2HtmlLabel13.Size = new System.Drawing.Size(106, 22);
             this.guna2HtmlLabel13.TabIndex = 16;
@@ -331,71 +278,34 @@
             this.guna2HtmlLabel14.BackColor = System.Drawing.Color.Transparent;
             this.guna2HtmlLabel14.Font = new System.Drawing.Font("Times New Roman", 10.8F);
             this.guna2HtmlLabel14.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.guna2HtmlLabel14.Location = new System.Drawing.Point(30, 33);
+            this.guna2HtmlLabel14.Location = new System.Drawing.Point(69, 83);
             this.guna2HtmlLabel14.Name = "guna2HtmlLabel14";
             this.guna2HtmlLabel14.Size = new System.Drawing.Size(125, 22);
             this.guna2HtmlLabel14.TabIndex = 15;
             this.guna2HtmlLabel14.Text = "Tổng tiền phòng:";
             // 
-            // lblTongThanhToan
+            // lblTongT
             // 
-            this.lblTongThanhToan.BackColor = System.Drawing.Color.Transparent;
-            this.lblTongThanhToan.ForeColor = System.Drawing.Color.MediumBlue;
-            this.lblTongThanhToan.Location = new System.Drawing.Point(0, 0);
-            this.lblTongThanhToan.Name = "lblTongThanhToan";
-            this.lblTongThanhToan.Size = new System.Drawing.Size(3, 2);
-            this.lblTongThanhToan.TabIndex = 2;
-            this.lblTongThanhToan.Text = null;
-            // 
-            // guna2HtmlLabel5
-            // 
-            this.guna2HtmlLabel5.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel5.ForeColor = System.Drawing.Color.MediumBlue;
-            this.guna2HtmlLabel5.Location = new System.Drawing.Point(0, 0);
-            this.guna2HtmlLabel5.Name = "guna2HtmlLabel5";
-            this.guna2HtmlLabel5.Size = new System.Drawing.Size(3, 2);
-            this.guna2HtmlLabel5.TabIndex = 3;
-            this.guna2HtmlLabel5.Text = null;
-            // 
-            // lblGiamGia
-            // 
-            this.lblGiamGia.BackColor = System.Drawing.Color.Transparent;
-            this.lblGiamGia.ForeColor = System.Drawing.Color.Black;
-            this.lblGiamGia.Location = new System.Drawing.Point(0, 0);
-            this.lblGiamGia.Name = "lblGiamGia";
-            this.lblGiamGia.Size = new System.Drawing.Size(3, 2);
-            this.lblGiamGia.TabIndex = 5;
-            this.lblGiamGia.Text = null;
+            this.lblTongT.BackColor = System.Drawing.Color.Transparent;
+            this.lblTongT.Font = new System.Drawing.Font("Times New Roman", 10.8F);
+            this.lblTongT.ForeColor = System.Drawing.Color.MediumBlue;
+            this.lblTongT.Location = new System.Drawing.Point(203, 142);
+            this.lblTongT.Name = "lblTongT";
+            this.lblTongT.Size = new System.Drawing.Size(62, 22);
+            this.lblTongT.TabIndex = 2;
+            this.lblTongT.Text = "100,000";
             // 
             // lblTongTienDV
             // 
             this.lblTongTienDV.BackColor = System.Drawing.Color.Transparent;
+            this.lblTongTienDV.Font = new System.Drawing.Font("Times New Roman", 10.8F);
             this.lblTongTienDV.ForeColor = System.Drawing.Color.Black;
-            this.lblTongTienDV.Location = new System.Drawing.Point(0, 0);
+            this.lblTongTienDV.Location = new System.Drawing.Point(198, 113);
             this.lblTongTienDV.Name = "lblTongTienDV";
-            this.lblTongTienDV.Size = new System.Drawing.Size(3, 2);
+            this.lblTongTienDV.Size = new System.Drawing.Size(62, 22);
             this.lblTongTienDV.TabIndex = 6;
-            this.lblTongTienDV.Text = null;
-            // 
-            // lblTongTT
-            // 
-            this.lblTongTT.BackColor = System.Drawing.Color.Transparent;
-            this.lblTongTT.ForeColor = System.Drawing.Color.Black;
-            this.lblTongTT.Location = new System.Drawing.Point(0, 0);
-            this.lblTongTT.Name = "lblTongTT";
-            this.lblTongTT.Size = new System.Drawing.Size(3, 2);
-            this.lblTongTT.TabIndex = 7;
-            this.lblTongTT.Text = null;
-            // 
-            // guna2HtmlLabel4
-            // 
-            this.guna2HtmlLabel4.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel4.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.guna2HtmlLabel4.Location = new System.Drawing.Point(0, 0);
-            this.guna2HtmlLabel4.Name = "guna2HtmlLabel4";
-            this.guna2HtmlLabel4.Size = new System.Drawing.Size(3, 2);
-            this.guna2HtmlLabel4.TabIndex = 8;
-            this.guna2HtmlLabel4.Text = null;
+            this.lblTongTienDV.Text = "120.000";
+            this.lblTongTienDV.Click += new System.EventHandler(this.lblTongTienDV_Click);
             // 
             // guna2HtmlLabel3
             // 
@@ -407,41 +317,31 @@
             this.guna2HtmlLabel3.TabIndex = 9;
             this.guna2HtmlLabel3.Text = null;
             // 
-            // guna2HtmlLabel2
-            // 
-            this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel2.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.guna2HtmlLabel2.Location = new System.Drawing.Point(0, 0);
-            this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
-            this.guna2HtmlLabel2.Size = new System.Drawing.Size(3, 2);
-            this.guna2HtmlLabel2.TabIndex = 10;
-            this.guna2HtmlLabel2.Text = null;
-            // 
             // dgvHoaDon
             // 
             this.dgvHoaDon.AllowUserToAddRows = false;
             this.dgvHoaDon.AllowUserToDeleteRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
-            this.dgvHoaDon.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle13.BackColor = System.Drawing.Color.White;
+            this.dgvHoaDon.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle13;
             this.dgvHoaDon.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvHoaDon.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle14.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(88)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle14.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle14.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle14.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle14.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvHoaDon.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle14;
             this.dgvHoaDon.ColumnHeadersHeight = 50;
             this.dgvHoaDon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dgvHoaDon.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle15.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle15.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle15.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle15.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle15.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
+            dataGridViewCellStyle15.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            dataGridViewCellStyle15.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
+            this.dgvHoaDon.DefaultCellStyle = dataGridViewCellStyle15;
             this.dgvHoaDon.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvHoaDon.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvHoaDon.Location = new System.Drawing.Point(0, 75);
@@ -450,7 +350,7 @@
             this.dgvHoaDon.RowHeadersVisible = false;
             this.dgvHoaDon.RowHeadersWidth = 51;
             this.dgvHoaDon.RowTemplate.Height = 24;
-            this.dgvHoaDon.Size = new System.Drawing.Size(659, 454);
+            this.dgvHoaDon.Size = new System.Drawing.Size(625, 454);
             this.dgvHoaDon.TabIndex = 0;
             this.dgvHoaDon.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvHoaDon.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -473,6 +373,67 @@
             this.dgvHoaDon.ThemeStyle.RowsStyle.Height = 24;
             this.dgvHoaDon.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvHoaDon.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
+            this.dgvHoaDon.SelectionChanged += new System.EventHandler(this.DgvHoaDon_SelectionChanged);
+            // 
+            // guna2HtmlLabel1
+            // 
+            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel1.Font = new System.Drawing.Font("Times New Roman", 10.8F);
+            this.guna2HtmlLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(105, 170);
+            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(89, 22);
+            this.guna2HtmlLabel1.TabIndex = 23;
+            this.guna2HtmlLabel1.Text = "Tổng tháng:";
+            // 
+            // btnThemHoaDon
+            // 
+            this.btnThemHoaDon.BorderRadius = 5;
+            this.btnThemHoaDon.BorderThickness = 1;
+            this.btnThemHoaDon.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnThemHoaDon.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnThemHoaDon.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnThemHoaDon.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnThemHoaDon.FillColor = System.Drawing.Color.DarkOrange;
+            this.btnThemHoaDon.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnThemHoaDon.ForeColor = System.Drawing.Color.White;
+            this.btnThemHoaDon.Image = global::GUI.Properties.Resources.hdd_removebg_preview;
+            this.btnThemHoaDon.ImageSize = new System.Drawing.Size(40, 40);
+            this.btnThemHoaDon.Location = new System.Drawing.Point(85, 211);
+            this.btnThemHoaDon.Name = "btnThemHoaDon";
+            this.btnThemHoaDon.Size = new System.Drawing.Size(180, 45);
+            this.btnThemHoaDon.TabIndex = 24;
+            this.btnThemHoaDon.Text = "Thêm hóa đơn";
+            this.btnThemHoaDon.Click += new System.EventHandler(this.btnThemHoaDon_Click);
+            // 
+            // cboPhieuThue
+            // 
+            this.cboPhieuThue.BackColor = System.Drawing.Color.Transparent;
+            this.cboPhieuThue.BorderRadius = 5;
+            this.cboPhieuThue.BorderThickness = 2;
+            this.cboPhieuThue.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cboPhieuThue.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPhieuThue.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboPhieuThue.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cboPhieuThue.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboPhieuThue.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
+            this.cboPhieuThue.ItemHeight = 30;
+            this.cboPhieuThue.Location = new System.Drawing.Point(130, 29);
+            this.cboPhieuThue.Name = "cboPhieuThue";
+            this.cboPhieuThue.Size = new System.Drawing.Size(164, 36);
+            this.cboPhieuThue.TabIndex = 25;
+            this.cboPhieuThue.SelectedIndexChanged += new System.EventHandler(this.cboPhieuThue_SelectedIndexChanged);
+            // 
+            // guna2HtmlLabel2
+            // 
+            this.guna2HtmlLabel2.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel2.Font = new System.Drawing.Font("Times New Roman", 10.8F);
+            this.guna2HtmlLabel2.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.guna2HtmlLabel2.Location = new System.Drawing.Point(-2, 38);
+            this.guna2HtmlLabel2.Name = "guna2HtmlLabel2";
+            this.guna2HtmlLabel2.Size = new System.Drawing.Size(126, 22);
+            this.guna2HtmlLabel2.TabIndex = 26;
+            this.guna2HtmlLabel2.Text = "Chọn phiếu thuê:";
             // 
             // frmHoaDon
             // 
@@ -484,7 +445,7 @@
             this.Controls.Add(this.guna2Panel2);
             this.Controls.Add(this.guna2Panel1);
             this.Name = "frmHoaDon";
-            //this.Load += new System.EventHandler(this.frmHoaDon_Load);
+            this.Load += new System.EventHandler(this.frmHoaDon_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.guna2Panel2.ResumeLayout(false);
@@ -498,31 +459,26 @@
 
         private Guna.UI2.WinForms.Guna2Panel guna2Panel1;
         private Guna.UI2.WinForms.Guna2Button btnLoc;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
         private Guna.UI2.WinForms.Guna2TextBox txtTimKiem;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpDenNgay;
         private Guna.UI2.WinForms.Guna2DateTimePicker dtpTuNgay;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel2;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblGiamGia;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTongTienDV;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTongTT;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTongThanhToan;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblTongT;
         private Guna.UI2.WinForms.Guna2Button btnInHoaDon;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2DataGridView dgvHoaDon;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTongCong;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblTongAll;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTongDV;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTongTienPhong;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel12;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel13;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel14;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
+        private Guna.UI2.WinForms.Guna2Button btnThemHoaDon;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel2;
+        private Guna.UI2.WinForms.Guna2ComboBox cboPhieuThue;
     }
 }

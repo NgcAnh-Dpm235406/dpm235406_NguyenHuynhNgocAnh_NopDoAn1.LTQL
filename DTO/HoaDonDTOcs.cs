@@ -20,9 +20,6 @@ namespace DTO
         private string sTenPhong;
         public string STenPhong { get => sTenPhong; set => sTenPhong = value; }
 
-        private int iMaTK_NguoiLap;
-        public int IMaTK_NguoiLap { get => iMaTK_NguoiLap; set => iMaTK_NguoiLap = value; }
-
         private DateTime dtNgayThanhToan;
         public DateTime DtNgayThanhToan { get => dtNgayThanhToan; set => dtNgayThanhToan = value; }
 

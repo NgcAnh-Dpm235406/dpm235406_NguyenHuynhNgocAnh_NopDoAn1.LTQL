@@ -52,5 +52,33 @@ namespace DAO
             DataProvider.DongKetNoi(con);
             return kq;
         }
+
+        public static (decimal tienPhong, decimal tienDV, decimal tong) TinhTienTheoPhieu(int maPhieu)
+        {
+            string sql = @"SELECT 
+                      ISNULL(pt.TongTienPhong,0) AS TienPhong,
+                      ISNULL(pt.TongTienDV,0) AS TienDV
+                   FROM PhieuThue pt
+                   WHERE pt.MaPhieu = @maPhieu";
+
+            using (SqlConnection con = DataProvider.MoKetNoi())
+            {
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.AddWithValue("@maPhieu", maPhieu);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                decimal tienPhong = 0, tienDV = 0;
+                if (reader.Read())
+                {
+                    tienPhong = Convert.ToDecimal(reader["TienPhong"]);
+                    tienDV = Convert.ToDecimal(reader["TienDV"]);
+                }
+                reader.Close();
+                DataProvider.DongKetNoi(con);
+
+                return (tienPhong, tienDV, tienPhong + tienDV);
+            }
+        }
+
     }
 } 
