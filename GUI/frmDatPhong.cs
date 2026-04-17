@@ -103,42 +103,47 @@ namespace GUI
         }
         private void btnXacNhan_Click(object sender, EventArgs e)
         {
-            // 1. Kiểm tra đầu vào
-            if (string.IsNullOrEmpty(txtHoTen.Text) || string.IsNullOrEmpty(txtSDT.Text) || cboTenPhong.SelectedIndex == -1)
+            // 1. Kiểm tra đầu vào cơ bản
+            if (string.IsNullOrWhiteSpace(txtHoTen.Text) ||
+                string.IsNullOrWhiteSpace(txtSDT.Text) ||
+                cboTenPhong.SelectedValue == null)
             {
-                MessageBox.Show("Vui lòng điền đủ Họ tên, SĐT và chọn Số phòng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin khách hàng và chọn phòng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             try
             {
+                // 2. Tạo đối tượng Phiếu Thuê
                 PhieuThue_DTO phieuDTO = new PhieuThue_DTO();
 
-                // --- ĐOẠN SỬA QUAN TRỌNG NHẤT ---
-                // Lấy chuỗi "Phòng 101", sau đó cắt bỏ chữ "Phòng " để lấy số 101
-                string selectedRoom = cboTenPhong.SelectedItem.ToString(); // Lấy "Phòng 101"
-                string roomNumber = selectedRoom.Replace("Phòng ", "").Trim(); // Còn lại "101"
-                phieuDTO.IMaPhong = int.Parse(roomNumber); // Chuyển "101" thành số 101
-                                                           // -------------------------------
+                // Lấy MaPhong từ ValueMember (đã cài đặt ở hàm Load)
+                phieuDTO.IMaPhong = Convert.ToInt32(cboTenPhong.SelectedValue);
 
                 phieuDTO.DtNgayCheckIn = dtpCheckIn.Value;
                 phieuDTO.DtNgayCheckOutDuKien = dtpCheckOut.Value;
                 phieuDTO.STrangThai = "Chưa thanh toán";
 
-                // Giả sử bạn tạm để MaKH = 1 để test nếu chưa làm phần Khách hàng
+                // 3. Logic xử lý Khách hàng (Quan trọng)
+                // Bạn nên viết thêm hàm trong BUS để lấy MaKH từ SDT hoặc thêm mới
+                // Ở đây tôi tạm giữ logic cũ của bạn nhưng khuyến khích cập nhật
                 phieuDTO.IMaKH = 1;
 
+                // 4. Thực thi lưu
                 if (busPhieu.ThuePhong(phieuDTO))
                 {
-                    // Cập nhật trạng thái phòng trong DB thành 'Có khách'
+                    // Cập nhật trạng thái phòng sang 'Có khách' để không ai đặt trùng
                     busPhong.CapNhatTrangThaiPhong(phieuDTO.IMaPhong, "Có khách");
 
-                    MessageBox.Show("Đặt phòng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show($"Đặt thành công phòng {cboTenPhong.Text}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    // Làm mới giao diện và load lại danh sách phòng trống
                     btnLamMoi_Click(null, null);
+                    LoadFullCboTenPhongTrong();
                 }
                 else
                 {
-                    MessageBox.Show("Lỗi: Không thể lưu vào cơ sở dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Không thể lưu phiếu thuê. Vui lòng kiểm tra lại kết nối DB!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)

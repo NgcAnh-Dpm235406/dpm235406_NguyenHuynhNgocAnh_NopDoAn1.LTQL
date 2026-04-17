@@ -46,7 +46,7 @@
             this.btnInHoaDon = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel9 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblTongDV = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2HtmlLabel11 = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblTongTienPhong = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel12 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel13 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel14 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -54,7 +54,7 @@
             this.guna2HtmlLabel5 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblGiamGia = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.lblTongTienDV = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.lblTongTienPhong = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.lblTongTT = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel4 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel3 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel2 = new Guna.UI2.WinForms.Guna2HtmlLabel();
@@ -153,7 +153,7 @@
             this.btnLoc.Size = new System.Drawing.Size(114, 44);
             this.btnLoc.TabIndex = 0;
             this.btnLoc.Text = "Lọc";
-            this.btnLoc.Click += new System.EventHandler(this.btnLoc_Click);
+            //this.btnLoc.Click += new System.EventHandler(this.btnLoc_Click);
             // 
             // guna2HtmlLabel1
             // 
@@ -174,7 +174,7 @@
             this.guna2Panel2.Controls.Add(this.btnInHoaDon);
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel9);
             this.guna2Panel2.Controls.Add(this.lblTongDV);
-            this.guna2Panel2.Controls.Add(this.guna2HtmlLabel11);
+            this.guna2Panel2.Controls.Add(this.lblTongTienPhong);
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel12);
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel13);
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel14);
@@ -182,7 +182,7 @@
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel5);
             this.guna2Panel2.Controls.Add(this.lblGiamGia);
             this.guna2Panel2.Controls.Add(this.lblTongTienDV);
-            this.guna2Panel2.Controls.Add(this.lblTongTienPhong);
+            this.guna2Panel2.Controls.Add(this.lblTongTT);
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel4);
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel3);
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel2);
@@ -293,16 +293,16 @@
             this.lblTongDV.TabIndex = 19;
             this.lblTongDV.Text = "123";
             // 
-            // guna2HtmlLabel11
+            // lblTongTienPhong
             // 
-            this.guna2HtmlLabel11.BackColor = System.Drawing.Color.Transparent;
-            this.guna2HtmlLabel11.Font = new System.Drawing.Font("Times New Roman", 10.8F);
-            this.guna2HtmlLabel11.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.guna2HtmlLabel11.Location = new System.Drawing.Point(161, 33);
-            this.guna2HtmlLabel11.Name = "guna2HtmlLabel11";
-            this.guna2HtmlLabel11.Size = new System.Drawing.Size(94, 22);
-            this.guna2HtmlLabel11.TabIndex = 18;
-            this.guna2HtmlLabel11.Text = "123.000.000";
+            this.lblTongTienPhong.BackColor = System.Drawing.Color.Transparent;
+            this.lblTongTienPhong.Font = new System.Drawing.Font("Times New Roman", 10.8F);
+            this.lblTongTienPhong.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.lblTongTienPhong.Location = new System.Drawing.Point(161, 33);
+            this.lblTongTienPhong.Name = "lblTongTienPhong";
+            this.lblTongTienPhong.Size = new System.Drawing.Size(94, 22);
+            this.lblTongTienPhong.TabIndex = 18;
+            this.lblTongTienPhong.Text = "123.000.000";
             // 
             // guna2HtmlLabel12
             // 
@@ -377,15 +377,15 @@
             this.lblTongTienDV.TabIndex = 6;
             this.lblTongTienDV.Text = null;
             // 
-            // lblTongTienPhong
+            // lblTongTT
             // 
-            this.lblTongTienPhong.BackColor = System.Drawing.Color.Transparent;
-            this.lblTongTienPhong.ForeColor = System.Drawing.Color.Black;
-            this.lblTongTienPhong.Location = new System.Drawing.Point(0, 0);
-            this.lblTongTienPhong.Name = "lblTongTienPhong";
-            this.lblTongTienPhong.Size = new System.Drawing.Size(3, 2);
-            this.lblTongTienPhong.TabIndex = 7;
-            this.lblTongTienPhong.Text = null;
+            this.lblTongTT.BackColor = System.Drawing.Color.Transparent;
+            this.lblTongTT.ForeColor = System.Drawing.Color.Black;
+            this.lblTongTT.Location = new System.Drawing.Point(0, 0);
+            this.lblTongTT.Name = "lblTongTT";
+            this.lblTongTT.Size = new System.Drawing.Size(3, 2);
+            this.lblTongTT.TabIndex = 7;
+            this.lblTongTT.Text = null;
             // 
             // guna2HtmlLabel4
             // 
@@ -484,6 +484,7 @@
             this.Controls.Add(this.guna2Panel2);
             this.Controls.Add(this.guna2Panel1);
             this.Name = "frmHoaDon";
+            //this.Load += new System.EventHandler(this.frmHoaDon_Load);
             this.guna2Panel1.ResumeLayout(false);
             this.guna2Panel1.PerformLayout();
             this.guna2Panel2.ResumeLayout(false);
@@ -506,7 +507,7 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel3;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblGiamGia;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTongTienDV;
-        private Guna.UI2.WinForms.Guna2HtmlLabel lblTongTienPhong;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblTongTT;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel4;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTongThanhToan;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel5;
@@ -519,7 +520,7 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel8;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel9;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTongDV;
-        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel11;
+        private Guna.UI2.WinForms.Guna2HtmlLabel lblTongTienPhong;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel12;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel13;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel14;
