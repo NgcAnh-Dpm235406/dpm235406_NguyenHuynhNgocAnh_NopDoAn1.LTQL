@@ -80,6 +80,14 @@ namespace DAO
             DataProvider.DongKetNoi(con);
             return dt;
         }
+        public static DataTable TimKiemHoaDon(string giaTri)
+        {
+            string sTruyVan = string.Format("SELECT * FROM HoaDon WHERE MaHD LIKE '%{0}%' OR MaKH LIKE '%{0}%'", giaTri);
+            SqlConnection con = DataProvider.MoKetNoi();
+            DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, con);
+            DataProvider.DongKetNoi(con);
+            return dt;
+        }
 
         /// <summary>
         /// Lưu hóa đơn mới

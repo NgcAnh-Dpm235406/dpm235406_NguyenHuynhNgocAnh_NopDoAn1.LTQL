@@ -18,6 +18,7 @@ namespace BUS
             // Gọi đúng hàm static từ DAO
             return HoaDon_DAO.LayHoaDon();
         }
+        public static DataTable TimKiem(string giaTri) => HoaDon_DAO.TimKiemHoaDon(giaTri);
 
         public decimal TinhTongThanhToan(decimal tienPhong, decimal tienDV)
         {
