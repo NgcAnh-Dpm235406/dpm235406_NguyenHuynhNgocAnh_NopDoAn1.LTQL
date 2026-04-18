@@ -92,14 +92,15 @@ namespace GUI
                     cboTrangThai.Text = item.STrangThai;
                     cboLoaiPhong.SelectedValue = item.IMaLoai;
 
-                    // Hiện giá để người dùng biết
                     txtGiaNgay.Text = item.DGiaNgay.ToString("N0");
                     txtGiaGio.Text = item.DGiaGio.ToString("N0");
 
-                    // Xóa trắng dữ liệu cũ để người dùng nhập mới
-                    txtNgay.Text = "0";
-                    txtGio.Text = "0";
-                    txtTienTT.Text = "0";
+                    // KHÔNG gán cứng bằng "0", mà phải lấy từ item (DTO)
+                    txtNgay.Text = item.ISoNgay.ToString();
+                    txtGio.Text = item.ISoGio.ToString();
+
+                    // Gọi hàm tính tiền để hiện tổng tiền ngay khi click
+                    TinhTienTamTinh();
                 };
 
                 flpDanhSachPhong.Controls.Add(btn);
@@ -109,16 +110,21 @@ namespace GUI
         // Tạo một hàm tính toán chung
         void TinhTienTamTinh()
         {
-            // Lọc bỏ tất cả ký tự không phải số
+            // Loại bỏ dấu phẩy và chữ VNĐ để lấy số thuần túy
             string sGiaNgay = txtGiaNgay.Text.Replace(",", "").Replace("VNĐ", "").Trim();
             string sGiaGio = txtGiaGio.Text.Replace(",", "").Replace("VNĐ", "").Trim();
 
-            decimal.TryParse(sGiaNgay, out decimal giaNgay);
-            decimal.TryParse(sGiaGio, out decimal giaGio);
-            int.TryParse(txtNgay.Text, out int soNgay);
-            int.TryParse(txtGio.Text, out int soGio);
+            decimal giaNgay = 0, giaGio = 0;
+            int soNgay = 0, soGio = 0;
+
+            decimal.TryParse(sGiaNgay, out giaNgay);
+            decimal.TryParse(sGiaGio, out giaGio);
+            int.TryParse(txtNgay.Text, out soNgay);
+            int.TryParse(txtGio.Text, out soGio);
 
             decimal tong = (giaNgay * soNgay) + (giaGio * soGio);
+
+            // Hiển thị lại với định dạng tiền tệ
             txtTienTT.Text = tong.ToString("N0") + " VNĐ";
         }
 
@@ -225,47 +231,14 @@ namespace GUI
         // Khi nhập vào ô Giá Ngày hoặc Số Ngày
         private void txtGiaNgay_TextChanged(object sender, EventArgs e)
         {
-            bool coDuLieu = !string.IsNullOrEmpty(txtGiaNgay.Text) && txtGiaNgay.Text != "0";
-
-            if (coDuLieu)
-            {
-                // Khóa nhóm Giờ
-                txtGio.Enabled = false;
-                txtGiaGio.Enabled = false;
-                txtGio.Text = "0"; // Reset về 0 để không tính nhầm tiền
-
-                // Đổi màu để người dùng dễ nhận biết (tùy chọn)
-                txtGio.FillColor = Color.LightGray;
-                txtGiaGio.FillColor = Color.LightGray;
-            }
-            else if (string.IsNullOrEmpty(txtGiaNgay.Text) || txtGiaNgay.Text == "0")
-            {
-                MoKhoaTatCa();
-            }
             TinhTienTamTinh();
         }
 
-        // Khi nhập vào ô Giá Giờ hoặc Số Giờ
         private void txtGiaGio_TextChanged(object sender, EventArgs e)
         {
-            bool coDuLieu = !string.IsNullOrEmpty(txtGiaGio.Text) && txtGiaGio.Text != "0";
-
-            if (coDuLieu)
-            {
-                // Khóa nhóm Ngày
-                txtNgay.Enabled = false;
-                txtGiaNgay.Enabled = false;
-                txtNgay.Text = "0";
-
-                txtNgay.FillColor = Color.LightGray;
-                txtGiaNgay.FillColor = Color.LightGray;
-            }
-            else if (string.IsNullOrEmpty(txtGiaGio.Text) || txtGiaGio.Text == "0")
-            {
-                MoKhoaTatCa();
-            }
             TinhTienTamTinh();
         }
+
 
         void MoKhoaTatCa()
         {
@@ -280,40 +253,74 @@ namespace GUI
             txtGiaGio.FillColor = Color.White;
         }
 
+
+        // Trong file frmQuanLyPhong.cs, hàm btnLuu_Click
         private void btnLuu_Click(object sender, EventArgs e)
         {
             // 1. Kiểm tra dữ liệu đầu vào cơ bản
             if (string.IsNullOrEmpty(txtTenPhong.Text))
             {
-                MessageBox.Show("Vui lòng nhập tên phòng!");
+                MessageBox.Show("Vui lòng nhập tên phòng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtTenPhong.Focus();
                 return;
             }
-            // 2. Tạo đối tượng DTO
+
+            // 2. Khởi tạo đối tượng DTO và lấy dữ liệu từ giao diện
             Phong_DTO p = new Phong_DTO();
-            p.STenPhong = txtTenPhong.Text;
+            p.STenPhong = txtTenPhong.Text.Trim();
             p.IMaLoai = (int)cboLoaiPhong.SelectedValue;
             p.STrangThai = cboTrangThai.Text;
 
-            // 3. Kiểm tra: Nếu maPhongChon == -1 thì là THÊM MỚI, ngược lại là CẬP NHẬT
+            // Giá ngày/giờ
+            string sGiaNgay = txtGiaNgay.Text.Replace(",", "").Replace("VNĐ", "").Trim();
+            string sGiaGio = txtGiaGio.Text.Replace(",", "").Replace("VNĐ", "").Trim();
+
+            decimal giaNgay = 0, giaGio = 0;
+            decimal.TryParse(sGiaNgay, out giaNgay);
+            decimal.TryParse(sGiaGio, out giaGio);
+
+            p.DGiaNgay = giaNgay;
+            p.DGiaGio = giaGio;
+
+            // >>> Bổ sung lấy số ngày và số giờ <<<
+            int soNgay = 0, soGio = 0;
+            int.TryParse(txtNgay.Text, out soNgay);
+            int.TryParse(txtGio.Text, out soGio);
+
+            p.ISoNgay = soNgay;
+            p.ISoGio = soGio;
+
+            // 3. Phân loại xử lý: Thêm mới hoặc Cập nhật
             if (maPhongChon == -1)
             {
                 if (busPhong.ThemPhong(p))
                 {
-                    MessageBox.Show("Thêm phòng mới thành công!");
-                    VeSoDoPhong(); // Vẽ lại sơ đồ
-                    ResetInput();   // Xóa trắng sau khi lưu
+                    MessageBox.Show("Thêm phòng mới thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    VeSoDoPhong();
+                    ResetInput();
+                }
+                else
+                {
+                    MessageBox.Show("Thêm phòng thất bại! Có thể tên phòng đã tồn tại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
             {
                 p.IMaPhong = maPhongChon;
+
                 if (busPhong.SuaPhong(p))
                 {
-                    MessageBox.Show("Cập nhật thông tin thành công!");
+                    MessageBox.Show("Cập nhật thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     VeSoDoPhong();
                     ResetInput();
                 }
+                else
+                {
+                    MessageBox.Show("Lỗi: Không thể cập nhật dữ liệu xuống Database.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
+
     }
+
 }

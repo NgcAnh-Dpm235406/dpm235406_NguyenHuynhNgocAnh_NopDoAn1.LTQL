@@ -20,10 +20,6 @@ namespace DTO
         private decimal dGiaGio;
         public decimal DGiaGio { get => dGiaGio; set => dGiaGio = value; }
 
-        private int iSoNgay;
-        public int ISoNgay { get => iSoNgay; set => iSoNgay = value; }
-
-        private int iSoGio;
-        public int ISoGio { get => iSoGio; set => iSoGio = value; }
+       
     }
 }

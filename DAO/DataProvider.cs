@@ -10,7 +10,7 @@ namespace DAO
 {
     public class DataProvider
     {
-        static string strCon = @"Server=.\SQLEXPRESS;Database=QLKS2;Integrated Security=True;TrustServerCertificate=True;";
+        static string strCon = @"Server=LAPTOP-EBQCS1LL;Database=QLKS3;Integrated Security=True;TrustServerCertificate=True;";
         public static SqlConnection MoKetNoi()
         {
             SqlConnection KetNoi = new SqlConnection(strCon);
