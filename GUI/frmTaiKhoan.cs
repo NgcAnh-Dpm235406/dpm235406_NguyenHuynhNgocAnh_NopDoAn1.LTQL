@@ -15,6 +15,8 @@ namespace GUI
     public partial class frmTaiKhoan : Form
     {
         string strCon = @"Data Source=.\SQLEXPRESS;Initial Catalog=Quan_Ly_Khach_San;Integrated Security=True";
+        bool isTenTKValid = false;
+        bool isMatKhauValid = false;
         public frmTaiKhoan()
         {
             InitializeComponent();
@@ -138,5 +140,55 @@ namespace GUI
             }
         }
 
+        private void txtTenTK_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtTenTK.Text) && !txtTenTK.Text.Contains(" "))
+            {
+                isTenTKValid = true;
+                txtTenTK.BackColor = Color.White;
+            }
+            else
+            {
+                isTenTKValid = false;
+                txtTenTK.BackColor = Color.MistyRose;
+            }
+            KiemTraBatNutLuu();
+        }
+
+        private void txtMatKhau_TextChanged(object sender, EventArgs e)
+        {
+            if (txtMatKhau.Text.Length >= 6)
+            {
+                isMatKhauValid = true;
+                txtMatKhau.BackColor = Color.White;
+            }
+            else
+            {
+                isMatKhauValid = false;
+                txtMatKhau.BackColor = Color.MistyRose;
+            }
+            KiemTraBatNutLuu();
+        }
+
+        private void cboQuyen_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            KiemTraBatNutLuu();
+        }
+
+        private void cboNhanVien_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboNhanVien.SelectedIndex != -1)
+            {
+                KiemTraBatNutLuu();
+            }
+        }
+        private void KiemTraBatNutLuu()
+        {
+            
+            bool isNhanVienSelected = cboNhanVien.SelectedIndex != -1;
+
+            
+            btnLuu.Enabled = isTenTKValid && isMatKhauValid && isNhanVienSelected;
+        }
     }
 }

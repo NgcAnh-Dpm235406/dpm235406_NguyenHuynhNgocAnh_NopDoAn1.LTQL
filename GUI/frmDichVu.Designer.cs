@@ -64,6 +64,7 @@
             this.txtMaDV.Name = "txtMaDV";
             this.txtMaDV.Size = new System.Drawing.Size(100, 22);
             this.txtMaDV.TabIndex = 2;
+            this.txtMaDV.TextChanged += new System.EventHandler(this.txtMaDV_TextChanged);
             // 
             // label2
             // 
@@ -80,6 +81,7 @@
             this.txtTenDV.Name = "txtTenDV";
             this.txtTenDV.Size = new System.Drawing.Size(100, 22);
             this.txtTenDV.TabIndex = 2;
+            this.txtTenDV.TextChanged += new System.EventHandler(this.txtTenDV_TextChanged);
             // 
             // numDonGia
             // 
@@ -87,6 +89,7 @@
             this.numDonGia.Name = "numDonGia";
             this.numDonGia.Size = new System.Drawing.Size(121, 22);
             this.numDonGia.TabIndex = 3;
+            this.numDonGia.ValueChanged += new System.EventHandler(this.numDonGia_ValueChanged);
             // 
             // label3
             // 
@@ -103,6 +106,7 @@
             this.txtDonViTinh.Name = "txtDonViTinh";
             this.txtDonViTinh.Size = new System.Drawing.Size(100, 22);
             this.txtDonViTinh.TabIndex = 5;
+            this.txtDonViTinh.TextChanged += new System.EventHandler(this.txtDonViTinh_TextChanged);
             // 
             // label4
             // 

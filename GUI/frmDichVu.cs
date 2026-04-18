@@ -15,6 +15,8 @@ namespace GUI
 {
     public partial class frmDichVu : Form
     {
+        bool isMaValid = false;
+        bool isTenValid = false;
         string strCon = @"Data Source=.\SQLEXPRESS;Initial Catalog=Quan_Ly_Khach_San;Integrated Security=True";
         SqlConnection sqlCon = null;
         public frmDichVu()
@@ -143,6 +145,63 @@ namespace GUI
             LoadData();
             txtTenDV.Focus();
             MessageBox.Show("Đã hủy thao tác nhập liệu.", "Thông báo");
+        }
+
+        private void txtMaDV_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtMaDV.Text) || txtMaDV.Text.Length > 10)
+            {
+                txtMaDV.BackColor = Color.LightPink; // Báo hiệu lỗi nhập liệu
+                isMaValid = false;
+            }
+            else
+            {
+                txtMaDV.BackColor = Color.White;
+                isMaValid = true;
+            }
+            KiemTraBatNutLuu();
+        }
+
+        private void numDonGia_ValueChanged(object sender, EventArgs e)
+        {
+            if (numDonGia.Value < 0)
+            {
+                numDonGia.Value = 0;
+            }
+        }
+
+        private void txtTenDV_TextChanged(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtTenDV.Text))
+            {
+                isTenValid = false;
+            }
+            else
+            {
+                isTenValid = true;
+            }
+            KiemTraBatNutLuu();
+        }
+
+        private void txtDonViTinh_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtDonViTinh.Text))
+            {
+                
+                if (txtDonViTinh.Text.Length > 20)
+                {
+                    txtDonViTinh.Text = txtDonViTinh.Text.Substring(0, 20);
+                    txtDonViTinh.SelectionStart = txtDonViTinh.Text.Length;
+                }
+            }
+
+            
+            KiemTraBatNutLuu();
+        }
+        private void KiemTraBatNutLuu()
+        {
+            bool isDonViValid = !string.IsNullOrWhiteSpace(txtDonViTinh.Text);
+            btnLuu.Enabled = isMaValid && isTenValid && isDonViValid;
         }
     }
 }
