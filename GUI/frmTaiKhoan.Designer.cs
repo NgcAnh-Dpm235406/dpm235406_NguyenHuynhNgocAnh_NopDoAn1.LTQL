@@ -50,6 +50,7 @@
             this.txtTenTK.Name = "txtTenTK";
             this.txtTenTK.Size = new System.Drawing.Size(100, 22);
             this.txtTenTK.TabIndex = 0;
+            this.txtTenTK.TextChanged += new System.EventHandler(this.txtTenTK_TextChanged);
             // 
             // txtMatKhau
             // 
@@ -57,6 +58,7 @@
             this.txtMatKhau.Name = "txtMatKhau";
             this.txtMatKhau.Size = new System.Drawing.Size(100, 22);
             this.txtMatKhau.TabIndex = 0;
+            this.txtMatKhau.TextChanged += new System.EventHandler(this.txtMatKhau_TextChanged);
             // 
             // label1
             // 
@@ -83,6 +85,7 @@
             this.cboQuyen.Name = "cboQuyen";
             this.cboQuyen.Size = new System.Drawing.Size(121, 24);
             this.cboQuyen.TabIndex = 2;
+            this.cboQuyen.SelectedIndexChanged += new System.EventHandler(this.cboQuyen_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -109,6 +112,7 @@
             this.cboNhanVien.Name = "cboNhanVien";
             this.cboNhanVien.Size = new System.Drawing.Size(121, 24);
             this.cboNhanVien.TabIndex = 2;
+            this.cboNhanVien.SelectedIndexChanged += new System.EventHandler(this.cboNhanVien_SelectedIndexChanged);
             // 
             // dgvTaiKhoan
             // 

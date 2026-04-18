@@ -13,6 +13,7 @@ namespace DAO
         public static List<TaiKhoan_DTO> LayDanhSachTaiKhoan()
         {
             // Truy vấn lấy tất cả tài khoản từ bảng TaiKhoan
+
             string sTruyVan = "SELECT * FROM TaiKhoan";
             SqlConnection con = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, con);

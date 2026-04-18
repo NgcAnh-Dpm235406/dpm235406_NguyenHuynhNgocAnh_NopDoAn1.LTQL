@@ -120,6 +120,16 @@ namespace DAO
             DataProvider.DongKetNoi(con);
             return kq;
         }
+        public static bool XuLyThanhToan(string maHD, string maPhong)
+        {
+            // Cập nhật trạng thái hóa đơn thành 'Đã thanh toán' và Phòng thành 'Trống'
+            string sql = string.Format(@"UPDATE HoaDon SET TrangThai = N'Đã thanh toán' WHERE MaHD = '{0}';
+                                 UPDATE Phong SET TrangThai = N'Trống' WHERE MaPhong = '{1}';", maHD, maPhong);
+            SqlConnection con = DataProvider.MoKetNoi();
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(sql, con);
+            DataProvider.DongKetNoi(con);
+            return kq;
+        }
 
 
         public static DataTable LayPhieuThueChuaCoHoaDon()
