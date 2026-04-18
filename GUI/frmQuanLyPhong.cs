@@ -15,7 +15,7 @@ namespace GUI
         Phong_BUS busPhong = new Phong_BUS();
         LoaiPhong_BUS busLoaiPhong = new LoaiPhong_BUS();
         int maPhongChon = -1; // Lưu trữ mã phòng đang được click chọn
-
+        
         public frmQuanLyPhong()
         {
             InitializeComponent();

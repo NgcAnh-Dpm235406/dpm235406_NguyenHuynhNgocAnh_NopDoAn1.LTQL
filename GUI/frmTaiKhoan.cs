@@ -14,7 +14,7 @@ namespace GUI
 {
     public partial class frmTaiKhoan : Form
     {
-        string strCon = @"Data Source=.\SQLEXPRESS;Initial Catalog=Quan_Ly_Khach_San;Integrated Security=True";
+        string strCon = @"Data Source=.\SQLEXPRESS;Initial Catalog=QLKS2;Integrated Security=True";
         bool isTenTKValid = false;
         bool isMatKhauValid = false;
         public frmTaiKhoan()

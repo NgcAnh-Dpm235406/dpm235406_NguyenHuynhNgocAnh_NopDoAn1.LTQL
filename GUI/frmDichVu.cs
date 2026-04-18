@@ -17,7 +17,7 @@ namespace GUI
     {
         bool isMaValid = false;
         bool isTenValid = false;
-        string strCon = @"Data Source=.\SQLEXPRESS;Initial Catalog=Quan_Ly_Khach_San;Integrated Security=True";
+        string strCon = @"Data Source=.\SQLEXPRESS;Initial Catalog=QLKS2;Integrated Security=True";
         SqlConnection sqlCon = null;
         public frmDichVu()
         {
