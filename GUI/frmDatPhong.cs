@@ -47,7 +47,7 @@ namespace GUI
         private void LoadFullCboTenPhongTrong()
         {
             // Gọi hàm từ BUS
-            DataTable dt = busPhong.LayTatCaPhongTrong();
+            DataTable dt = Phong_BUS.LayTatCaPhongTrong();
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -84,7 +84,7 @@ namespace GUI
                 // 3. Nếu lấy được mã loại hợp lệ (>0) thì mới gọi BUS
                 if (maLoai > 0)
                 {
-                    DataTable dtSoPhong = busPhong.LayPhongTrongTheoLoai(maLoai);
+                    DataTable dtSoPhong = Phong_BUS.LayPhongTrongTheoLoai(maLoai);
 
                     if (dtSoPhong != null && dtSoPhong.Rows.Count > 0)
                     {
@@ -133,7 +133,7 @@ namespace GUI
                 if (busPhieu.ThuePhong(phieuDTO))
                 {
                     // Cập nhật trạng thái phòng sang 'Có khách' để không ai đặt trùng
-                    busPhong.CapNhatTrangThaiPhong(phieuDTO.IMaPhong, "Có khách");
+                    Phong_BUS.CapNhatTrangThaiPhong(phieuDTO.IMaPhong, "Có khách");
 
                     MessageBox.Show($"Đặt thành công phòng {cboTenPhong.Text}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

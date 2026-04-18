@@ -59,7 +59,7 @@ namespace GUI
         void VeSoDoPhong()
         {
             flpDanhSachPhong.Controls.Clear();
-            List<Phong_DTO> dsPhong = busPhong.LayDanhSachPhong();
+            List<Phong_DTO> dsPhong = Phong_BUS.LayDanhSachPhong();
 
             if (dsPhong == null) return;
 
@@ -185,7 +185,7 @@ namespace GUI
             DialogResult dr = MessageBox.Show("Bạn có chắc chắn muốn xóa phòng này?", "Xác nhận", MessageBoxButtons.YesNo);
             if (dr == DialogResult.Yes)
             {
-                if (busPhong.XoaPhong(maPhongChon))
+                if (Phong_BUS.XoaPhong(maPhongChon))
                 {
                     MessageBox.Show("Đã xóa phòng!");
                     VeSoDoPhong();
@@ -204,7 +204,7 @@ namespace GUI
             if (result == DialogResult.Yes)
             {
                 // 1. Đưa phòng về trạng thái trống
-                if (busPhong.CapNhatTrangThaiPhong(maPhongChon, "Trống"))
+                if (Phong_BUS.CapNhatTrangThaiPhong(maPhongChon, "Trống"))
                 {
                     MessageBox.Show("Thanh toán thành công!");
                     VeSoDoPhong(); // Cập nhật lại sơ đồ phòng thành màu xanh
@@ -293,7 +293,7 @@ namespace GUI
             // 3. Phân loại xử lý: Thêm mới hoặc Cập nhật
             if (maPhongChon == -1)
             {
-                if (busPhong.ThemPhong(p))
+                if (Phong_BUS.ThemPhong(p))
                 {
                     MessageBox.Show("Thêm phòng mới thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     VeSoDoPhong();
@@ -308,7 +308,7 @@ namespace GUI
             {
                 p.IMaPhong = maPhongChon;
 
-                if (busPhong.SuaPhong(p))
+                if (Phong_BUS.SuaPhong(p))
                 {
                     MessageBox.Show("Cập nhật thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     VeSoDoPhong();

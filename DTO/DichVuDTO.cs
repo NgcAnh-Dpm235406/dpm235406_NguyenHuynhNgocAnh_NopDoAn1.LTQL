@@ -16,5 +16,14 @@ namespace DTO
 
         private decimal dGiaDV;
         public decimal DGiaDV { get => dGiaDV; set => dGiaDV = value; }
+
+        private string sDonViTinh;
+        public string SDonViTinh { get => sDonViTinh; set => sDonViTinh = value; }
+
+        private int iMaPhong;
+        public int IMaPhong { get => iMaPhong; set => iMaPhong = value; }
+
+        private string sTenPhong;
+        public string STenPhong { get => sTenPhong; set => sTenPhong = value; }
     }
 }

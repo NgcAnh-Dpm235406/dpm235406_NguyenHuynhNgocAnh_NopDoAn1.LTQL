@@ -17,191 +17,201 @@ namespace GUI
     {
         bool isMaValid = false;
         bool isTenValid = false;
-        string strCon = @"Data Source=.\SQLEXPRESS;Initial Catalog=QLKS2;Integrated Security=True";
+        
         SqlConnection sqlCon = null;
         public frmDichVu()
         {
             InitializeComponent();
-        } 
-        void LoadData()
-        {
-            if (sqlCon == null) sqlCon = new SqlConnection(strCon);
-            SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM DichVu", sqlCon);
-            DataTable dt = new DataTable();
-            adapter.Fill(dt);
-            dgvDichVu.DataSource = dt;
         }
+
         private void frmDichVu_Load(object sender, EventArgs e)
-                {
-                    LoadData();
-                }
-        private void btnThem_Click(object sender, EventArgs e)
         {
-            if (sqlCon == null) sqlCon = new SqlConnection(strCon);
-            if (sqlCon.State == ConnectionState.Closed) sqlCon.Open();
+            LoadData();
 
-            string query = "INSERT INTO DichVu (TenDV, DonGia, DonViTinh) VALUES (@ten, @gia, @dvt)";
-            SqlCommand cmd = new SqlCommand(query, sqlCon);
-            cmd.Parameters.AddWithValue("@ten", txtTenDV.Text);
-            cmd.Parameters.AddWithValue("@gia", numDonGia.Value);
-            cmd.Parameters.AddWithValue("@dvt", txtDonViTinh.Text);
+            // Dữ liệu combobox Đơn vị tính
+            string sQueryDonViTinh = @"SELECT DISTINCT DonViTinh FROM DichVu";
+            SqlDataAdapter daDonViTinh = new SqlDataAdapter(sQueryDonViTinh, con);
+            DataSet dsDonViTinh = new DataSet();
+            daDonViTinh.Fill(dsDonViTinh, "tblDonViTinh");
 
-            int kq = cmd.ExecuteNonQuery();
-            if (kq > 0)
-            {
-                MessageBox.Show("Thêm thành công!");
-                LoadData();
-            }
-            txtMaDV.Clear();
-            txtTenDV.Clear();
-            numDonGia.Value = 0;
-            txtDonViTinh.Clear();
-            txtTenDV.Focus();
+            cboDonViTinh.DataSource = dsDonViTinh.Tables["tblDonViTinh"];
+            cboDonViTinh.DisplayMember = "DonViTinh";   // hiển thị tên đơn vị
+            cboDonViTinh.ValueMember = "DonViTinh";     // giá trị cũng chính là tên đơn vị
         }
 
-        private void btnXoa_Click(object sender, EventArgs e)
+        private void LoadData()
         {
-            if (MessageBox.Show("Bạn có chắc chắn muốn xóa dịch vụ này?", "Thông báo", MessageBoxButtons.YesNo) == DialogResult.Yes)
-            {
-                using (SqlConnection con = new SqlConnection(strCon))
-                {
-                    con.Open();
-                    string query = "DELETE FROM DichVu WHERE MaDV=@ma";
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@ma", txtMaDV.Text);
-                    cmd.ExecuteNonQuery();
-                    LoadData();
-                    btnThem_Click(null, null); // Xóa trắng ô nhập sau khi xóa dưới DB
-                }
-            }
+            dgvDichVu.DataSource = DichVu_BUS.LayDanhSachDichVu();
+            dgvDichVu.Columns["IMaDV"].HeaderText = "Mã DV";
+            dgvDichVu.Columns["STenDV"].HeaderText = "Tên DV";
+            dgvDichVu.Columns["DGiaDV"].HeaderText = "Đơn giá";
+            dgvDichVu.Columns["SDonViTinh"].HeaderText = "Đơn vị tính";
+            dgvDichVu.Columns["IMaPhong"].HeaderText = "Mã phòng";
+            dgvDichVu.Columns["STenPhong"].HeaderText = "Tên phòng";
+
+            cboPhong.DataSource = Phong_BUS.LayDanhSachPhong();
+            cboPhong.DisplayMember = "STenPhong";
+            cboPhong.ValueMember = "IMaPhong";
         }
         private void dgvDichVu_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int i = e.RowIndex;
-            if (i >= 0)
+            if (e.RowIndex >= 0)
             {
-                txtMaDV.Text = dgvDichVu.Rows[i].Cells[0].Value.ToString();
-                txtTenDV.Text = dgvDichVu.Rows[i].Cells[1].Value.ToString();
-                numDonGia.Value = Convert.ToDecimal(dgvDichVu.Rows[i].Cells[2].Value);
+                DataGridViewRow row = dgvDichVu.Rows[e.RowIndex];
+                txtMaDV.Text = row.Cells["IMaDV"].Value.ToString();
+                txtTenDV.Text = row.Cells["STenDV"].Value.ToString();
+                txtDonGia.Text = row.Cells["DGiaDV"].Value.ToString();
+                cboDonViTinh.Text = row.Cells["SDonViTinh"].Value.ToString();
+                cboPhong.SelectedValue = row.Cells["IMaPhong"].Value;
             }
         }
 
-        private void btnLuu_Click(object sender, EventArgs e)
+
+
+
+        private void btnThem_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtTenDV.Text))
+            // 1. Kiểm tra dữ liệu đầu vào cơ bản
+            if (string.IsNullOrWhiteSpace(txtTenDV.Text))
             {
                 MessageBox.Show("Vui lòng nhập tên dịch vụ!");
                 return;
             }
-
-            using (SqlConnection con = new SqlConnection(strCon))
+            if (string.IsNullOrWhiteSpace(txtDonGia.Text))
             {
-                con.Open();
-                string query = "";
-
-                if (string.IsNullOrEmpty(txtMaDV.Text)) 
-                    query = "INSERT INTO DichVu VALUES (@ten, @gia, @dvt)";
-                else 
-                    query = "UPDATE DichVu SET TenDV=@ten, DonGia=@gia, DonViTinh=@dvt WHERE MaDV=@ma";
-
-                SqlCommand cmd = new SqlCommand(query, con);
-                if (!string.IsNullOrEmpty(txtMaDV.Text)) cmd.Parameters.AddWithValue("@ma", txtMaDV.Text);
-                cmd.Parameters.AddWithValue("@ten", txtTenDV.Text);
-                cmd.Parameters.AddWithValue("@gia", numDonGia.Value);
-                cmd.Parameters.AddWithValue("@dvt", txtDonViTinh.Text);
-
-                cmd.ExecuteNonQuery();
-                MessageBox.Show("Đã lưu thông tin!");
-                LoadData();
+                MessageBox.Show("Vui lòng nhập đơn giá!");
+                return;
             }
-        }
-
-        private void txtTimKiem_TextChanged(object sender, EventArgs e)
-        {
-            using (SqlConnection con = new SqlConnection(strCon))
+            if (string.IsNullOrWhiteSpace(cboDonViTinh.Text))
             {
-                string query = "SELECT * FROM DichVu WHERE TenDV LIKE @ten";
-                SqlDataAdapter adapter = new SqlDataAdapter(query, con);
-                adapter.SelectCommand.Parameters.AddWithValue("@ten", "%" + txtTimKiem.Text + "%");
-                DataTable dt = new DataTable();
-                adapter.Fill(dt);
-                dgvDichVu.DataSource = dt;
+                MessageBox.Show("Vui lòng nhập đơn vị tính!");
+                return;
             }
-        }
 
-        private void btnThoat_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
-        private void btnHuy_Click(object sender, EventArgs e)
-        {
-            
-            txtMaDV.Clear();
-            txtTenDV.Clear();
-            numDonGia.Value = 0;
-            txtDonViTinh.Clear();
-            txtTimKiem.Clear();
-            LoadData();
-            txtTenDV.Focus();
-            MessageBox.Show("Đã hủy thao tác nhập liệu.", "Thông báo");
-        }
-
-        private void txtMaDV_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtMaDV.Text) || txtMaDV.Text.Length > 10)
+            if (cboPhong.SelectedValue == null)
             {
-                txtMaDV.BackColor = Color.LightPink; // Báo hiệu lỗi nhập liệu
-                isMaValid = false;
+                MessageBox.Show("Vui lòng chọn phòng!");
+                return;
+            }
+            // 2. Tạo DTO
+            DichVu_DTO dv = new DichVu_DTO
+            {
+                STenDV = txtTenDV.Text.Trim(),
+                DGiaDV = decimal.Parse(txtDonGia.Text),
+                SDonViTinh = cboDonViTinh.Text.Trim()
+            };
+
+            // 3. Xử lý chọn phòng
+            if (cboPhong.SelectedValue != null)
+            {
+                dv.IMaPhong = int.Parse(cboPhong.SelectedValue.ToString());
             }
             else
             {
-                txtMaDV.BackColor = Color.White;
-                isMaValid = true;
+                dv.IMaPhong = 0; // hoặc để NULL trong DB nếu là dịch vụ chung
             }
-            KiemTraBatNutLuu();
-        }
 
-        private void numDonGia_ValueChanged(object sender, EventArgs e)
-        {
-            if (numDonGia.Value < 0)
+            // 4. Gọi BUS để thêm
+            if (DichVu_BUS.ThemDichVu(dv))
             {
-                numDonGia.Value = 0;
-            }
-        }
-
-        private void txtTenDV_TextChanged(object sender, EventArgs e)
-        {
-            if (string.IsNullOrWhiteSpace(txtTenDV.Text))
-            {
-                isTenValid = false;
+                MessageBox.Show("Thêm dịch vụ thành công!");
+                LoadData(); // reload lại dgv
             }
             else
             {
-                isTenValid = true;
+                MessageBox.Show("Thêm dịch vụ thất bại!");
             }
-            KiemTraBatNutLuu();
         }
 
-        private void txtDonViTinh_TextChanged(object sender, EventArgs e)
+
+        private void btnSua_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrWhiteSpace(txtDonViTinh.Text))
+            if (string.IsNullOrWhiteSpace(txtMaDV.Text))
             {
-                
-                if (txtDonViTinh.Text.Length > 20)
+                MessageBox.Show("Vui lòng chọn dịch vụ cần sửa!");
+                return;
+            }
+
+            // Mở khóa các ô để người dùng nhập
+            txtTenDV.ReadOnly = false;
+            txtDonGia.ReadOnly = false;
+            cboDonViTinh.Enabled = true;
+            cboPhong.Enabled = true;
+
+            MessageBox.Show("Bạn có thể sửa thông tin, sau đó nhấn LƯU để cập nhật.");
+        }
+
+
+
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            int maDV = int.Parse(txtMaDV.Text);
+            if (MessageBox.Show("Xóa dịch vụ này?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                if (DichVu_BUS.XoaDichVu(maDV))
                 {
-                    txtDonViTinh.Text = txtDonViTinh.Text.Substring(0, 20);
-                    txtDonViTinh.SelectionStart = txtDonViTinh.Text.Length;
+                    MessageBox.Show("Xóa thành công!");
+                    LoadData();
+                }
+                else
+                {
+                    MessageBox.Show("Xóa thất bại!");
                 }
             }
-
-            
-            KiemTraBatNutLuu();
         }
+
         private void KiemTraBatNutLuu()
         {
-            bool isDonViValid = !string.IsNullOrWhiteSpace(txtDonViTinh.Text);
-            btnLuu.Enabled = isMaValid && isTenValid && isDonViValid;
+            bool isDonViValid = !string.IsNullOrWhiteSpace(cboDonViTinh.Text);
+            //btnLuu.Enabled = isMaValid && isTenValid && isDonViValid;
+        }
+
+        private void btnLuu_Click(object sender, EventArgs e)
+        {
+            if (cboPhong.SelectedValue == null)
+            {
+                MessageBox.Show("Vui lòng chọn phòng!");
+                return;
+            }
+
+            string sDonGia = txtDonGia.Text.Replace(",", "").Replace("VNĐ", "").Trim();
+            decimal giaDV;
+            if (!decimal.TryParse(sDonGia, out giaDV))
+            {
+                MessageBox.Show("Đơn giá không hợp lệ!");
+                return;
+            }
+
+            DichVu_DTO dv = new DichVu_DTO
+            {
+                IMaDV = int.Parse(txtMaDV.Text),
+                STenDV = txtTenDV.Text.Trim(),
+                DGiaDV = giaDV,
+                SDonViTinh = cboDonViTinh.Text.Trim(),
+                IMaPhong = int.Parse(cboPhong.SelectedValue.ToString())
+            };
+
+            if (DichVu_BUS.SuaDichVu(dv))
+            {
+                MessageBox.Show("Cập nhật thành công!");
+                LoadData();
+
+                // Khóa lại các ô sau khi lưu
+                txtTenDV.ReadOnly = true;
+                txtDonGia.ReadOnly = true;
+                cboDonViTinh.Enabled = false;
+                cboPhong.Enabled = false;
+            }
+            else
+            {
+                MessageBox.Show("Cập nhật thất bại!");
+            }
+        }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

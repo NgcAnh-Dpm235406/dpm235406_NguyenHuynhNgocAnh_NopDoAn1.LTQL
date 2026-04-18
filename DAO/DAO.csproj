@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataProvider.cs" />
+    <Compile Include="DichVuDAO.cs" />
     <Compile Include="HoaDonDAO.cs" />
     <Compile Include="KhachHangDAO.cs" />
     <Compile Include="LoaiPhongDAO.cs" />

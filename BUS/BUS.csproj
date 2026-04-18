@@ -73,6 +73,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DichVuBUS.cs" />
     <Compile Include="HoaDonBUS.cs" />
     <Compile Include="KhachHangBUS.cs" />
     <Compile Include="LoaiPhongBUS.cs" />

@@ -205,6 +205,11 @@
     <Content Include="resources\ex.jpg" />
     <Content Include="resources\eye %281%29.png" />
     <Content Include="resources\giuong-removebg-preview.png" />
+    <None Include="resources\them-removebg-preview.png" />
+    <None Include="resources\sua-removebg-preview.png" />
+    <None Include="resources\sua-removebg-preview-removebg-preview.png" />
+    <None Include="resources\lm-removebg-preview.png" />
+    <None Include="resources\lm-removebg-preview %281%29.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

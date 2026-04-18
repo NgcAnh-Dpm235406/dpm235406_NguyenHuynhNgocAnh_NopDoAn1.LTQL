@@ -7,65 +7,65 @@ namespace BUS
 {
     public class Phong_BUS
     {
-        // Vì trong DAO dùng hàm static, nên không cần khởi tạo đối tượng daoPhong nữa
-
-        public List<Phong_DTO> LayDanhSachPhong()
+        // 1. Lấy danh sách phòng
+        public static List<Phong_DTO> LayDanhSachPhong()
         {
-            // Gọi đúng tên hàm trong Phong_DAO
             return Phong_DAO.LayDanhSachPhong();
         }
 
-        public bool CapNhatTrangThaiPhong(int maPhong, string trangThaiMoi)
+        // 2. Cập nhật trạng thái phòng
+        public static bool CapNhatTrangThaiPhong(int maPhong, string trangThaiMoi)
         {
-            // Gọi đúng tên hàm trong Phong_DAO
             return Phong_DAO.CapNhatTrangThai(maPhong, trangThaiMoi);
         }
 
-        public List<Phong_DTO> LocPhongTheoLoai(int maLoai)
+        // 3. Lọc phòng theo loại
+        public static List<Phong_DTO> LocPhongTheoLoai(int maLoai)
         {
             List<Phong_DTO> ds = Phong_DAO.LayDanhSachPhong();
             if (ds == null) return null;
             return ds.FindAll(p => p.IMaLoai == maLoai);
         }
 
-        // 2. Thêm phòng mới (Kiểm tra tên trùng)
-        public bool ThemPhong(Phong_DTO phong)
+        // 4. Thêm phòng mới (kiểm tra tên trùng)
+        public static bool ThemPhong(Phong_DTO phong)
         {
             if (string.IsNullOrEmpty(phong.STenPhong)) return false;
 
-            // Kiểm tra trùng tên phòng ở đây
             List<Phong_DTO> ds = Phong_DAO.LayDanhSachPhong();
             if (ds != null && ds.Exists(p => p.STenPhong == phong.STenPhong)) return false;
 
-            return Phong_DAO.ThemPhong(phong); // Bạn cần viết hàm này trong DAO
+            return Phong_DAO.ThemPhong(phong);
         }
 
-        // 3. Sửa thông tin phòng
-        public bool SuaPhong(Phong_DTO phong)
+        // 5. Sửa thông tin phòng
+        public static bool SuaPhong(Phong_DTO phong)
         {
-            return Phong_DAO.SuaPhong(phong); // Bạn cần viết hàm này trong DAO
+            return Phong_DAO.SuaPhong(phong);
         }
 
-        // 4. Xóa phòng
-        public bool XoaPhong(int maPhong)
+        // 6. Xóa phòng
+        public static bool XoaPhong(int maPhong)
         {
-            return Phong_DAO.XoaPhong(maPhong); // Bạn cần viết hàm này trong DAO
+            return Phong_DAO.XoaPhong(maPhong);
         }
 
-        // Hàm đếm số lượng phòng theo từng trạng thái để hiện lên các ô màu
-        public int DemPhongTheoTrangThai(string trangThai)
+        // 7. Đếm số lượng phòng theo trạng thái
+        public static int DemPhongTheoTrangThai(string trangThai)
         {
             List<Phong_DTO> ds = Phong_DAO.LayDanhSachPhong();
             if (ds == null) return 0;
             return ds.FindAll(p => p.STrangThai == trangThai).Count;
         }
 
-        // Thêm vào file Phong_BUS.cs
-        public DataTable LayPhongTrongTheoLoai(int maLoai)
+        // 8. Lấy phòng trống theo loại
+        public static DataTable LayPhongTrongTheoLoai(int maLoai)
         {
             return Phong_DAO.LayPhongTrongTheoLoai(maLoai);
         }
-        public DataTable LayTatCaPhongTrong()
+
+        // 9. Lấy tất cả phòng trống
+        public static DataTable LayTatCaPhongTrong()
         {
             return Phong_DAO.LayTatCaTenPhongTrong();
         }
