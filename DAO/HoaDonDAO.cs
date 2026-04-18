@@ -34,7 +34,7 @@ namespace DAO
                 HoaDon_DTO hd = new HoaDon_DTO();
                 hd.IMaHD = int.Parse(dr["MaHD"].ToString());
                 hd.IMaPhieu = int.Parse(dr["MaPhieu"].ToString());
-                hd.IMaTK_NguoiLap = int.Parse(dr["MaTK_NguoiLap"].ToString());
+                
 
                 // Gán dữ liệu chữ từ câu lệnh JOIN
                 hd.SHoTen = dr["HoTen"].ToString();
@@ -63,22 +63,37 @@ namespace DAO
                    JOIN PhieuThue pt ON hd.MaPhieu = pt.MaPhieu
                    JOIN KhachHang kh ON pt.MaKH = kh.MaKH
                    JOIN Phong p ON pt.MaPhong = p.MaPhong
-                   WHERE (hd.NgayThanhToan BETWEEN @tu AND @den)
-                   AND (kh.HoTen LIKE @ten)"; // Lọc theo tên khách hàng
+                   WHERE (hd.NgayThanhToan BETWEEN @tu AND @den)";
+
+            // Nếu có từ khóa tìm kiếm khác rỗng thì thêm điều kiện (accent-insensitive, case-insensitive)
+            bool hasKeyword = !string.IsNullOrWhiteSpace(tenKH);
+            if (hasKeyword)
+            {
+                sql += " AND kh.HoTen COLLATE Latin1_General_CI_AI LIKE @ten";
+            }
 
             SqlConnection con = DataProvider.MoKetNoi();
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.Parameters.AddWithValue("@tu", tuNgay.Date);
-            cmd.Parameters.AddWithValue("@den", denNgay.Date.AddDays(1).AddSeconds(-1));
+            try
+            {
+                SqlCommand cmd = new SqlCommand(sql, con);
+                cmd.Parameters.Add("@tu", SqlDbType.DateTime).Value = tuNgay.Date;
+                cmd.Parameters.Add("@den", SqlDbType.DateTime).Value = denNgay.Date.AddDays(1).AddSeconds(-1);
 
-            // Bây giờ dòng này sẽ hết lỗi vì đã có tenKH ở trên đầu hàm
-            cmd.Parameters.AddWithValue("@ten", "%" + tenKH + "%");
+                if (hasKeyword)
+                {
+                    // Dùng NVarChar (Unicode) và truyền tham số với wildcard
+                    cmd.Parameters.Add("@ten", SqlDbType.NVarChar, 200).Value = "%" + tenKH.Trim() + "%";
+                }
 
-            SqlDataAdapter da = new SqlDataAdapter(cmd);
-            DataTable dt = new DataTable();
-            da.Fill(dt);
-            DataProvider.DongKetNoi(con);
-            return dt;
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+            finally
+            {
+                DataProvider.DongKetNoi(con);
+            }
         }
         public static DataTable TimKiemHoaDon(string giaTri)
         {
@@ -94,10 +109,11 @@ namespace DAO
         /// </summary>
         public static bool LuuHoaDon(HoaDon_DTO hd)
         {
+            // Loại bỏ {4} vì đã dùng GETDATE() trực tiếp trong SQL
             string sTruyVan = string.Format(
-                "INSERT INTO HoaDon (MaPhieu, MaTK_NguoiLap, TongTienPhong, TongTienDV, TongTienThanhToan, NgayThanhToan) " +
-                "VALUES ({0}, {1}, {2}, {3}, {4}, GETDATE())",
-                hd.IMaPhieu, hd.IMaTK_NguoiLap, hd.DTongTienPhong, hd.DTongTienDV, hd.DTongTienThanhToan);
+                "INSERT INTO HoaDon (MaPhieu, TongTienPhong, TongTienDV, TongTienThanhToan, NgayThanhToan) " +
+                "VALUES ({0}, {1}, {2}, {3}, GETDATE())",
+                hd.IMaPhieu, hd.DTongTienPhong, hd.DTongTienDV, hd.DTongTienThanhToan);
 
             con = DataProvider.MoKetNoi();
             bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, con);
@@ -114,6 +130,24 @@ namespace DAO
             DataProvider.DongKetNoi(con);
             return kq;
         }
+
+
+        public static DataTable LayPhieuThueChuaCoHoaDon()
+        {
+            string sql = @"SELECT pt.MaPhieu, p.TenPhong, kh.HoTen
+               FROM PhieuThue pt
+               INNER JOIN Phong p ON pt.MaPhong = p.MaPhong
+               INNER JOIN KhachHang kh ON pt.MaKH = kh.MaKH
+               WHERE pt.TrangThai = N'Chưa thanh toán'
+                 AND NOT EXISTS (SELECT 1 FROM HoaDon hd WHERE hd.MaPhieu = pt.MaPhieu)";
+
+            SqlConnection con = DataProvider.MoKetNoi();
+            DataTable dt = DataProvider.TruyVanLayDuLieu(sql, con);
+            DataProvider.DongKetNoi(con);
+            return dt;
+        }
+
+
 
         /// <summary>
         /// Xóa hóa đơn theo mã

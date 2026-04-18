@@ -150,19 +150,25 @@ namespace GUI
         // 5. Sự kiện Sửa Phòng
         private void btnSua_Click(object sender, EventArgs e)
         {
-            if (maPhongChon == -1) return;
-
-            Phong_DTO p = new Phong_DTO();
-            p.IMaPhong = maPhongChon;
-            p.STenPhong = txtTenPhong.Text;
-            p.IMaLoai = (int)cboLoaiPhong.SelectedValue;
-            p.STrangThai = cboTrangThai.Text;
-
-            if (busPhong.SuaPhong(p)) // Bạn cần viết hàm SuaPhong trong BUS/DAO
+            if (maPhongChon == -1)
             {
-                MessageBox.Show("Cập nhật thông tin thành công!");
-                VeSoDoPhong();
+                MessageBox.Show("Vui lòng chọn một phòng từ danh sơ đồ trước khi sửa!");
+                return;
             }
+            // 1. Mở khóa các ô để người dùng nhập (ReadOnly = false)
+            txtTenPhong.ReadOnly = false;
+            // Vì bạn dùng Guna2 nên dùng thuộc tính Enabled cũng được hoặc dùng ReadOnly
+            txtGiaNgay.Enabled = true;
+            txtGiaGio.Enabled = true;
+            cboLoaiPhong.Enabled = true;
+            cboTrangThai.Enabled = true;
+            // 2. Thay đổi màu nền để người dùng biết là đang trong chế độ sửa
+            txtTenPhong.FillColor = Color.White;
+            txtGiaNgay.FillColor = Color.White;
+            txtGiaGio.FillColor = Color.White;
+            // 3. Đưa con trỏ vào ô Tên phòng
+            txtTenPhong.Focus();
+           
         }
 
         // 6. Sự kiện Xóa Phòng

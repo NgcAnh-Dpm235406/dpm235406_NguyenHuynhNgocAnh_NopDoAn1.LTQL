@@ -25,6 +25,26 @@ namespace BUS
             return tienPhong + tienDV;
         }
 
+        public (decimal tongPhong, decimal tongDV, decimal tongThanhToan) TinhTongTheoKhach(string hoTen)
+        {
+            DataTable dt = HoaDon_DAO.LayDSHoaDon(new DateTime(1753, 1, 1), new DateTime(9998, 12, 31), hoTen);
+            decimal tongPhong = 0, tongDV = 0, tongThanhToan = 0;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                decimal phong = 0, dv = 0, tt = 0;
+                decimal.TryParse(row["TongTienPhong"]?.ToString(), out phong);
+                decimal.TryParse(row["TongTienDV"]?.ToString(), out dv);
+                decimal.TryParse(row["TongTienThanhToan"]?.ToString(), out tt);
+
+                tongPhong += phong;
+                tongDV += dv;
+                tongThanhToan += tt;
+            }
+
+            return (tongPhong, tongDV, tongThanhToan);
+        }
+
         public bool LuuHoaDon(HoaDon_DTO hd)
         {
             // Gán ngày thanh toán là hiện tại trước khi lưu
@@ -79,6 +99,14 @@ namespace BUS
             return HoaDon_DAO.XoaHoaDon(maHD);
         }
 
-        
+        public DataTable LayPhieuThueChuaCoHoaDon()
+        {
+            return HoaDon_DAO.LayPhieuThueChuaCoHoaDon();
+        }
+        public (decimal tienPhong, decimal tienDV, decimal tong) TinhTienTheoPhieu(int maPhieu)
+        {
+            return PhieuThue_DAO.TinhTienTheoPhieu(maPhieu);
+        }
+
     }
 }
