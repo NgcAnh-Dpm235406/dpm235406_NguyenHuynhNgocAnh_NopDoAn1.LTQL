@@ -73,13 +73,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSet1.cs">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="DataSet1.Designer.cs">
+    <Compile Include="DataSetKhachHang.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
+      <DependentUpon>DataSetKhachHang.xsd</DependentUpon>
     </Compile>
     <Compile Include="frmDatPhong.cs">
       <SubType>Form</SubType>
@@ -123,6 +120,12 @@
     <Compile Include="frmQuanLyPhong.Designer.cs">
       <DependentUpon>frmQuanLyPhong.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmRPKhachHang.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRPKhachHang.Designer.cs">
+      <DependentUpon>frmRPKhachHang.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmTaiKhoan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -154,6 +157,9 @@
     <EmbeddedResource Include="frmQuanLyPhong.resx">
       <DependentUpon>frmQuanLyPhong.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmRPKhachHang.resx">
+      <DependentUpon>frmRPKhachHang.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmTaiKhoan.resx">
       <DependentUpon>frmTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
@@ -167,19 +173,18 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="Report1.rdlc" />
-    <EmbeddedResource Include="rptHoaDon.rdlc" />
+    <EmbeddedResource Include="ReportKhachHang.rdlc" />
     <None Include=".editorconfig" />
-    <None Include="DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
+    <None Include="DataSetKhachHang.xsc">
+      <DependentUpon>DataSetKhachHang.xsd</DependentUpon>
     </None>
-    <None Include="DataSet1.xsd">
+    <None Include="DataSetKhachHang.xsd">
       <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+      <LastGenOutput>DataSetKhachHang.Designer.cs</LastGenOutput>
     </None>
-    <None Include="DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
+    <None Include="DataSetKhachHang.xss">
+      <DependentUpon>DataSetKhachHang.xsd</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
