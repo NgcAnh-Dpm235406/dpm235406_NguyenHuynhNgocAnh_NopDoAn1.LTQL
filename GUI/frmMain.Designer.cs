@@ -227,8 +227,8 @@
             // 
             this.guna2Panel1.BackColor = System.Drawing.Color.LightBlue;
             this.guna2Panel1.Controls.Add(this.label2);
-            this.guna2Panel1.Controls.Add(this.label1);
             this.guna2Panel1.Controls.Add(this.pictureBox1);
+            this.guna2Panel1.Controls.Add(this.lblHoTen);
             this.guna2Panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.guna2Panel1.Location = new System.Drawing.Point(0, 0);
             this.guna2Panel1.Name = "guna2Panel1";
@@ -251,18 +251,18 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.label1.Location = new System.Drawing.Point(80, 19);
+            this.label1.Location = new System.Drawing.Point(406, 31);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(114, 20);
+            this.label1.Size = new System.Drawing.Size(73, 20);
             this.label1.TabIndex = 1;
-            this.label1.Text = "Phượng Hoàng";
+            this.label1.Text = "Xin chào:";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::GUI.Properties.Resources.logoph_removebg_preview;
             this.pictureBox1.Location = new System.Drawing.Point(-11, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(100, 90);
+            this.pictureBox1.Size = new System.Drawing.Size(93, 90);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
@@ -272,7 +272,7 @@
             this.plnTieuDe.BackColor = System.Drawing.Color.LightCyan;
             this.plnTieuDe.BorderThickness = 1;
             this.plnTieuDe.Controls.Add(this.btnDangXuat);
-            this.plnTieuDe.Controls.Add(this.lblHoTen);
+            this.plnTieuDe.Controls.Add(this.label1);
             this.plnTieuDe.Controls.Add(this.guna2PictureBox1);
             this.plnTieuDe.Controls.Add(this.lblTieuDe);
             this.plnTieuDe.Dock = System.Windows.Forms.DockStyle.Top;
@@ -306,11 +306,12 @@
             // lblHoTen
             // 
             this.lblHoTen.AutoSize = true;
-            this.lblHoTen.Location = new System.Drawing.Point(505, 33);
+            this.lblHoTen.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            this.lblHoTen.Location = new System.Drawing.Point(79, 19);
             this.lblHoTen.Name = "lblHoTen";
-            this.lblHoTen.Size = new System.Drawing.Size(123, 19);
+            this.lblHoTen.Size = new System.Drawing.Size(114, 20);
             this.lblHoTen.TabIndex = 2;
-            this.lblHoTen.Text = "Xin chào: Admin";
+            this.lblHoTen.Text = "Phượng Hoàng";
             // 
             // guna2PictureBox1
             // 

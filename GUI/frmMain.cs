@@ -89,25 +89,17 @@ namespace GUI
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            /// 1. Kiểm tra nếu loginAccount tồn tại
-            if (loginAccount != null)
-            {
-                // Hiển thị họ tên lên giao diện
-                lblHoTen.Text = "Xin chào, " + loginAccount.STenDangNhap;
+            // Hiển thị tên người dùng lên giao diện
+            label1.Text = "Xin chào: " + GlobalUser.HoTen;
 
-                // 2. Thực hiện phân quyền
-                PhanQuyenHeThong();
-            }
+            // Nếu bạn muốn hiển thị kèm cả quyền hạn:
+            // label1.Text = $"Xin chào: {GlobalUser.HoTen} ({GlobalUser.LoaiTaiKhoan})";
+
+            // Gọi hàm phân quyền đã viết ở các bước trước
+            ThucHienPhanQuyen();
         }
 
-        private void PhanQuyenHeThong()
-        {
-            // Sử dụng BUS để kiểm tra thay vì so sánh chuỗi trực tiếp
-            bool isAdmin = busTK.LaAdmin(loginAccount);
-
-            btnTaiKhoan.Visible = isAdmin;
-            // btnThongKe.Visible = isAdmin;
-        }
+       
 
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
@@ -185,6 +177,26 @@ namespace GUI
 
             // Gọi hàm để nhúng vào Panel (nhớ kiểm tra tên Panel bên trong hàm này)
             OpenChildForm(f);
+        }
+
+        private void ThucHienPhanQuyen()
+        {
+            string role = GlobalUser.LoaiTaiKhoan;
+
+            if (role == "Manager")
+            {
+                btnTaiKhoan.Visible = false; // Quản lý không được đụng vào Tài khoản
+            }
+            else if (role == "User")
+            {
+                btnTaiKhoan.Visible = false;
+
+                // CHO PHÉP bấm vào để xem (Enabled phải là true)
+                btnQuanlyp.Enabled = true;
+                btnDichVu.Enabled = true;
+                btnHoaDon.Enabled = true;
+                btnDatPhong.Enabled = true;
+            }
         }
     }
 }

@@ -37,6 +37,16 @@ namespace GUI
                                                       // Gán sự kiện sau khi bind xong
             cboLoaiPhong.SelectedIndexChanged += cboLoaiPhong_SelectedIndexChanged;
 
+            if (GlobalUser.LoaiTaiKhoan == "User")
+            {
+                btnThem.Enabled = false;
+                btnXoa.Enabled = false;
+                btnSua.Enabled = false;
+                btnLuu.Enabled = false;
+                btnThanhToan.Enabled = true;
+                // Nhân viên chỉ nhìn thấy danh sách trên DataGridView
+            }
+
         }
 
         // 1. Load danh sách loại phòng vào ComboBox

@@ -27,8 +27,15 @@ namespace GUI
         private void frmDichVu_Load(object sender, EventArgs e)
         {
             LoadData();
+            if (GlobalUser.LoaiTaiKhoan == "User")
+            {
+                btnXoa.Enabled = false;
+                btnSua.Enabled = false;
+                // Nút btnThem và btnLuu vẫn để true để nhân viên thêm dịch vụ cho khách
+                btnThem.Enabled = true;
+            }
 
-           
+
         }
 
         private void LoadData()

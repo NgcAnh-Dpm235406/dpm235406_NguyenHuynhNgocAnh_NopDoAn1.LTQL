@@ -8,7 +8,7 @@ namespace DAO
 {
     public class TaiKhoan_DAO
     {
-
+        
         // Trong file TaiKhoan_DAO.cs
         public static List<TaiKhoan_DTO> LayDanhSachTaiKhoan()
         {
@@ -29,39 +29,45 @@ namespace DAO
                 tk.SHoTen = dr["HoTen"].ToString();
                 tk.SLoaiTaiKhoan = dr["LoaiTaiKhoan"].ToString();
                 // Không lấy mật khẩu đổ lên danh sách để bảo mật
+                tk.SMatKhau = dr["MatKhau"].ToString();
                 lstTK.Add(tk);
             }
             DataProvider.DongKetNoi(con);
             return lstTK;
         }
+        // Trong TaiKhoan_DAO.cs
         public static bool ThemTaiKhoan(TaiKhoan_DTO tk)
         {
-            string sTruyVan = string.Format("INSERT INTO TaiKhoan VALUES ('{0}', '{1}', '{2}')", tk.STenDangNhap, tk.SMatKhau, tk.SLoaiTaiKhoan);
+            string s = string.Format("INSERT INTO TaiKhoan (TenDangNhap, MatKhau, HoTen, LoaiTaiKhoan, TrangThai) VALUES ('{0}', '{1}', N'{2}', '{3}', 1)",
+                        tk.STenDangNhap, tk.SMatKhau, tk.SHoTen, tk.SLoaiTaiKhoan);
             SqlConnection con = DataProvider.MoKetNoi();
-            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, con);
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(s, con);
             DataProvider.DongKetNoi(con);
             return kq;
         }
-        public static bool XoaTaiKhoan(string tenTK)
-        {
-            string sTruyVan = string.Format("DELETE FROM TaiKhoan WHERE TenDangNhap = '{0}'", tenTK);
-            SqlConnection con = DataProvider.MoKetNoi();
-            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, con);
-            DataProvider.DongKetNoi(con);
-            return kq;
-        }
+
         public static bool SuaTaiKhoan(TaiKhoan_DTO tk)
         {
-            string sTruyVan = string.Format("UPDATE TaiKhoan SET MatKhau = '{0}', LoaiTaiKhoan = '{1}' WHERE TenDangNhap = '{2}'",
-                                            tk.SMatKhau, tk.SLoaiTaiKhoan, tk.STenDangNhap);
+            string s = string.Format("UPDATE TaiKhoan SET MatKhau='{0}', HoTen=N'{1}', LoaiTaiKhoan='{2}' WHERE MaTK={3}",
+                        tk.SMatKhau, tk.SHoTen, tk.SLoaiTaiKhoan, tk.IMaTK);
             SqlConnection con = DataProvider.MoKetNoi();
-            bool kq = DataProvider.TruyVanKhongLayDuLieu(sTruyVan, con);
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(s, con);
             DataProvider.DongKetNoi(con);
             return kq;
         }
+
+        public static bool XoaTaiKhoan(string tenTK)
+        {
+            string s = string.Format("DELETE FROM TaiKhoan WHERE TenDangNhap = '{0}'", tenTK);
+            SqlConnection con = DataProvider.MoKetNoi();
+            bool kq = DataProvider.TruyVanKhongLayDuLieu(s, con);
+            DataProvider.DongKetNoi(con);
+            return kq;
+        }
+        // Thêm hàm này vào class TaiKhoan_DAO
         public static TaiKhoan_DTO KiemTraDangNhap(string tenTK, string matKhau)
         {
-            // Tên cột phải khớp: TenDangNhap, MatKhau
+            // Truy vấn tìm tài khoản khớp user/pass và đang hoạt động (TrangThai = 1)
             string s = string.Format("SELECT * FROM TaiKhoan WHERE TenDangNhap = '{0}' AND MatKhau = '{1}' AND TrangThai = 1", tenTK, matKhau);
 
             SqlConnection con = DataProvider.MoKetNoi();
@@ -69,19 +75,23 @@ namespace DAO
 
             if (dt != null && dt.Rows.Count > 0)
             {
+                // Nếu tìm thấy, đóng gói dữ liệu vào DTO để trả về
                 TaiKhoan_DTO tk = new TaiKhoan_DTO();
                 tk.IMaTK = int.Parse(dt.Rows[0]["MaTK"].ToString());
                 tk.STenDangNhap = dt.Rows[0]["TenDangNhap"].ToString();
                 tk.SMatKhau = dt.Rows[0]["MatKhau"].ToString();
                 tk.SHoTen = dt.Rows[0]["HoTen"].ToString();
-                tk.SLoaiTaiKhoan = dt.Rows[0]["LoaiTaiKhoan"].ToString(); // Khớp với hình
+                tk.SLoaiTaiKhoan = dt.Rows[0]["LoaiTaiKhoan"].ToString();
 
                 DataProvider.DongKetNoi(con);
                 return tk;
             }
 
             DataProvider.DongKetNoi(con);
-            return null;
+            return null; // Không tìm thấy tài khoản
         }
+
+       
+        
     }
 }

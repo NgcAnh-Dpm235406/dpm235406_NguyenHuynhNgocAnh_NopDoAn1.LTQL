@@ -1,13 +1,15 @@
-﻿using BUS;
-using DTO;
-using System;
+﻿using System;
 using System.Windows.Forms;
+using BUS;
+using DTO;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace GUI
 {
     public partial class frmLogin : Form
     {
-        // Khởi tạo BUS
+        // Nếu các hàm trong TaiKhoan_BUS KHÔNG có chữ 'static', ta giữ nguyên dòng này:
         TaiKhoan_BUS accBus = new TaiKhoan_BUS();
 
         public frmLogin()
@@ -15,12 +17,12 @@ namespace GUI
             InitializeComponent();
             // Thiết lập mặc định
             txtMatKhau.UseSystemPasswordChar = true;
-            this.AcceptButton = btnLogin; // Nhấn Enter trên bàn phím sẽ tự kích hoạt btnLogin
+            this.AcceptButton = btnLogin;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            string user = txtTen.Text.Trim();
+            string user = txtTen.Text.Trim(); // Nhớ kiểm tra đúng tên ID của TextBox
             string pass = txtMatKhau.Text.Trim();
 
             if (string.IsNullOrEmpty(user) || string.IsNullOrEmpty(pass))
@@ -29,46 +31,50 @@ namespace GUI
                 return;
             }
 
-            // Gọi BUS kiểm tra
-            TaiKhoan_DTO loginAcc = accBus.KiemTraDangNhap(user, pass);
-
-            if (loginAcc != null)
+            try
             {
-                MessageBox.Show("Đăng nhập thành công! Chào " + loginAcc.SHoTen, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // 1. Gọi BUS để kiểm tra đăng nhập (Trả về một đối tượng DTO)
+                TaiKhoan_DTO loginAcc = accBus.KiemTraDangNhap(user, pass);
 
-                // 1. Khởi tạo Form Main
-                frmMain f = new frmMain(loginAcc);
+                if (loginAcc != null)
+                {
+                    // 2. LƯU THÔNG TIN VÀO LỚP TOÀN CỤC (Để các Form sau dùng)
+                    GlobalUser.TenDangNhap = loginAcc.STenDangNhap; // Hoặc .TenDangNhap tùy biến bạn đặt trong DTO
+                    GlobalUser.LoaiTaiKhoan = loginAcc.SLoaiTaiKhoan; // Đây là cột 'Admin', 'Manager' hoặc 'User'
+                    GlobalUser.HoTen = loginAcc.SHoTen;
+                    MessageBox.Show($"Đăng nhập thành công! Chào {loginAcc.SHoTen} ({GlobalUser.LoaiTaiKhoan})",
+                                    "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                // 2. Ẩn form Login
-                this.Hide();
+                    // 3. Mở Form Main và truyền đối tượng loginAcc vào (như hàm khởi tạo của bạn yêu cầu)
+                    frmMain f = new frmMain(loginAcc);
+                    this.Hide();
+                    f.ShowDialog();
 
-                // 3. Hiển thị Main dưới dạng Dialog. 
-                // Khi người dùng nhấn Đăng xuất (this.Close() ở frmMain), code sẽ chạy tiếp dòng dưới.
-                f.ShowDialog();
-
-                // 4. Khi quay lại Login: Xóa trắng mật khẩu và hiện Form
-                txtMatKhau.Clear();
-                this.Show();
-                txtMatKhau.Focus(); // Để con trỏ vào ô mật khẩu cho lần đăng nhập sau
+                    // Sau khi thoát Main thì đóng luôn Login
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtMatKhau.Clear();
+                    txtMatKhau.Focus();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                txtMatKhau.Clear();
-                txtMatKhau.Focus();
+                MessageBox.Show("Lỗi hệ thống: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            DialogResult dr = MessageBox.Show("Bạn có muốn thoát chương trình?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (dr == DialogResult.Yes)
+            if (MessageBox.Show("Bạn có muốn thoát chương trình?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                Application.Exit(); // Thoát hoàn toàn ứng dụng
+                Application.Exit();
             }
         }
 
-        // --- Hiển thị mật khẩu (Cải tiến) ---
+        // --- Hiển thị mật khẩu khi giữ chuột ---
         private void showPASS_MouseDown(object sender, MouseEventArgs e)
         {
             txtMatKhau.UseSystemPasswordChar = false;
@@ -79,14 +85,15 @@ namespace GUI
             txtMatKhau.UseSystemPasswordChar = true;
         }
 
-        // --- Đảm bảo đóng Form Login là đóng sạch ứng dụng ---
         private void frmLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            // Nếu form Login bị đóng thủ công (dấu X), thoát hẳn app để không chạy ngầm
-            if (this.Visible == true)
-            {
-                Application.Exit();
-            }
+            // Thoát hoàn toàn app để không bị chạy ngầm khi đóng Login
+            Application.Exit();
+        }
+
+        private void txtTen_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -88,6 +88,7 @@
             this.txtTen.Name = "txtTen";
             this.txtTen.Size = new System.Drawing.Size(295, 23);
             this.txtTen.TabIndex = 0;
+            this.txtTen.TextChanged += new System.EventHandler(this.txtTen_TextChanged);
             // 
             // label1
             // 

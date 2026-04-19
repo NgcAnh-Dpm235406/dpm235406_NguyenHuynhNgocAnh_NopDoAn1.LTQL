@@ -175,7 +175,7 @@ namespace GUI
 
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
-            txtTimKiem.Text = "";
+          
             txtHoTen.Text = "";
             txtSDT.Text = "";
             txtCCCD.Text = "";

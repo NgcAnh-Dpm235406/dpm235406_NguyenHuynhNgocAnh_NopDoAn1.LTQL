@@ -42,8 +42,8 @@
             this.cboPhieuThue = new Guna.UI2.WinForms.Guna2ComboBox();
             this.btnThemHoaDon = new Guna.UI2.WinForms.Guna2Button();
             this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
-            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
+            this.btnXoa = new Guna.UI2.WinForms.Guna2Button();
+            this.BtnXuatExcel = new Guna.UI2.WinForms.Guna2Button();
             this.lblTongAll = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.guna2HtmlLabel8 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             this.btnInHoaDon = new Guna.UI2.WinForms.Guna2Button();
@@ -155,8 +155,8 @@
             this.guna2Panel2.Controls.Add(this.cboPhieuThue);
             this.guna2Panel2.Controls.Add(this.btnThemHoaDon);
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel1);
-            this.guna2Panel2.Controls.Add(this.guna2Button2);
-            this.guna2Panel2.Controls.Add(this.guna2Button1);
+            this.guna2Panel2.Controls.Add(this.btnXoa);
+            this.guna2Panel2.Controls.Add(this.BtnXuatExcel);
             this.guna2Panel2.Controls.Add(this.lblTongAll);
             this.guna2Panel2.Controls.Add(this.guna2HtmlLabel8);
             this.guna2Panel2.Controls.Add(this.btnInHoaDon);
@@ -209,11 +209,11 @@
             this.btnThemHoaDon.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnThemHoaDon.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
             this.btnThemHoaDon.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.btnThemHoaDon.FillColor = System.Drawing.Color.DarkOrange;
+            this.btnThemHoaDon.FillColor = System.Drawing.SystemColors.Highlight;
             this.btnThemHoaDon.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.btnThemHoaDon.ForeColor = System.Drawing.Color.White;
-            this.btnThemHoaDon.Image = global::GUI.Properties.Resources.hdd_removebg_preview;
-            this.btnThemHoaDon.ImageSize = new System.Drawing.Size(40, 40);
+            this.btnThemHoaDon.Image = global::GUI.Properties.Resources.them_removebg_preview;
+            this.btnThemHoaDon.ImageSize = new System.Drawing.Size(30, 30);
             this.btnThemHoaDon.Location = new System.Drawing.Point(85, 211);
             this.btnThemHoaDon.Name = "btnThemHoaDon";
             this.btnThemHoaDon.Size = new System.Drawing.Size(180, 45);
@@ -232,43 +232,45 @@
             this.guna2HtmlLabel1.TabIndex = 23;
             this.guna2HtmlLabel1.Text = "Tổng tháng:";
             // 
-            // guna2Button2
+            // btnXoa
             // 
-            this.guna2Button2.BorderRadius = 5;
-            this.guna2Button2.BorderThickness = 1;
-            this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button2.FillColor = System.Drawing.Color.Red;
-            this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button2.ForeColor = System.Drawing.Color.White;
-            this.guna2Button2.Image = global::GUI.Properties.Resources.xoa_removebg_preview;
-            this.guna2Button2.ImageSize = new System.Drawing.Size(28, 28);
-            this.guna2Button2.Location = new System.Drawing.Point(85, 397);
-            this.guna2Button2.Name = "guna2Button2";
-            this.guna2Button2.Size = new System.Drawing.Size(180, 45);
-            this.guna2Button2.TabIndex = 0;
-            this.guna2Button2.Text = "Xóa hóa đơn";
+            this.btnXoa.BorderRadius = 5;
+            this.btnXoa.BorderThickness = 1;
+            this.btnXoa.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnXoa.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnXoa.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnXoa.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnXoa.FillColor = System.Drawing.Color.Red;
+            this.btnXoa.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnXoa.ForeColor = System.Drawing.Color.White;
+            this.btnXoa.Image = global::GUI.Properties.Resources.xoa_removebg_preview;
+            this.btnXoa.ImageSize = new System.Drawing.Size(28, 28);
+            this.btnXoa.Location = new System.Drawing.Point(85, 397);
+            this.btnXoa.Name = "btnXoa";
+            this.btnXoa.Size = new System.Drawing.Size(180, 45);
+            this.btnXoa.TabIndex = 0;
+            this.btnXoa.Text = "Xóa hóa đơn";
+            this.btnXoa.Click += new System.EventHandler(this.BtnXoaHoaDon_Click);
             // 
-            // guna2Button1
+            // BtnXuatExcel
             // 
-            this.guna2Button1.BorderRadius = 5;
-            this.guna2Button1.BorderThickness = 1;
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.FillColor = System.Drawing.Color.LimeGreen;
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Image = global::GUI.Properties.Resources.ex;
-            this.guna2Button1.ImageSize = new System.Drawing.Size(30, 30);
-            this.guna2Button1.Location = new System.Drawing.Point(85, 336);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(180, 45);
-            this.guna2Button1.TabIndex = 1;
-            this.guna2Button1.Text = "Xuất Excel";
+            this.BtnXuatExcel.BorderRadius = 5;
+            this.BtnXuatExcel.BorderThickness = 1;
+            this.BtnXuatExcel.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.BtnXuatExcel.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.BtnXuatExcel.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.BtnXuatExcel.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.BtnXuatExcel.FillColor = System.Drawing.Color.LimeGreen;
+            this.BtnXuatExcel.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.BtnXuatExcel.ForeColor = System.Drawing.Color.White;
+            this.BtnXuatExcel.Image = global::GUI.Properties.Resources.ex;
+            this.BtnXuatExcel.ImageSize = new System.Drawing.Size(30, 30);
+            this.BtnXuatExcel.Location = new System.Drawing.Point(85, 336);
+            this.BtnXuatExcel.Name = "BtnXuatExcel";
+            this.BtnXuatExcel.Size = new System.Drawing.Size(180, 45);
+            this.BtnXuatExcel.TabIndex = 1;
+            this.BtnXuatExcel.Text = "Xuất Excel";
+            this.BtnXuatExcel.Click += new System.EventHandler(this.BtnXuatExcel_Click);
             // 
             // lblTongAll
             // 
@@ -310,6 +312,7 @@
             this.btnInHoaDon.Size = new System.Drawing.Size(180, 45);
             this.btnInHoaDon.TabIndex = 4;
             this.btnInHoaDon.Text = "In hóa đơn";
+            this.btnInHoaDon.Click += new System.EventHandler(this.BtnInHoaDon_Click);
             // 
             // lblTongTienPhong
             // 
@@ -467,8 +470,8 @@
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTongTienDV;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTongT;
         private Guna.UI2.WinForms.Guna2Button btnInHoaDon;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
+        private Guna.UI2.WinForms.Guna2Button btnXoa;
+        private Guna.UI2.WinForms.Guna2Button BtnXuatExcel;
         private Guna.UI2.WinForms.Guna2DataGridView dgvHoaDon;
         private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel6;
         private Guna.UI2.WinForms.Guna2HtmlLabel lblTongAll;

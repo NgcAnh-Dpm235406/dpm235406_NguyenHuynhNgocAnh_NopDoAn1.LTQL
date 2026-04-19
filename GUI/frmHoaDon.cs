@@ -37,15 +37,15 @@ namespace GUI
                 btnInHoaDon.Click -= BtnInHoaDon_Click;
                 btnInHoaDon.Click += BtnInHoaDon_Click;
             }
-            if (guna2Button1 != null) // Export
+            if (BtnXuatExcel != null) // Export
             {
-                guna2Button1.Click -= BtnXuatExcel_Click;
-                guna2Button1.Click += BtnXuatExcel_Click;
+                BtnXuatExcel.Click -= BtnXuatExcel_Click;
+                BtnXuatExcel.Click += BtnXuatExcel_Click;
             }
-            if (guna2Button2 != null) // Delete
+            if (btnXoa != null) // Delete
             {
-                guna2Button2.Click -= BtnXoaHoaDon_Click;
-                guna2Button2.Click += BtnXoaHoaDon_Click;
+                btnXoa.Click -= BtnXoaHoaDon_Click;
+                btnXoa.Click += BtnXoaHoaDon_Click;
             }
 
             LoadDSHoaDon();
@@ -56,6 +56,18 @@ namespace GUI
         private void frmHoaDon_Load(object sender, EventArgs e)
         {
             LoadCboPhieuThue();
+            if (GlobalUser.LoaiTaiKhoan == "User")
+            {
+                // Giả sử bạn có nút Xóa hóa đơn cũ hoặc Chốt doanh thu thì khóa lại
+                btnXoa.Enabled = false;
+                
+
+                // Nút lập hóa đơn/Thanh toán vẫn để true
+                btnInHoaDon.Enabled = true;
+                BtnXuatExcel.Enabled = true;
+                btnThemHoaDon.Enabled = true;
+
+            }
         }
         public void LoadDSHoaDon()
         {
