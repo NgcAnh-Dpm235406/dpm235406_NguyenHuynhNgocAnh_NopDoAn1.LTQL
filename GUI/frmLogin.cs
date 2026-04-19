@@ -50,8 +50,9 @@ namespace GUI
                     this.Hide();
                     f.ShowDialog();
 
-                    // Sau khi thoát Main thì đóng luôn Login
-                    this.Close();
+                    this.Show(); // 3. Hiện lại Login
+                    txtMatKhau.Clear(); // Xóa pass cũ cho an toàn
+                    txtMatKhau.Focus();
                 }
                 else
                 {

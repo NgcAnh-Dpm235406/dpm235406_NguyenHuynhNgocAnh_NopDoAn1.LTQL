@@ -73,13 +73,7 @@ namespace GUI
             OpenChildForm(new frmDichVu());
         }
 
-        private void btnThongKe_Click(object sender, EventArgs e)
-        {
-            // Mở Form Dashboard(Bạn cần tạo Form này trước)
-            lblTieuDe.Text = "THỐNG KÊ";
-            //OpenChildForm(new frmThongKe());
-        }
-
+        
         private void btnTaiKhoan_Click(object sender, EventArgs e)
         {
             // Mở Form Dashboard(Bạn cần tạo Form này trước)
@@ -94,41 +88,25 @@ namespace GUI
 
             // Nếu bạn muốn hiển thị kèm cả quyền hạn:
             // label1.Text = $"Xin chào: {GlobalUser.HoTen} ({GlobalUser.LoaiTaiKhoan})";
-
+           
             // Gọi hàm phân quyền đã viết ở các bước trước
             ThucHienPhanQuyen();
         }
 
-       
+
 
         private void btnDangXuat_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Bạn có muốn đăng xuất không?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Bạn có muốn đăng xuất không?", "Thông báo",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
-                this.Close(); // Đóng Form Main để quay lại Login
+                // Chỉ cần Close(), vì ở frmLogin chúng ta gọi frmMain bằng ShowDialog()
+                // Khi frmMain đóng, luồng code ở frmLogin sẽ tự chạy tiếp để hiện lên.
+                this.Close();
             }
         }
 
         // Hàm dùng chung để "nhúng" Form con vào Panel chính
-        private void MoFormCon(Form formCon)
-        {
-            // 1. Xóa bỏ nội dung cũ đang hiển thị trong Panel
-            if (pnlNoiDungChinh.Controls.Count > 0)
-            {
-                pnlNoiDungChinh.Controls.Clear();
-            }
-
-            // 2. Cấu hình Form con để nó có thể nằm gọn trong Panel
-            formCon.TopLevel = false;            // Bắt buộc: Để Form không nhảy ra ngoài
-            formCon.FormBorderStyle = FormBorderStyle.None; // Bỏ thanh tiêu đề của Form con
-            formCon.Dock = DockStyle.Fill;       // Để Form con lấp đầy Panel chính
-
-            // 3. Thêm Form con vào Panel và hiển thị
-            pnlNoiDungChinh.Controls.Add(formCon);
-            pnlNoiDungChinh.Tag = formCon;
-            formCon.BringToFront();
-            formCon.Show();
-        }
 
         private void btnQuanlyp_Click(object sender, EventArgs e)
         {
@@ -140,10 +118,7 @@ namespace GUI
             // Gọi hàm để nhúng vào Panel (nhớ kiểm tra tên Panel bên trong hàm này)
             OpenChildForm(f);
         }
-
-
-
-        
+      
 
         private void btnKhachHang_Click_1(object sender, EventArgs e)
         {
