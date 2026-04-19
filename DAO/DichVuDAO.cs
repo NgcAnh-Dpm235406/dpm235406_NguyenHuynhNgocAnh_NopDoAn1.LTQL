@@ -68,7 +68,23 @@ namespace DAO
             return kq;
         }
 
-        
 
+        public static List<string> LayDanhSachDonViTinh()
+        {
+            // Lấy duy nhất các đơn vị tính, sắp xếp theo bảng chữ cái
+            string s = "SELECT DISTINCT DonViTinh FROM DichVu WHERE DonViTinh IS NOT NULL AND DonViTinh <> '' ORDER BY DonViTinh ASC";
+
+            SqlConnection con = DataProvider.MoKetNoi();
+            DataTable dt = DataProvider.TruyVanLayDuLieu(s, con);
+
+            List<string> list = new List<string>();
+            foreach (DataRow row in dt.Rows)
+            {
+                list.Add(row["DonViTinh"].ToString());
+            }
+
+            DataProvider.DongKetNoi(con);
+            return list;
+        }
     }
 }

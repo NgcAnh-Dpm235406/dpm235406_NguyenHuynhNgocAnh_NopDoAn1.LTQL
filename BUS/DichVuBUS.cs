@@ -31,6 +31,9 @@ namespace BUS
             return DichVu_DAO.XoaDichVu(maDV);
         }
 
-      
+        public static List<string> LayDanhSachDonViTinh()
+        {
+            return DichVu_DAO.LayDanhSachDonViTinh();
+        }
     }
 }

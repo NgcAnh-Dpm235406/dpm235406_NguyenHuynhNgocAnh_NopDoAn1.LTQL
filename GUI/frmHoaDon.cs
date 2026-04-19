@@ -57,7 +57,7 @@ namespace GUI
         {
             LoadCboPhieuThue();
         }
-        private void LoadDSHoaDon()
+        public void LoadDSHoaDon()
         {
             DateTime tu = new DateTime(1753, 1, 1);
             DateTime den = new DateTime(9998, 12, 31);

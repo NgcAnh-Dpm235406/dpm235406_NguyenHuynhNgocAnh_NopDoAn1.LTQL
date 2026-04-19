@@ -69,5 +69,11 @@ namespace BUS
         {
             return Phong_DAO.LayTatCaTenPhongTrong();
         }
+
+        public static bool KiemTraTenPhongTonTai(string tenPhong)
+        {
+            return Phong_DAO.KiemTraTenPhongTonTai(tenPhong);
+        }
+
     }
 }

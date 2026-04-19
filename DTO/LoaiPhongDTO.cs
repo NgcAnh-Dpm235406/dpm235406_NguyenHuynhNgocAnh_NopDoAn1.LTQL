@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    internal class LoaiPhong_DTO
+    public class LoaiPhong_DTO
     {
         private int iMaLoai;
         public int IMaLoai { get => iMaLoai; set => iMaLoai = value; }

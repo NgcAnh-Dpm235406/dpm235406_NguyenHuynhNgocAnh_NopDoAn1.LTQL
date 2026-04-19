@@ -30,13 +30,20 @@ namespace GUI
             // Đăng ký sự kiện TextChanged trực tiếp bằng code để chắc chắn nó chạy
             txtGiaNgay.TextChanged += txtGiaNgay_TextChanged;
             txtGiaGio.TextChanged += txtGiaGio_TextChanged;
+
+            cboLoaiPhong.DataSource = LoaiPhong_BUS.LayDanhSachLoaiPhong();
+            cboLoaiPhong.DisplayMember = "TenLoai";   // hiển thị tên loại phòng
+            cboLoaiPhong.ValueMember = "MaLoai";      // giá trị là mã loại phòng
+                                                      // Gán sự kiện sau khi bind xong
+            cboLoaiPhong.SelectedIndexChanged += cboLoaiPhong_SelectedIndexChanged;
+
         }
 
         // 1. Load danh sách loại phòng vào ComboBox
         void LoadComboBoxLoaiPhong()
         {
             // Giao diện (GUI) gọi qua BUS - ĐÚNG CHUẨN
-            DataTable dt = busLoaiPhong.LayDanhSachLoaiPhong();
+            DataTable dt = LoaiPhong_BUS.LayDanhSachLoaiPhong();
 
             if (dt != null)
             {
@@ -56,7 +63,7 @@ namespace GUI
         }
 
         // 3. Hàm vẽ sơ đồ phòng bằng Guna2TileButton
-        void VeSoDoPhong()
+        public void VeSoDoPhong()
         {
             flpDanhSachPhong.Controls.Clear();
             List<Phong_DTO> dsPhong = Phong_BUS.LayDanhSachPhong();
@@ -89,18 +96,25 @@ namespace GUI
                 btn.Click += (s, ev) => {
                     maPhongChon = item.IMaPhong;
                     txtTenPhong.Text = item.STenPhong;
-                    cboTrangThai.Text = item.STrangThai;
+                    cboTrangThai.Text = item.STrangThai; // Gán trạng thái trước
                     cboLoaiPhong.SelectedValue = item.IMaLoai;
 
                     txtGiaNgay.Text = item.DGiaNgay.ToString("N0");
                     txtGiaGio.Text = item.DGiaGio.ToString("N0");
 
-                    // KHÔNG gán cứng bằng "0", mà phải lấy từ item (DTO)
-                    txtNgay.Text = item.ISoNgay.ToString();
-                    txtGio.Text = item.ISoGio.ToString();
-
-                    // Gọi hàm tính tiền để hiện tổng tiền ngay khi click
-                    TinhTienTamTinh();
+                    // KIỂM TRA TẠI ĐÂY:
+                    if (item.STrangThai == "Trống")
+                    {
+                        txtNgay.Text = "";
+                        txtGio.Text = "";
+                        txtTienTT.Text = "";
+                    }
+                    else
+                    {
+                        txtNgay.Text = item.ISoNgay.ToString();
+                        txtGio.Text = item.ISoGio.ToString();
+                        TinhTienTamTinh(); // Chỉ tính tiền khi không phải phòng trống
+                    }
                 };
 
                 flpDanhSachPhong.Controls.Add(btn);
@@ -110,38 +124,53 @@ namespace GUI
         // Tạo một hàm tính toán chung
         void TinhTienTamTinh()
         {
-            // Loại bỏ dấu phẩy và chữ VNĐ để lấy số thuần túy
-            string sGiaNgay = txtGiaNgay.Text.Replace(",", "").Replace("VNĐ", "").Trim();
-            string sGiaGio = txtGiaGio.Text.Replace(",", "").Replace("VNĐ", "").Trim();
+            // CỰC KỲ QUAN TRỌNG: Nếu trạng thái là Trống, không tính toán và thoát ngay
+            if (cboTrangThai.Text == "Trống")
+            {
+                return;
+            }
 
             decimal giaNgay = 0, giaGio = 0;
             int soNgay = 0, soGio = 0;
 
+            string sGiaNgay = txtGiaNgay.Text.Replace(",", "").Replace("VNĐ", "").Trim();
+            string sGiaGio = txtGiaGio.Text.Replace(",", "").Replace("VNĐ", "").Trim();
             decimal.TryParse(sGiaNgay, out giaNgay);
             decimal.TryParse(sGiaGio, out giaGio);
+
             int.TryParse(txtNgay.Text, out soNgay);
             int.TryParse(txtGio.Text, out soGio);
 
             decimal tong = (giaNgay * soNgay) + (giaGio * soGio);
 
-            // Hiển thị lại với định dạng tiền tệ
-            txtTienTT.Text = tong.ToString("N0") + " VNĐ";
+            if (tong == 0)
+                txtTienTT.Text = "";
+            else
+                txtTienTT.Text = tong.ToString("N0") + " VNĐ";
         }
 
         // Gọi hàm này trong sự kiện TextChanged của txtSoNgay và txtSoGio
-        private void txtSoNgay_TextChanged(object sender, EventArgs e) => TinhTienTamTinh();
-        private void txtSoGio_TextChanged(object sender, EventArgs e) => TinhTienTamTinh();
+        private void TxtGiaNgay_TextChanged(object sender, EventArgs e)
+        {
+            
+            TinhTienTamTinh(); // gọi lại tính tiền
+        }
+
+        private void TxtGiaGio_TextChanged(object sender, EventArgs e)
+        {
+            TinhTienTamTinh(); // gọi lại tính tiền
+        }
+
 
         // 4. Sự kiện Thêm Phòng
         private void btnThem_Click(object sender, EventArgs e)
         {
             // 1. Xóa trắng các TextBox
             txtTenPhong.Clear();
-            txtGiaNgay.Clear();
-            txtGiaGio.Clear();
             txtNgay.Text = "0";
             txtGio.Text = "0";
             txtTienTT.Text = "0 VNĐ";
+            TinhTienTamTinh();
             // 2. Đưa các ComboBox về mặc định
             cboTrangThai.SelectedIndex = 0; // Trống
             if (cboLoaiPhong.Items.Count > 0) cboLoaiPhong.SelectedIndex = 0;
@@ -158,23 +187,22 @@ namespace GUI
         {
             if (maPhongChon == -1)
             {
-                MessageBox.Show("Vui lòng chọn một phòng từ danh sơ đồ trước khi sửa!");
+                MessageBox.Show("Vui lòng chọn một phòng!");
                 return;
             }
-            // 1. Mở khóa các ô để người dùng nhập (ReadOnly = false)
+            // Mở khóa các ô nhập liệu
             txtTenPhong.ReadOnly = false;
-            // Vì bạn dùng Guna2 nên dùng thuộc tính Enabled cũng được hoặc dùng ReadOnly
-            txtGiaNgay.Enabled = true;
-            txtGiaGio.Enabled = true;
             cboLoaiPhong.Enabled = true;
             cboTrangThai.Enabled = true;
-            // 2. Thay đổi màu nền để người dùng biết là đang trong chế độ sửa
-            txtTenPhong.FillColor = Color.White;
-            txtGiaNgay.FillColor = Color.White;
-            txtGiaGio.FillColor = Color.White;
-            // 3. Đưa con trỏ vào ô Tên phòng
+
+            // QUAN TRỌNG: Mở khóa 2 ô này để bạn có thể sửa từ 0 thành 2
+            txtNgay.Enabled = true;
+            txtNgay.ReadOnly = false;
+            txtGio.Enabled = true;
+            txtGio.ReadOnly = false;
+
             txtTenPhong.Focus();
-           
+            TinhTienTamTinh(); // Cập nhật lại tiền tạm tính khi sửa số ngày hoặc số giờ
         }
 
         // 6. Sự kiện Xóa Phòng
@@ -257,32 +285,15 @@ namespace GUI
         // Trong file frmQuanLyPhong.cs, hàm btnLuu_Click
         private void btnLuu_Click(object sender, EventArgs e)
         {
-            // 1. Kiểm tra dữ liệu đầu vào cơ bản
-            if (string.IsNullOrEmpty(txtTenPhong.Text))
-            {
-                MessageBox.Show("Vui lòng nhập tên phòng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtTenPhong.Focus();
-                return;
-            }
+            if (string.IsNullOrEmpty(txtTenPhong.Text)) return;
 
-            // 2. Khởi tạo đối tượng DTO và lấy dữ liệu từ giao diện
             Phong_DTO p = new Phong_DTO();
+            p.IMaPhong = maPhongChon;
             p.STenPhong = txtTenPhong.Text.Trim();
             p.IMaLoai = (int)cboLoaiPhong.SelectedValue;
             p.STrangThai = cboTrangThai.Text;
 
-            // Giá ngày/giờ
-            string sGiaNgay = txtGiaNgay.Text.Replace(",", "").Replace("VNĐ", "").Trim();
-            string sGiaGio = txtGiaGio.Text.Replace(",", "").Replace("VNĐ", "").Trim();
-
-            decimal giaNgay = 0, giaGio = 0;
-            decimal.TryParse(sGiaNgay, out giaNgay);
-            decimal.TryParse(sGiaGio, out giaGio);
-
-            p.DGiaNgay = giaNgay;
-            p.DGiaGio = giaGio;
-
-            // >>> Bổ sung lấy số ngày và số giờ <<<
+            // Lấy số ngày/giờ từ giao diện (chỗ bạn sửa từ 0 thành 2)
             int soNgay = 0, soGio = 0;
             int.TryParse(txtNgay.Text, out soNgay);
             int.TryParse(txtGio.Text, out soGio);
@@ -290,37 +301,87 @@ namespace GUI
             p.ISoNgay = soNgay;
             p.ISoGio = soGio;
 
-            // 3. Phân loại xử lý: Thêm mới hoặc Cập nhật
-            if (maPhongChon == -1)
-            {
-                if (Phong_BUS.ThemPhong(p))
-                {
-                    MessageBox.Show("Thêm phòng mới thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    VeSoDoPhong();
-                    ResetInput();
-                }
-                else
-                {
-                    MessageBox.Show("Thêm phòng thất bại! Có thể tên phòng đã tồn tại.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            else
-            {
-                p.IMaPhong = maPhongChon;
+            // Lấy tổng tiền để lưu xuống cột TongTien trong DB
+            string sTongTien = txtTienTT.Text.Replace(",", "").Replace("VNĐ", "").Trim();
+            decimal tongTien = 0;
+            decimal.TryParse(sTongTien, out tongTien);
+            p.DTongTien = tongTien;
 
+            if (maPhongChon != -1) // Chế độ sửa
+            {
                 if (Phong_BUS.SuaPhong(p))
                 {
-                    MessageBox.Show("Cập nhật thông tin thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    VeSoDoPhong();
+                    MessageBox.Show("Cập nhật thông tin thành công!", "Thông báo");
+                    VeSoDoPhong(); // Load lại để hưởng thành quả
                     ResetInput();
                 }
                 else
                 {
-                    MessageBox.Show("Lỗi: Không thể cập nhật dữ liệu xuống Database.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Lỗi: Không thể cập nhật dữ liệu xuống Database.", "Lỗi");
                 }
             }
         }
 
+
+
+
+
+
+        private void cboLoaiPhong_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboLoaiPhong.SelectedValue == null || cboLoaiPhong.SelectedValue is DataRowView)
+                return;
+
+            int maLoai = Convert.ToInt32(cboLoaiPhong.SelectedValue);
+            LoaiPhong_DTO loaiPhong = LoaiPhong_BUS.LayLoaiPhongTheoMa(maLoai);
+
+            if (loaiPhong != null)
+            {
+                txtGiaNgay.Text = loaiPhong.DGiaNgay.ToString("N0") + " VNĐ";
+                txtGiaGio.Text = loaiPhong.DGiaGio.ToString("N0") + " VNĐ";
+
+                // Khóa không cho sửa
+                txtGiaNgay.ReadOnly = true;
+                txtGiaGio.ReadOnly = true;
+            }
+        }
+        
+
+
+
+        private void txtNgay_TextChanged(object sender, EventArgs e)
+        {
+          TinhTienTamTinh();
+        }
+
+        private void txtGio_TextChanged(object sender, EventArgs e)
+        {
+           TinhTienTamTinh();
+        }
+
+        private void cboTrangThai_TextChanged(object sender, EventArgs e)
+        {
+            if (cboTrangThai.Text == "Trống")
+            {
+                txtNgay.Text = "";
+                txtGio.Text = "";
+                txtTienTT.Text = "";
+
+                // Khóa luôn để người dùng không nhập bậy vào phòng trống
+                txtNgay.ReadOnly = true;
+                txtGio.ReadOnly = true;
+            }
+            else
+            {
+                // Nếu không phải trống (Có khách, Đã đặt...) thì cho phép nhập
+                txtNgay.ReadOnly = false;
+                txtGio.ReadOnly = false;
+
+                // Nếu ô đang trắng thì mặc định để về 0 để dễ nhìn
+                if (string.IsNullOrEmpty(txtNgay.Text)) txtNgay.Text = "0";
+                if (string.IsNullOrEmpty(txtGio.Text)) txtGio.Text = "0";
+            }
+        }
     }
 
 }

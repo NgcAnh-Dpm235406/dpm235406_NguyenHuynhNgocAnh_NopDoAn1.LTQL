@@ -171,6 +171,7 @@
             this.cboTrangThai.Name = "cboTrangThai";
             this.cboTrangThai.Size = new System.Drawing.Size(258, 36);
             this.cboTrangThai.TabIndex = 29;
+            this.cboTrangThai.TextChanged += new System.EventHandler(this.cboTrangThai_TextChanged);
             // 
             // txtGio
             // 
@@ -192,6 +193,7 @@
             this.txtGio.SelectedText = "";
             this.txtGio.Size = new System.Drawing.Size(258, 29);
             this.txtGio.TabIndex = 28;
+            this.txtGio.TextChanged += new System.EventHandler(this.txtGio_TextChanged);
             // 
             // label7
             // 
@@ -222,6 +224,7 @@
             this.txtNgay.SelectedText = "";
             this.txtNgay.Size = new System.Drawing.Size(258, 29);
             this.txtNgay.TabIndex = 26;
+            this.txtNgay.TextChanged += new System.EventHandler(this.txtNgay_TextChanged);
             // 
             // label6
             // 
@@ -252,6 +255,7 @@
             this.txtGiaGio.SelectedText = "";
             this.txtGiaGio.Size = new System.Drawing.Size(258, 29);
             this.txtGiaGio.TabIndex = 24;
+            this.txtGiaGio.TextChanged += new System.EventHandler(this.TxtGiaGio_TextChanged);
             // 
             // label5
             // 
@@ -375,6 +379,7 @@
             this.cboLoaiPhong.Name = "cboLoaiPhong";
             this.cboLoaiPhong.Size = new System.Drawing.Size(258, 36);
             this.cboLoaiPhong.TabIndex = 17;
+            this.cboLoaiPhong.SelectedIndexChanged += new System.EventHandler(this.cboLoaiPhong_SelectedIndexChanged);
             // 
             // txtGiaNgay
             // 
@@ -396,6 +401,7 @@
             this.txtGiaNgay.SelectedText = "";
             this.txtGiaNgay.Size = new System.Drawing.Size(258, 29);
             this.txtGiaNgay.TabIndex = 15;
+            this.txtGiaNgay.TextChanged += new System.EventHandler(this.TxtGiaNgay_TextChanged);
             // 
             // label4
             // 

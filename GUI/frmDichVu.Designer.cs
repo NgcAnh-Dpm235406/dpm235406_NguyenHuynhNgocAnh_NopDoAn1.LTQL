@@ -231,18 +231,7 @@
             this.cboDonViTinh.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cboDonViTinh.ForeColor = System.Drawing.Color.Black;
             this.cboDonViTinh.ItemHeight = 30;
-            this.cboDonViTinh.Items.AddRange(new object[] {
-            "Việt Nam",
-            "Anh",
-            "Pháp",
-            "Đức",
-            "Mỹ",
-            "Italia",
-            "Hàn Quốc",
-            "Trung Quốc",
-            "Lào",
-            "Thái",
-            "Ấn Độ"});
+            //this.cboDonViTinh.Items.AddRange(new object[] {});
             this.cboDonViTinh.Location = new System.Drawing.Point(13, 268);
             this.cboDonViTinh.Name = "cboDonViTinh";
             this.cboDonViTinh.Size = new System.Drawing.Size(216, 36);

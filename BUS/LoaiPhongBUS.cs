@@ -1,4 +1,5 @@
 ﻿using DAO;
+using DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -10,10 +11,17 @@ namespace BUS
 {
     public class LoaiPhong_BUS
     {
-        public DataTable LayDanhSachLoaiPhong()
+        public static DataTable LayDanhSachLoaiPhong()
         {
-            // BUS gọi xuống DAO
             return LoaiPhong_DAO.LayDSLoaiPhong();
         }
+
+        public static LoaiPhong_DTO LayLoaiPhongTheoMa(int maLoai)
+        {
+            return LoaiPhong_DAO.LayLoaiPhongTheoMa(maLoai);
+        }
+
+
+
     }
 }

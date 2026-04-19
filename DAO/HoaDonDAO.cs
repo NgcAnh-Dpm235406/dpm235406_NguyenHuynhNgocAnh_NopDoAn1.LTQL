@@ -17,11 +17,19 @@ namespace DAO
         public static List<HoaDon_DTO> LayHoaDon()
         {
             // JOIN để lấy HoTen từ bảng KhachHang và TenPhong từ bảng Phong
-            string sTruyVan = @"SELECT hd.*, kh.HoTen, p.TenPhong 
-                                FROM HoaDon hd
-                                JOIN PhieuThue pt ON hd.MaPhieu = pt.MaPhieu
-                                JOIN KhachHang kh ON pt.MaKH = kh.MaKH
-                                JOIN Phong p ON pt.MaPhong = p.MaPhong";
+            string sTruyVan = @"
+        SELECT hd.MaHD, hd.MaPhieu, hd.NgayThanhToan,
+               hd.TongTienPhong,
+               ISNULL(SUM(d.GiaDV),0) AS TongTienDV,
+               hd.TongTienPhong + ISNULL(SUM(d.GiaDV),0) AS TongTienThanhToan,
+               kh.HoTen, p.TenPhong
+        FROM HoaDon hd
+        JOIN PhieuThue pt ON hd.MaPhieu = pt.MaPhieu
+        JOIN KhachHang kh ON pt.MaKH = kh.MaKH
+        JOIN Phong p ON pt.MaPhong = p.MaPhong
+        LEFT JOIN DichVu d ON d.MaPhong = p.MaPhong
+        GROUP BY hd.MaHD, hd.MaPhieu, hd.NgayThanhToan,
+                 hd.TongTienPhong, kh.HoTen, p.TenPhong";
 
             con = DataProvider.MoKetNoi();
             DataTable dt = DataProvider.TruyVanLayDuLieu(sTruyVan, con);
@@ -57,20 +65,26 @@ namespace DAO
         // Thêm tham số string tenKH vào đây
         public static DataTable LayDSHoaDon(DateTime tuNgay, DateTime denNgay, string tenKH)
         {
-            string sql = @"SELECT hd.MaHD, p.TenPhong, kh.HoTen, hd.NgayThanhToan, 
-                          hd.TongTienPhong, hd.TongTienDV, hd.TongTienThanhToan
-                   FROM HoaDon hd
-                   JOIN PhieuThue pt ON hd.MaPhieu = pt.MaPhieu
-                   JOIN KhachHang kh ON pt.MaKH = kh.MaKH
-                   JOIN Phong p ON pt.MaPhong = p.MaPhong
-                   WHERE (hd.NgayThanhToan BETWEEN @tu AND @den)";
+            string sql = @"
+        SELECT hd.MaHD, p.TenPhong, kh.HoTen, hd.NgayThanhToan,
+               hd.TongTienPhong,
+               ISNULL(SUM(d.GiaDV),0) AS TongTienDV,
+               hd.TongTienPhong + ISNULL(SUM(d.GiaDV),0) AS TongTienThanhToan
+        FROM HoaDon hd
+        JOIN PhieuThue pt ON hd.MaPhieu = pt.MaPhieu
+        JOIN KhachHang kh ON pt.MaKH = kh.MaKH
+        JOIN Phong p ON pt.MaPhong = p.MaPhong
+        LEFT JOIN DichVu d ON d.MaPhong = p.MaPhong
+        WHERE (hd.NgayThanhToan BETWEEN @tu AND @den)";
 
-            // Nếu có từ khóa tìm kiếm khác rỗng thì thêm điều kiện (accent-insensitive, case-insensitive)
             bool hasKeyword = !string.IsNullOrWhiteSpace(tenKH);
             if (hasKeyword)
             {
                 sql += " AND kh.HoTen COLLATE Latin1_General_CI_AI LIKE @ten";
             }
+
+            // GROUP BY phải đặt cuối cùng, sau tất cả điều kiện WHERE
+            sql += @" GROUP BY hd.MaHD, p.TenPhong, kh.HoTen, hd.NgayThanhToan, hd.TongTienPhong";
 
             SqlConnection con = DataProvider.MoKetNoi();
             try
@@ -81,7 +95,6 @@ namespace DAO
 
                 if (hasKeyword)
                 {
-                    // Dùng NVarChar (Unicode) và truyền tham số với wildcard
                     cmd.Parameters.Add("@ten", SqlDbType.NVarChar, 200).Value = "%" + tenKH.Trim() + "%";
                 }
 

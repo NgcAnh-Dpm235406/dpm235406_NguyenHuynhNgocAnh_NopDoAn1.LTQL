@@ -28,15 +28,7 @@ namespace GUI
         {
             LoadData();
 
-            // Dữ liệu combobox Đơn vị tính
-            string sQueryDonViTinh = @"SELECT DISTINCT DonViTinh FROM DichVu";
-            SqlDataAdapter daDonViTinh = new SqlDataAdapter(sQueryDonViTinh, con);
-            DataSet dsDonViTinh = new DataSet();
-            daDonViTinh.Fill(dsDonViTinh, "tblDonViTinh");
-
-            cboDonViTinh.DataSource = dsDonViTinh.Tables["tblDonViTinh"];
-            cboDonViTinh.DisplayMember = "DonViTinh";   // hiển thị tên đơn vị
-            cboDonViTinh.ValueMember = "DonViTinh";     // giá trị cũng chính là tên đơn vị
+           
         }
 
         private void LoadData()
@@ -52,18 +44,36 @@ namespace GUI
             cboPhong.DataSource = Phong_BUS.LayDanhSachPhong();
             cboPhong.DisplayMember = "STenPhong";
             cboPhong.ValueMember = "IMaPhong";
+            cboDonViTinh.DataSource = DichVu_BUS.LayDanhSachDonViTinh();
+            cboDonViTinh.SelectedIndex = -1;
+
+            // 3. Để trống khi mới load (tùy chọn)
+            cboDonViTinh.SelectedIndex = -1;
         }
         private void dgvDichVu_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0)
             {
+
                 DataGridViewRow row = dgvDichVu.Rows[e.RowIndex];
                 txtMaDV.Text = row.Cells["IMaDV"].Value.ToString();
                 txtTenDV.Text = row.Cells["STenDV"].Value.ToString();
                 txtDonGia.Text = row.Cells["DGiaDV"].Value.ToString();
                 cboDonViTinh.Text = row.Cells["SDonViTinh"].Value.ToString();
                 cboPhong.SelectedValue = row.Cells["IMaPhong"].Value;
+
+                // Xử lý ComboBox Đơn vị tính
+                // Gán Đơn vị tính
+                if (row.Cells["SDonViTinh"].Value != null)
+                {
+                    // Vì DataSource của cbo là List<string> nên ta dùng .Text là nhanh nhất
+                    cboDonViTinh.Text = row.Cells["SDonViTinh"].Value.ToString();
+                }
+
+                // Gán Phòng
+                cboPhong.SelectedValue = row.Cells["IMaPhong"].Value;
             }
+
         }
 
 
@@ -120,6 +130,13 @@ namespace GUI
             else
             {
                 MessageBox.Show("Thêm dịch vụ thất bại!");
+            }
+
+            // Gọi sang form Hóa đơn để refresh tổng tiền DV
+            frmHoaDon hoaDonForm = Application.OpenForms["frmHoaDon"] as frmHoaDon;
+            if (hoaDonForm != null)
+            {
+                hoaDonForm.LoadDSHoaDon();
             }
         }
 
@@ -206,6 +223,13 @@ namespace GUI
             else
             {
                 MessageBox.Show("Cập nhật thất bại!");
+            }
+
+            // Refresh hóa đơn
+            frmHoaDon hoaDonForm = Application.OpenForms["frmHoaDon"] as frmHoaDon;
+            if (hoaDonForm != null)
+            {
+                hoaDonForm.LoadDSHoaDon();
             }
         }
 

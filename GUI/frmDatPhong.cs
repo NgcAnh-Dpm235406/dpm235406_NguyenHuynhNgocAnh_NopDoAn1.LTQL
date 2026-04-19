@@ -34,7 +34,7 @@ namespace GUI
         private void LoadComboBoxLoaiPhong()
         {
             // Giả sử hàm LayDanhSachLoaiPhong() trong BUS trả về DataTable có cột "MaLoai", "TenLoai"
-            DataTable dt = busLoai.LayDanhSachLoaiPhong();
+            DataTable dt = LoaiPhong_BUS.LayDanhSachLoaiPhong();
 
             if (dt != null && dt.Rows.Count > 0)
             {
@@ -103,54 +103,76 @@ namespace GUI
         }
         private void btnXacNhan_Click(object sender, EventArgs e)
         {
-            // 1. Kiểm tra đầu vào cơ bản
+            // Kiểm tra thông tin khách hàng cơ bản
             if (string.IsNullOrWhiteSpace(txtHoTen.Text) ||
                 string.IsNullOrWhiteSpace(txtSDT.Text) ||
+                string.IsNullOrWhiteSpace(txtDiaChi.Text) ||
                 cboTenPhong.SelectedValue == null)
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin khách hàng và chọn phòng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            try
+            // Tạo đối tượng Phiếu Thuê trước
+            PhieuThue_DTO phieuDTO = new PhieuThue_DTO();
+            phieuDTO.IMaPhong = Convert.ToInt32(cboTenPhong.SelectedValue);
+            phieuDTO.DtNgayCheckIn = dtpCheckIn.Value;
+            phieuDTO.DtNgayCheckOutDuKien = dtpCheckOut.Value;
+            phieuDTO.STrangThai = "Chưa thanh toán";
+            phieuDTO.IMaKH = 1; // tạm thời
+
+            // Kiểm tra logic Ngày/Giờ
+            if (rdbtnNgay.Checked)
             {
-                // 2. Tạo đối tượng Phiếu Thuê
-                PhieuThue_DTO phieuDTO = new PhieuThue_DTO();
-
-                // Lấy MaPhong từ ValueMember (đã cài đặt ở hàm Load)
-                phieuDTO.IMaPhong = Convert.ToInt32(cboTenPhong.SelectedValue);
-
-                phieuDTO.DtNgayCheckIn = dtpCheckIn.Value;
-                phieuDTO.DtNgayCheckOutDuKien = dtpCheckOut.Value;
-                phieuDTO.STrangThai = "Chưa thanh toán";
-
-                // 3. Logic xử lý Khách hàng (Quan trọng)
-                // Bạn nên viết thêm hàm trong BUS để lấy MaKH từ SDT hoặc thêm mới
-                // Ở đây tôi tạm giữ logic cũ của bạn nhưng khuyến khích cập nhật
-                phieuDTO.IMaKH = 1;
-
-                // 4. Thực thi lưu
-                if (busPhieu.ThuePhong(phieuDTO))
+                if (string.IsNullOrWhiteSpace(txtSoNgay.Text) || !int.TryParse(txtSoNgay.Text, out int soNgay) || soNgay <= 0)
                 {
-                    // Cập nhật trạng thái phòng sang 'Có khách' để không ai đặt trùng
-                    Phong_BUS.CapNhatTrangThaiPhong(phieuDTO.IMaPhong, "Có khách");
-
-                    MessageBox.Show($"Đặt thành công phòng {cboTenPhong.Text}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                    // Làm mới giao diện và load lại danh sách phòng trống
-                    btnLamMoi_Click(null, null);
-                    LoadFullCboTenPhongTrong();
+                    MessageBox.Show("Vui lòng nhập số ngày hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
                 }
-                else
-                {
-                    MessageBox.Show("Không thể lưu phiếu thuê. Vui lòng kiểm tra lại kết nối DB!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                phieuDTO.ISoNgay = int.Parse(txtSoNgay.Text);
+                phieuDTO.ISoGio = 0;
             }
-            catch (Exception ex)
+            else if (rdbtnGio.Checked)
             {
-                MessageBox.Show("Lỗi hệ thống: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (string.IsNullOrWhiteSpace(txtSoGio.Text) || !int.TryParse(txtSoGio.Text, out int soGio) || soGio <= 0)
+                {
+                    MessageBox.Show("Vui lòng nhập số giờ hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+                phieuDTO.ISoNgay = 0;
+                phieuDTO.ISoGio = int.Parse(txtSoGio.Text);
+            }
+            else
+            {
+                MessageBox.Show("Vui lòng chọn hình thức thuê (Ngày hoặc Giờ)!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                phieuDTO.ISoNgay = 0;
+                phieuDTO.ISoGio = 0;
+                return;
+              
+            }
+
+            // Lưu phiếu thuê
+            if (busPhieu.ThuePhong(phieuDTO))
+            {
+                Phong_BUS.CapNhatTrangThaiPhong(phieuDTO.IMaPhong, "Đã đặt");
+
+                frmQuanLyPhong qlpForm = Application.OpenForms["frmQuanLyPhong"] as frmQuanLyPhong;
+                if (qlpForm != null)
+                {
+                    qlpForm.VeSoDoPhong();
+                }
+
+                MessageBox.Show($"Đặt thành công phòng {cboTenPhong.Text}!", "Thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnLamMoi_Click(null, null);
+                LoadFullCboTenPhongTrong();
+            }
+            else
+            {
+                MessageBox.Show("Không thể lưu phiếu thuê. Vui lòng kiểm tra lại kết nối DB!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
         private void btnLamMoi_Click(object sender, EventArgs e)
         {
             txtTimKiem.Text = "";
@@ -168,6 +190,11 @@ namespace GUI
         }
 
         private void cboLoaiPhong_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void guna2GroupBox1_Click(object sender, EventArgs e)
         {
 
         }

@@ -25,5 +25,11 @@ namespace DTO
 
         private string sTrangThai;
         public string STrangThai { get => sTrangThai; set => sTrangThai = value; }
+
+        private int iSoNgay;
+        public int ISoNgay { get => iSoNgay; set => iSoNgay = value; }
+
+        private int iSoGio;
+        public int ISoGio { get => iSoGio; set => iSoGio = value; }
     }
 }
