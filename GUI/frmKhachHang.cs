@@ -160,5 +160,14 @@ namespace GUI
                 cboQuocTich.Text = row.Cells["SQuocTich"].Value?.ToString();
             }
         }
+
+        private void btnXemBaoCao_Click(object sender, EventArgs e)
+        {
+            // 1. Tạo mới một thực thể của Form báo cáo
+            frmRPKhachHang f = new frmRPKhachHang();
+
+            // 2. Hiển thị nó lên
+            f.ShowDialog();
+        }
     }
 }

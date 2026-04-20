@@ -21,7 +21,7 @@ namespace GUI
 
         private void frmRPKhachHang_Load(object sender, EventArgs e)
         {
-            using (SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=TenCSDL;Integrated Security=True"))
+            using (SqlConnection conn = new SqlConnection("Data Source=.;Initial Catalog=QLKS3;Integrated Security=True"))
             {
                 SqlDataAdapter da = new SqlDataAdapter("SELECT MaKH, HoTen, CCCD, SDT, DiaChi, QuocTich FROM KhachHang", conn);
                 DataTable dt = new DataTable();

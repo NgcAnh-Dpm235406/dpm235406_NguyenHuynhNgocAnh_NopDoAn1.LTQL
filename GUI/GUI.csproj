@@ -73,6 +73,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataSetHoaDon.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSetHoaDon.xsd</DependentUpon>
+    </Compile>
     <Compile Include="DataSetKhachHang.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -120,6 +125,12 @@
     <Compile Include="frmQuanLyPhong.Designer.cs">
       <DependentUpon>frmQuanLyPhong.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmReportHoaDon.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportHoaDon.Designer.cs">
+      <DependentUpon>frmReportHoaDon.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmRPKhachHang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +168,9 @@
     <EmbeddedResource Include="frmQuanLyPhong.resx">
       <DependentUpon>frmQuanLyPhong.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="frmReportHoaDon.resx">
+      <DependentUpon>frmReportHoaDon.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmRPKhachHang.resx">
       <DependentUpon>frmRPKhachHang.cs</DependentUpon>
     </EmbeddedResource>
@@ -173,8 +187,24 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="ReportKhachHang.rdlc" />
+    <Content Include="ReportHoaDon.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="ReportKhachHang.rdlc">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
     <None Include=".editorconfig" />
+    <None Include="DataSetHoaDon.xsc">
+      <DependentUpon>DataSetHoaDon.xsd</DependentUpon>
+    </None>
+    <None Include="DataSetHoaDon.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSetHoaDon.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSetHoaDon.xss">
+      <DependentUpon>DataSetHoaDon.xsd</DependentUpon>
+    </None>
     <None Include="DataSetKhachHang.xsc">
       <DependentUpon>DataSetKhachHang.xsd</DependentUpon>
     </None>

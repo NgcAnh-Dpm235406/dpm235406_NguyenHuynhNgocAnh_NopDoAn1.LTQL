@@ -548,7 +548,14 @@ namespace GUI
             }
         }
 
+        private void btnXemBaoCao_Click(object sender, EventArgs e)
+        {
+            // 1. Tạo mới một thực thể của Form báo cáo
+            frmReportHoaDon f = new frmReportHoaDon();
 
+            // 2. Hiển thị nó lên
+            f.ShowDialog();
+        }
     }
     
 }
